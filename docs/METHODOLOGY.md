@@ -132,7 +132,7 @@ Because matchups are scored from team-level abilities, the simulation **generate
 
 **Elo (recency-weighted).** A sequential rating walked over the same real results in date order: `R' = R + K·G·(W − E)`, with `K` larger for World Cup games than friendlies and a goal-difference multiplier `G`. It answers "who is hot *now*", weighting current and high-stakes results. On the live data Elo ranks Mexico **7th** vs the Bayesian model's **20th** — the pooled view says "solid", the momentum view says "surging". Their disagreement localizes uncertainty.
 
-**LLM-as-a-Judge.** For a single fixture, Claude (`claude-opus-4-8`, structured output) is handed both ratings, recent form, the squad/tactics profile, sentiment, and venue, and returns calibrated 1X2 probabilities + rationale. It fuses signals a formula can't and serves as a qualitative cross-check; an Elo-only fallback runs when no API key is configured.
+**LLM-as-a-Judge.** For a single fixture, an LLM (OpenAI or Claude — provider auto-detected from the configured API key, structured output) is handed both ratings, recent form, the squad/tactics profile, sentiment, and venue, and returns calibrated 1X2 probabilities + rationale. It fuses signals a formula can't and serves as a qualitative cross-check; an Elo-only fallback runs when no API key is configured.
 
 ---
 

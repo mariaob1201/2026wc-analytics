@@ -61,18 +61,23 @@ def main() -> None:
         note="Opta projects this as Mexico's most likely R32 matchup." if args.b == "Senegal" else "",
     )
 
-    # The LLM path needs BOTH the key and the SDK installed.
-    using_llm = bool(os.environ.get("ANTHROPIC_API_KEY"))
-    try:
-        import anthropic  # noqa: F401
-    except ImportError:
-        using_llm = False
+    # Detect the active provider (OpenAI / Claude) and whether its SDK is present.
+    from wc2026.models.llm_provider import provider
+    prov = provider()
+    sdk = {"openai": "openai", "anthropic": "anthropic"}.get(prov)
+    has_sdk = False
+    if sdk:
+        try:
+            __import__(sdk)
+            has_sdk = True
+        except ImportError:
+            has_sdk = False
     print(f"Judging: {args.a} vs {args.b} ({args.stage})")
-    if using_llm:
-        print("Mode: Claude LLM judge (claude-opus-4-8)\n")
+    if has_sdk:
+        print(f"Mode: LLM judge via {prov}\n")
     else:
-        print("Mode: Elo-only fallback — `pip install anthropic` + set "
-              "ANTHROPIC_API_KEY for the real judge\n")
+        print("Mode: Elo-only fallback — set OPENAI_API_KEY (or ANTHROPIC_API_KEY) "
+              "and `pip install openai` (or anthropic) for the real judge\n")
 
     v = judge_match(fx)
     pa = getattr(v, "p_a_win", None) or v["p_a_win"]

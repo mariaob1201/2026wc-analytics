@@ -5,16 +5,12 @@ report, preview, or news blob, Claude returns STRUCTURED features the model can
 use — lineup/formation, injuries & suspensions, and a momentum signal — which
 feed the momentum/scouting layers (``models/momentum.py``, ``data/scouting.py``).
 
-Same pattern as the LLM judge: ``claude-opus-4-8`` with structured output and
-adaptive thinking, the ``anthropic`` SDK imported lazily, and a no-LLM fallback
-so the module loads and tests run offline. Set ANTHROPIC_API_KEY to use it live.
+Provider-agnostic (via ``llm_provider``): uses OpenAI (``OPENAI_API_KEY``) or
+Claude (``ANTHROPIC_API_KEY``) with structured output, lazily imported, and a
+no-LLM neutral fallback so the module loads and tests run offline.
 """
 
 from __future__ import annotations
-
-import os
-
-MODEL = "claude-opus-4-8"
 
 SYSTEM = (
     "You are a football data extractor. From the provided text about a team or "
@@ -39,26 +35,15 @@ def _schema():
     return MatchFeatures
 
 
-def extract_features(text: str, team: str = "", client=None, model: str = MODEL):
-    """Extract structured features from free text. Falls back to a neutral stub."""
-    if client is None:
-        if not os.environ.get("ANTHROPIC_API_KEY"):
-            return _neutral(team)
-        try:
-            import anthropic
-        except ImportError:
-            return _neutral(team)
-        client = anthropic.Anthropic()
+def extract_features(text: str, team: str = ""):
+    """Extract structured features with the configured LLM (OpenAI or Claude).
+    Falls back to a neutral stub when no provider key is set."""
+    from .llm_provider import structured_complete
 
-    MatchFeatures = _schema()
     prompt = (f"Team of interest: {team or 'the team named in the text'}.\n\n"
               f"TEXT:\n{text}\n\nExtract the structured features.")
-    resp = client.messages.parse(
-        model=model, max_tokens=1500, thinking={"type": "adaptive"},
-        system=SYSTEM, messages=[{"role": "user", "content": prompt}],
-        output_format=MatchFeatures,
-    )
-    return resp.parsed_output
+    out = structured_complete(SYSTEM, prompt, _schema, max_tokens=1500)
+    return out if out is not None else _neutral(team)
 
 
 def _neutral(team: str):

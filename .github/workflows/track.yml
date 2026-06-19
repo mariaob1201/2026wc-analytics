@@ -30,9 +30,10 @@ jobs:
           pip install -e .
 
       - name: Refresh tracker (pull results -> refit -> forecast -> log)
-        # ANTHROPIC_API_KEY is optional: enables the LLM judge/extractor; the
-        # pipeline runs on deterministic fallbacks without it.
+        # LLM keys are optional: either enables the judge/extractor (OpenAI or
+        # Claude); the pipeline runs on deterministic fallbacks without them.
         env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
         run: make daily
 

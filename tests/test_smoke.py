@@ -160,8 +160,10 @@ def test_elo():
     assert len(elo) == 48 and {"team", "elo", "rank"} <= set(elo.columns)
 
 
-def test_llm_judge_fallback():
-    """Judge falls back to Elo (no SDK/key) and returns coherent 1X2 probs."""
+def test_llm_judge_fallback(monkeypatch):
+    """Judge falls back to Elo (no provider key) and returns coherent 1X2 probs."""
+    monkeypatch.delenv("OPENAI_API_KEY", raising=False)
+    monkeypatch.delenv("ANTHROPIC_API_KEY", raising=False)
     from wc2026.models.llm_judge import Fixture, TeamContext, elo_fallback
 
     fx = Fixture(
@@ -248,8 +250,10 @@ def test_live_squads_parser():
     assert j["position"] == "FW" and j["caps"] == 124 and j["age"] == 35
 
 
-def test_llm_extract_fallback():
+def test_llm_extract_fallback(monkeypatch):
     """Feature extractor returns a neutral stub without an LLM, and maps signal."""
+    monkeypatch.delenv("OPENAI_API_KEY", raising=False)
+    monkeypatch.delenv("ANTHROPIC_API_KEY", raising=False)
     from wc2026.models.llm_extract import extract_features, momentum_from_features
 
     f = extract_features("Mexico look sharp ahead of the next match.", team="Mexico")

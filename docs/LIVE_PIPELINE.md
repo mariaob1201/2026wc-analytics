@@ -73,7 +73,9 @@ jobs:
         with: { python-version: "3.11" }
       - run: pip install -r requirements.txt && pip install -e .
       - run: make track-champion           # fetch → refit → regenerate tracker
-        env: { ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }} }
+        env:                                # set whichever LLM key you have
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
       - run: |                              # commit refreshed reports + charts
           git config user.name  "tracker-bot"
           git config user.email "bot@users.noreply.github.com"
@@ -82,7 +84,8 @@ jobs:
           git push
 ```
 
-The `ANTHROPIC_API_KEY` secret enables the LLM judge/extractor; without it the
+Either LLM key (`OPENAI_API_KEY` or `ANTHROPIC_API_KEY`) enables the judge/
+extractor — the code auto-detects the provider; without a key the deterministic
 fallbacks run and the loop still works.
 
 **B. A Claude Code scheduled agent** (the `/schedule` skill) running

@@ -1,32 +1,25 @@
-"""LLM-as-a-Judge: Claude judges a specific fixture from the full context.
+"""LLM-as-a-Judge: an LLM judges a specific fixture from the full context.
 
 Where the numbers stop, the judge starts. Elo and the Bayesian model give
-strength; this layer hands Claude *everything* — both ratings, recent form, the
-squad/tactics profile, fan sentiment, venue/host edge — and asks for calibrated
-1X2 probabilities, a likely scoreline, and a rationale. It's the natural way to
-"respect the structure and current results" qualitatively: the judge reasons
-about a concrete matchup the way an analyst would, fusing signals a single
-formula can't.
+strength; this layer hands the model *everything* — both ratings, recent form,
+the squad/tactics profile, fan sentiment, venue/host edge — and asks for
+calibrated 1X2 probabilities, a likely scoreline, and a rationale. It fuses
+signals a single formula can't.
 
 Design
 ------
-* Uses Claude ``claude-opus-4-8`` with adaptive thinking and **structured
-  output** (``messages.parse`` + a Pydantic schema) so the result is validated,
-  not regex-scraped.
-* The ``anthropic`` SDK is imported lazily — the module loads and the
-  Elo-only fallback runs without the SDK or an API key, so tests stay offline.
-* ``elo_fallback`` gives deterministic 1X2 probabilities from the Elo gap when
-  no key is configured, so the pipeline always produces *something*.
+* Provider-agnostic via ``llm_provider`` — uses **OpenAI** (``OPENAI_API_KEY``)
+  or **Claude** (``ANTHROPIC_API_KEY``), with structured output against a
+  Pydantic schema so the result is validated, not regex-scraped.
+* SDKs are imported lazily; ``elo_fallback`` gives deterministic 1X2 from the
+  Elo gap when no provider key is set, so the pipeline always produces output.
 
-Set ``ANTHROPIC_API_KEY`` to use the real judge:  pip install anthropic
+  pip install openai   # (or anthropic) and set the matching API key
 """
 
 from __future__ import annotations
 
-import os
 from dataclasses import dataclass, field
-
-MODEL = "claude-opus-4-8"
 
 
 @dataclass
@@ -97,31 +90,16 @@ SYSTEM = (
 )
 
 
-def judge_match(fx: Fixture, client=None, model: str = MODEL):
-    """Call Claude to judge the fixture; returns a validated Verdict object.
+def judge_match(fx: Fixture):
+    """Judge the fixture with the configured LLM (OpenAI or Claude); returns a
+    validated Verdict. Falls back to Elo when no provider key is set."""
+    from .llm_provider import structured_complete
 
-    Falls back to Elo if the SDK/key is unavailable. Pass ``client`` to inject a
-    pre-built Anthropic client (e.g. in tests).
-    """
-    if client is None:
-        if not os.environ.get("ANTHROPIC_API_KEY"):
-            return _as_verdict(elo_fallback(fx))
-        try:
-            import anthropic
-        except ImportError:
-            return _as_verdict(elo_fallback(fx))
-        client = anthropic.Anthropic()
-
-    Verdict = _verdict_model()
-    response = client.messages.parse(
-        model=model,
-        max_tokens=2000,
-        thinking={"type": "adaptive"},
-        system=SYSTEM,
-        messages=[{"role": "user", "content": build_prompt(fx)}],
-        output_format=Verdict,
-    )
-    return _normalize(response.parsed_output)
+    verdict = structured_complete(SYSTEM, build_prompt(fx), _verdict_model,
+                                  max_tokens=2000)
+    if verdict is None:
+        return _as_verdict(elo_fallback(fx))
+    return _normalize(verdict)
 
 
 def elo_fallback(fx: Fixture) -> dict:

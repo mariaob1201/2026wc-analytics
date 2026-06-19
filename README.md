@@ -74,7 +74,8 @@ structure**, holding completed games fixed and simulating the rest. Current **fo
 sentiment** enter as a small, capped goal-rate nudge.
 
 Cross-checks: a recency-weighted **Elo** (who's hot now) and an **LLM-as-a-Judge**
-(Claude) that fuses ratings with scouting for a single fixture.
+(OpenAI or Claude — auto-detected from your API key) that fuses ratings with
+scouting for a single fixture.
 
 ---
 
