@@ -88,13 +88,20 @@ def build_model(
         sigma_att = pm.HalfNormal("sigma_att", sigma=0.5)
         sigma_def = pm.HalfNormal("sigma_def", sigma=0.5)
 
-        # Zero-sum abilities for identifiability; attack prior centred on the
-        # player-feature covariate, defence centred on zero.
-        att = pm.ZeroSumNormal("att", sigma=sigma_att, dims="team")
-        deff = pm.ZeroSumNormal("def", sigma=sigma_def, dims="team")
+        # NON-CENTERED parameterization. We sample standardized zero-sum
+        # offsets and scale them by sigma, rather than sampling abilities whose
+        # prior width is itself a parameter. This breaks the "funnel"
+        # (sigma near zero -> tiny, highly-correlated ability space) that makes
+        # the centered version sample badly. The residual att offset is also
+        # kept SEPARATE from the covariate term so `beta_prior` and the offsets
+        # don't trade off against each other (a non-identifiable ridge).
+        att_raw = pm.ZeroSumNormal("att_raw", sigma=1.0, dims="team")
+        def_raw = pm.ZeroSumNormal("def_raw", sigma=1.0, dims="team")
+        att = pm.Deterministic("att", sigma_att * att_raw, dims="team")
+        deff = pm.Deterministic("def", sigma_def * def_raw, dims="team")
 
-        # Effective attack = data-driven att + covariate nudge.
-        att_eff = pm.Deterministic("att_eff", att + beta_prior * prior, dims="team")
+        # Effective attack = covariate nudge (player analytics) + residual.
+        att_eff = pm.Deterministic("att_eff", beta_prior * prior + att, dims="team")
 
         log_lambda_home = intercept + home_adv + att_eff[h_idx] - deff[a_idx]
         log_lambda_away = intercept + att_eff[a_idx] - deff[h_idx]

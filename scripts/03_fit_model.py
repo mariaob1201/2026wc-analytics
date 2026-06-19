@@ -33,7 +33,7 @@ def main() -> None:
     print(summary.to_string())
     max_rhat = summary["r_hat"].max()
     print(f"\nmax R-hat among key params: {max_rhat:.3f} "
-          f"({'OK' if max_rhat < 1.01 else 'CHECK — may need more tuning'})")
+          f"({'OK' if max_rhat <= 1.01 else 'CHECK — may need more tuning'})")
 
     strength = posterior_strength_table(result)
     strength.to_csv(PROCESSED / "posterior_strength.csv", index=False)
