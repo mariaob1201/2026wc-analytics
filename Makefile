@@ -40,6 +40,20 @@ HANDLE ?= @your_handle
 # Real player data -> real-match fit -> Mexico assessment.
 real: real-players real-fit mexico
 
+elo:
+	$(PY) scripts/10_elo.py
+
+simulate-real:
+	$(PY) scripts/15_simulate_real.py
+
+# Backtest + forecast, then tracking charts/sentiment/tactics. Re-run each matchday.
+track:
+	$(PY) scripts/13_match_predictions.py
+	$(PY) scripts/14_analytics.py
+
+# Full real-data pipeline end to end.
+real-all: real-players real-fit elo track simulate-real mexico
+
 test:
 	$(PY) -m pytest
 

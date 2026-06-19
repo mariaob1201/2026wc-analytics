@@ -88,11 +88,17 @@ def _seed_bracket(qualifier_idxs: list[int], net: np.ndarray) -> list[int]:
 
 
 def simulate_tournament(fit: FitResult, fixtures: pd.DataFrame,
-                        groups: dict[str, list[str]], n_sims: int = 5000) -> pd.DataFrame:
-    """Run ``n_sims`` tournaments; return per-team progression probabilities."""
+                        groups: dict[str, list[str]], n_sims: int = 5000,
+                        shifts: dict | None = None) -> pd.DataFrame:
+    """Run ``n_sims`` tournaments; return per-team progression probabilities.
+
+    ``shifts`` (team name -> log-rate nudge) optionally folds current form /
+    sentiment into every simulated match, so championship odds reflect momentum.
+    """
     rng = np.random.default_rng(SEED)
     idx = fit.team_to_idx
     teams = fit.teams
+    shift_arr = np.array([(shifts or {}).get(t, 0.0) for t in teams])
 
     # Pre-index group memberships.
     group_members = {g: [idx[t] for t in ts] for g, ts in groups.items()}
@@ -110,6 +116,7 @@ def simulate_tournament(fit: FitResult, fixtures: pd.DataFrame,
 
     for _ in range(n_sims):
         p = _draw_params(fit, rng)
+        p["att"] = p["att"] + shift_arr      # fold in momentum/sentiment
         net = p["att"] + p["deff"]
 
         # --- Group stage ---

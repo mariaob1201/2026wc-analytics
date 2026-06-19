@@ -9,6 +9,66 @@ import matplotlib.pyplot as plt  # noqa: E402
 import pandas as pd  # noqa: E402
 
 
+def plot_calibration(bt: pd.DataFrame, path, bins: int = 5) -> None:
+    """Reliability diagram: pooled predicted prob vs observed frequency (1X2)."""
+    import numpy as np
+
+    probs, outcomes = [], []
+    for r in bt.itertuples():
+        probs += [r.p_H, r.p_D, r.p_A]
+        outcomes += [r.result == "H", r.result == "D", r.result == "A"]
+    probs, outcomes = np.array(probs), np.array(outcomes, dtype=float)
+    edges = np.linspace(0, 1, bins + 1)
+    xs, ys = [], []
+    for lo, hi in zip(edges[:-1], edges[1:]):
+        m = (probs >= lo) & (probs < hi) if hi < 1 else (probs >= lo) & (probs <= hi)
+        if m.sum():
+            xs.append(probs[m].mean())
+            ys.append(outcomes[m].mean())
+    fig, ax = plt.subplots(figsize=(6, 6))
+    ax.plot([0, 1], [0, 1], "--", color="grey", label="perfect")
+    ax.plot(xs, ys, "o-", color="#2b8cbe", label="model")
+    ax.set_xlabel("predicted probability")
+    ax.set_ylabel("observed frequency")
+    ax.set_title("Calibration (1X2, out-of-sample)")
+    ax.legend()
+    fig.tight_layout()
+    fig.savefig(path, dpi=130)
+    plt.close(fig)
+
+
+def plot_goals_scatter(bt: pd.DataFrame, path) -> None:
+    """Predicted total goals (expected) vs actual total goals per match."""
+    fig, ax = plt.subplots(figsize=(6.5, 6))
+    mx = max(bt["tot_pred"].max(), bt["tot_act"].max()) + 0.5
+    ax.plot([0, mx], [0, mx], "--", color="grey")
+    ax.scatter(bt["tot_pred"], bt["tot_act"], color="#cb181d", alpha=0.8)
+    ax.set_xlabel("predicted total goals (expected)")
+    ax.set_ylabel("actual total goals")
+    ax.set_title("Predicted vs actual goals (played)")
+    fig.tight_layout()
+    fig.savefig(path, dpi=130)
+    plt.close(fig)
+
+
+def plot_forecast_probs(fc: pd.DataFrame, path) -> None:
+    """Stacked W/D/L bars for upcoming fixtures."""
+    d = fc.copy()
+    labels = [f"{r.home} v {r.away}" for r in d.itertuples()][::-1]
+    h, dr, a = d["p_H"][::-1], d["p_D"][::-1], d["p_A"][::-1]
+    fig, ax = plt.subplots(figsize=(9, 0.42 * len(d) + 1))
+    ax.barh(labels, 100 * h, color="#2b8cbe", label="home win")
+    ax.barh(labels, 100 * dr, left=100 * h, color="#bdbdbd", label="draw")
+    ax.barh(labels, 100 * a, left=100 * (h + dr), color="#cb181d", label="away win")
+    ax.set_xlabel("probability [%]")
+    ax.set_title("Forecast — win/draw/win for next fixtures")
+    ax.legend(ncol=3, loc="lower center", bbox_to_anchor=(0.5, 1.02))
+    ax.set_xlim(0, 100)
+    fig.tight_layout()
+    fig.savefig(path, dpi=130)
+    plt.close(fig)
+
+
 def social_card(strength: pd.DataFrame, facts: dict, path,
                 handle: str = "@your_handle") -> None:
     """A portrait (1080x1350) Instagram/X-ready summary card — real data only.

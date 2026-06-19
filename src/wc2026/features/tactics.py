@@ -66,6 +66,42 @@ def formation_fit(squad: pd.DataFrame) -> pd.DataFrame:
     return out
 
 
+def matchup_tactics(home_squad: pd.DataFrame, away_squad: pd.DataFrame,
+                    home_actual: str | None = None,
+                    away_actual: str | None = None) -> dict:
+    """Tactical read of a fixture: each side's best shape + the line battles.
+
+    Compares the two squads line-by-line (defence/midfield/attack) and calls who
+    holds the edge where — the "soccer strategy" view of a matchup.
+    """
+    h = interpret_formation(home_squad, actual=home_actual)
+    a = interpret_formation(away_squad, actual=away_actual)
+
+    def edge(line: str, pos: str, n: int) -> str:
+        hs = _line_strength(home_squad, pos, n)
+        as_ = _line_strength(away_squad, pos, n)
+        if abs(hs - as_) < 1.0:
+            return f"{line}: even ({hs:.0f} vs {as_:.0f})"
+        who = "home" if hs > as_ else "away"
+        return f"{line}: {who} edge ({hs:.0f} vs {as_:.0f})"
+
+    battles = [edge("Defence", "DF", 4), edge("Midfield", "MF", 4),
+               edge("Attack", "FW", 3)]
+    mid_h = _line_strength(home_squad, "MF", 4)
+    mid_a = _line_strength(away_squad, "MF", 4)
+    control = ("home controls midfield" if mid_h - mid_a > 1.5 else
+               "away controls midfield" if mid_a - mid_h > 1.5 else
+               "midfield finely balanced")
+
+    return {
+        "home_best": h["best_formation"], "home_actual": home_actual,
+        "away_best": a["best_formation"], "away_actual": away_actual,
+        "line_battles": battles,
+        "verdict": (f"{control}; home built around its {h['strongest_line']}, "
+                    f"away around its {a['strongest_line']}."),
+    }
+
+
 def interpret_formation(squad: pd.DataFrame, actual: str | None = None) -> dict:
     """Semantic tactical read: best-fit shape, and how the actual one compares."""
     fit = formation_fit(squad)

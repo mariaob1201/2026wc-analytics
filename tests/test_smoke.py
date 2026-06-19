@@ -99,6 +99,12 @@ def test_tactics():
     assert "actual_commentary" in res
     assert res["strongest_line"] in {"defence", "midfield", "attack"}
 
+    from wc2026.features.tactics import matchup_tactics
+    teams = generate_players()["team"].unique()
+    mt = matchup_tactics(generate_players()[generate_players()["team"] == teams[0]],
+                         generate_players()[generate_players()["team"] == teams[1]])
+    assert len(mt["line_battles"]) == 3 and "verdict" in mt
+
 
 def test_x_collector_pure_helpers():
     """Sentiment + cost + summary work WITHOUT tweepy or a network."""
@@ -167,6 +173,26 @@ def test_llm_judge_fallback():
     total = v["p_a_win"] + v["p_draw"] + v["p_b_win"]
     assert abs(total - 1.0) < 0.05
     assert v["p_a_win"] > v["p_b_win"]   # higher Elo + home favoured
+
+
+def test_momentum():
+    """Form shifts are bounded; a recent winner gets a positive nudge."""
+    import pandas as pd
+
+    from wc2026.models.momentum import MAX_SHIFT, combined_shifts, form_shifts
+
+    m = pd.DataFrame({
+        "date": ["2026-05-01", "2026-05-10", "2026-06-01"],
+        "home_team": ["Argentina", "Argentina", "Haiti"],
+        "away_team": ["Haiti", "Haiti", "Argentina"],
+        "home_goals": [4, 3, 0], "away_goals": [0, 0, 2],
+    })
+    s = form_shifts(m, asof="2026-06-19")
+    assert all(abs(v) <= MAX_SHIFT + 1e-9 for v in s.values())
+    assert s["Argentina"] > s["Haiti"]   # winners nudged up relative to losers
+
+    c = combined_shifts(m, "2026-06-19", scouted={"Mexico": "leaning positive"})
+    assert c["Mexico"] > 0               # positive sentiment adds a small nudge
 
 
 def test_model_fits_tiny():

@@ -138,7 +138,7 @@ def fit(
                      team_to_idx={t: i for i, t in enumerate(teams)})
 
 
-def predict_match(idata, teams, home, away, neutral=True, max_goals=8):
+def predict_match(idata, teams, home, away, neutral=True, max_goals=8, shifts=None):
     """Posterior-predictive GOAL forecast for one fixture.
 
     This is the goals-vs-winners answer made explicit. For every posterior draw
@@ -160,8 +160,13 @@ def predict_match(idata, teams, home, away, neutral=True, max_goals=8):
     att = flat("att_eff")          # (draws, team)
     deff = flat("def")
 
-    lam_h = np.exp(intercept + home_adv + att[:, i] - deff[:, j])
-    lam_a = np.exp(intercept + att[:, j] - deff[:, i])
+    # Optional momentum/sentiment nudge: a small log-rate shift to each team's
+    # attack (e.g. recent form). shifts is {team_name: float}; default 0.
+    sh = shifts or {}
+    sh_h, sh_a = float(sh.get(home, 0.0)), float(sh.get(away, 0.0))
+
+    lam_h = np.exp(intercept + home_adv + att[:, i] + sh_h - deff[:, j])
+    lam_a = np.exp(intercept + att[:, j] + sh_a - deff[:, i])
 
     g = np.arange(max_goals + 1)
     # Joint scoreline matrix: average the per-draw outer products (shared λ per
