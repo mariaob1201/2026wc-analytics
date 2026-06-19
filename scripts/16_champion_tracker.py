@@ -133,6 +133,7 @@ def _render(st, nxt, sim, n_played) -> str:
              "simulation over goals. See [METHODOLOGY.md](METHODOLOGY.md).\n")
 
     L.append("## Title odds — conditioned on current results\n")
+    L.append("![Title probabilities](../artifacts/champion_tracker.png)\n")
     L.append("| Team | Quarter | Semi | Final | **Champion** |")
     L.append("|---|---|---|---|---|")
     for r in sim.head(12).itertuples():

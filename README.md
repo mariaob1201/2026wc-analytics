@@ -28,6 +28,8 @@ tournament. Re-run after each matchday:
 make track-champion     # refit on current results → tracker (odds + next games)
 ```
 
+![Title probabilities](artifacts/champion_tracker.png)
+
 | Output | What it is |
 |---|---|
 | [docs/CHAMPION_TRACKER.md](docs/CHAMPION_TRACKER.md) | Title odds (conditioned on current state) + next-game goal forecasts + standings |

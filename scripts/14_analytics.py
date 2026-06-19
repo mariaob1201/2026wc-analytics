@@ -70,6 +70,9 @@ def _render(bt, fc, rows) -> str:
          "slate. Charts in `artifacts/`. Compiled 2026-06-19._\n"]
 
     L.append("## Tracking charts\n")
+    L.append("![Calibration](../artifacts/calibration.png)")
+    L.append("![Predicted vs actual goals](../artifacts/goals_pred_vs_actual.png)")
+    L.append("![Forecast probabilities](../artifacts/forecast_probs.png)\n")
     L.append("- **Calibration** (`artifacts/calibration.png`) — are our "
              "probabilities honest? Points on the diagonal = well-calibrated.")
     L.append("- **Predicted vs actual goals** (`artifacts/goals_pred_vs_actual.png`) "

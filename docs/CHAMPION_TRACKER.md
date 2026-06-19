@@ -11,6 +11,8 @@ Both come from one model: goals are the primitive; the winner is a simulation ov
 
 ## Title odds — conditioned on current results
 
+![Title probabilities](../artifacts/champion_tracker.png)
+
 | Team | Quarter | Semi | Final | **Champion** |
 |---|---|---|---|---|
 | Argentina | 49% | 28% | 18% | **13%** |

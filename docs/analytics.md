@@ -4,6 +4,10 @@ _Run after each matchday to track model calibration and read the next slate. Cha
 
 ## Tracking charts
 
+![Calibration](../artifacts/calibration.png)
+![Predicted vs actual goals](../artifacts/goals_pred_vs_actual.png)
+![Forecast probabilities](../artifacts/forecast_probs.png)
+
 - **Calibration** (`artifacts/calibration.png`) — are our probabilities honest? Points on the diagonal = well-calibrated.
 - **Predicted vs actual goals** (`artifacts/goals_pred_vs_actual.png`) — scatter of expected vs real total goals per played match.
 - **Forecast win/draw/win** (`artifacts/forecast_probs.png`) — stacked 1X2 bars for upcoming fixtures.
