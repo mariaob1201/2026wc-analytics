@@ -1,9 +1,11 @@
 name: daily-tracker
 
 # Pull the latest results, refit, and refresh every forecast/report once a day.
+# Runs only during the tournament; the `gate` job hard-stops it after 2026-07-17
+# (the final is 2026-07-19). GitHub cron has no end date, so the gate enforces it.
 on:
   schedule:
-    - cron: "0 12 * * *"      # 12:00 UTC daily (after most matchdays settle)
+    - cron: "0 12 * 6,7 *"     # 12:00 UTC daily, June–July only
   workflow_dispatch: {}        # allow manual runs from the Actions tab
 
 permissions:
@@ -13,8 +15,29 @@ concurrency:
   group: daily-tracker
   cancel-in-progress: true
 
+env:
+  TRACKER_END: "20260717"      # last day the tracker runs (inclusive)
+
 jobs:
+  # Hard stop: skip everything once we're past the tournament end date.
+  gate:
+    runs-on: ubuntu-latest
+    outputs:
+      active: ${{ steps.check.outputs.active }}
+    steps:
+      - id: check
+        run: |
+          today=$(date -u +%Y%m%d)
+          if [ "$today" -le "$TRACKER_END" ]; then
+            echo "active=true"  >> "$GITHUB_OUTPUT"
+          else
+            echo "active=false" >> "$GITHUB_OUTPUT"
+            echo "Past ${TRACKER_END} — daily tracker retired; skipping."
+          fi
+
   track:
+    needs: gate
+    if: needs.gate.outputs.active == 'true'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
