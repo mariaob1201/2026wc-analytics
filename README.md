@@ -1,42 +1,58 @@
-# ⚽ World Cup 2026 — Bayesian Champion Tracker
+# ⚽ World Cup 2026 — End-to-End Goal Forecasting
 
-A **living, state-aware forecast** of the 2026 FIFA World Cup. It models **goals**
-with a hierarchical Bayesian model, conditions on the **matches already played**,
-and answers two linked questions with one model:
+**The core outcome of this project: forecast the goals in every World Cup match,
+score those forecasts against the real results as they come in, and keep a live,
+honest track record of how good the forecasts are.** Everything else — win
+probabilities, title odds, tactics — is derived from the goal forecast.
 
-1. **Next games** — how many goals each side scores in the upcoming fixtures.
-2. **The trophy** — each team's probability of winning the World Cup, given
-   everything that has happened so far.
-
-Goals are the primitive; winners are a simulation over goals. Squad **skill**, the
-**current results**, and **form + X/ESPN sentiment** all feed the prediction.
-
-> **For researchers:** this is a reference implementation of a Baio–Blangiardo-style
-> hierarchical Poisson football model, extended with partial pooling for a 48-team
-> field, a recency Elo cross-check, an LLM-as-a-Judge, and an honest backtest. The
-> full write-up — assumptions, diagnostics, and open problems — is in
-> **[docs/METHODOLOGY.md](docs/METHODOLOGY.md)**.
-
----
-
-## The headline view → [docs/CHAMPION_TRACKER.md](docs/CHAMPION_TRACKER.md)
-
-Conditioned on the matches played so far, the model simulates the rest of the
-tournament. Re-run after each matchday:
-
-```bash
-make track-champion     # refit on current results → tracker (odds + next games)
+```
+ forecast goals  ──▶  match is played  ──▶  compare to ground truth  ──▶  roll forward
+ (Bayesian model)     (live results)        (hit-rate, goals MAE, RPS)     (refit daily)
 ```
 
-![Title probabilities](artifacts/champion_tracker.png)
+A hierarchical Bayesian model gives each team an attack and a defence, turning any
+fixture into a full **scoreline distribution**. Predicted goals are logged
+*before* kickoff and checked against the actual score afterward — so accuracy
+accumulates over the tournament instead of being asserted once.
+
+## 🎯 The headline: forecasts vs ground truth → [docs/FORECAST_LOG.md](docs/FORECAST_LOG.md)
+
+Every goal forecast and how it turned out, with the running scoreboard:
+
+| | Predicted (xG) | Predicted | **Actual** | ✓ |
+|---|---|---|---|:--:|
+| Mexico v South Africa | 1.6–0.8 | 1-0 | **2-0** | ✅ |
+| France v Senegal | 1.6–0.8 | 1-0 | **3-1** | ✅ |
+| Spain v Cape Verde | 2.0–0.6 | 1-0 | **0-0** | — |
+
+**Running accuracy (out-of-sample, live):** 54% outcome hit-rate · 1.54 goals MAE ·
+RPS 0.166. The model **beats Elo and a naive baseline on RPS across the 2018, 2022
+and 2026 World Cups** — see the benchmark in [docs/EVALUATION.md](docs/EVALUATION.md).
+
+```bash
+make daily            # pull latest results → refit → forecast → score vs truth
+```
+
+This whole loop runs **automatically every day** via GitHub Actions
+([`.github/workflows/track.yml`](.github/workflows/track.yml)): it pulls the day's
+results, refits, forecasts the next games, fills in ground truth for matches just
+played, and commits the refreshed reports.
+
+### What's in the repo
 
 | Output | What it is |
 |---|---|
-| [docs/CHAMPION_TRACKER.md](docs/CHAMPION_TRACKER.md) | Title odds (conditioned on current state) + next-game goal forecasts + standings |
-| [docs/match_predictions.md](docs/match_predictions.md) | Pre-tournament **backtest**: predicted goals vs actual, match by match |
-| [docs/analytics.md](docs/analytics.md) | Tracking charts (calibration), match **sentiment** & **tactics** |
-| [docs/METHODOLOGY.md](docs/METHODOLOGY.md) | Full technical methodology, assumptions, and research agenda |
-| `artifacts/*.png` | Charts (champion odds, calibration, goals scatter, forecast bars) — regenerable |
+| **[docs/FORECAST_LOG.md](docs/FORECAST_LOG.md)** | **Goal forecasts vs ground truth + running accuracy (the main outcome)** |
+| [docs/EVALUATION.md](docs/EVALUATION.md) | Backtest vs Elo + naive baselines (2018/2022/2026), RPS/log-loss |
+| [docs/match_predictions.md](docs/match_predictions.md) | Per-match predicted goals vs actual + next-slate forecasts |
+| [docs/CHAMPION_TRACKER.md](docs/CHAMPION_TRACKER.md) | Goals rolled up → title odds, conditioned on current results |
+| [docs/analytics.md](docs/analytics.md) | Calibration chart, match sentiment & tactics |
+| [docs/METHODOLOGY.md](docs/METHODOLOGY.md) · [docs/LIVE_PIPELINE.md](docs/LIVE_PIPELINE.md) | Methodology + the live/agent automation guide |
+
+> **For researchers:** a reference implementation of a Baio–Blangiardo-style
+> hierarchical Poisson goals model — partial pooling for the 48-team field,
+> recency-weighted likelihood, an Elo cross-check, an LLM judge/extractor, and a
+> proper out-of-sample backtest (RPS/log-loss vs baselines).
 
 ---
 
@@ -65,16 +81,17 @@ Cross-checks: a recency-weighted **Elo** (who's hot now) and an **LLM-as-a-Judge
 ## Quick start
 
 ```bash
-make setup          # .venv + deps (PyMC, ArviZ, pandas, matplotlib)
-make real-all       # full real-data pipeline (squads → fit → elo → backtest → sim)
-make track-champion # the living champion tracker (re-run each matchday)
-make test           # fast test suite
+make setup     # .venv + deps (PyMC, ArviZ, pandas, matplotlib)
+make daily     # ⭐ the full loop: pull results → refit → forecast → score vs truth
+make evaluate  # backtest vs Elo + naive baselines (the scoreboard)
+make test      # fast test suite
 ```
 
 Single match on demand:
 
 ```bash
 .venv/bin/python scripts/12_predict_match.py --home Mexico --away Czechia
+# → expected goals, most-likely score, P(win/draw/win), over-2.5, both-teams-score
 ```
 
 ---
