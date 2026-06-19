@@ -46,13 +46,19 @@ elo:
 simulate-real:
 	$(PY) scripts/15_simulate_real.py
 
+champion:
+	$(PY) scripts/16_champion_tracker.py
+
 # Backtest + forecast, then tracking charts/sentiment/tactics. Re-run each matchday.
 track:
 	$(PY) scripts/13_match_predictions.py
 	$(PY) scripts/14_analytics.py
 
+# The living champion tracker: refit on current results, then track. Run each matchday.
+track-champion: real-players real-fit champion
+
 # Full real-data pipeline end to end.
-real-all: real-players real-fit elo track simulate-real mexico
+real-all: real-players real-fit elo track simulate-real champion mexico
 
 test:
 	$(PY) -m pytest

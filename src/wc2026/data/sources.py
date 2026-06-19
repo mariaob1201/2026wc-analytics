@@ -133,6 +133,22 @@ def build_real_matches(start: str = "2022-01-01", end: str = "2026-06-19") -> pd
     })
 
 
+def wc2026_matches() -> pd.DataFrame:
+    """All 2026 World Cup matches in the results feed, names mapped to our canon.
+
+    Adds `home`/`away` (canonical names) columns. Rows with null scores are
+    fixtures not yet played.
+    """
+    df = download_intl_results()
+    df = df[(df["tournament"] == "FIFA World Cup") & (df["date"] >= "2026-06-01")].copy()
+    from_src = {INTL_NAME_ALIASES.get(t.name, t.name): t.name for t in TEAMS}
+    df["home"] = df["home_team"].map(lambda x: from_src.get(x, x))
+    df["away"] = df["away_team"].map(lambda x: from_src.get(x, x))
+    valid = {t.name for t in TEAMS}
+    df = df[df["home"].isin(valid) & df["away"].isin(valid)]
+    return df.sort_values("date").reset_index(drop=True)
+
+
 def _primary_position(player_positions: str) -> str:
     """Bucket FIFA's 'RW, ST, CF' style field into GK/DF/MF/FW."""
     primary = str(player_positions).split(",")[0].strip().upper()

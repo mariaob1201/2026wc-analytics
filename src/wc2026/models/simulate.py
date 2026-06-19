@@ -89,16 +89,27 @@ def _seed_bracket(qualifier_idxs: list[int], net: np.ndarray) -> list[int]:
 
 def simulate_tournament(fit: FitResult, fixtures: pd.DataFrame,
                         groups: dict[str, list[str]], n_sims: int = 5000,
-                        shifts: dict | None = None) -> pd.DataFrame:
+                        shifts: dict | None = None,
+                        played: dict | None = None) -> pd.DataFrame:
     """Run ``n_sims`` tournaments; return per-team progression probabilities.
 
     ``shifts`` (team name -> log-rate nudge) optionally folds current form /
     sentiment into every simulated match, so championship odds reflect momentum.
+
+    ``played`` ({(home, away): (gh, ga)}) holds already-completed group matches
+    FIXED and simulates only the remaining fixtures — so the odds are conditioned
+    on the actual current state of the tournament, not re-rolled from scratch.
     """
     rng = np.random.default_rng(SEED)
     idx = fit.team_to_idx
     teams = fit.teams
     shift_arr = np.array([(shifts or {}).get(t, 0.0) for t in teams])
+
+    # Already-played group results to hold FIXED (current-state conditioning):
+    # {(home_name, away_name): (home_goals, away_goals)} -> indexed.
+    played_idx = {(idx[h], idx[a]): (int(gh), int(ga))
+                  for (h, a), (gh, ga) in (played or {}).items()
+                  if h in idx and a in idx}
 
     # Pre-index group memberships.
     group_members = {g: [idx[t] for t in ts] for g, ts in groups.items()}
@@ -124,7 +135,12 @@ def simulate_tournament(fit: FitResult, fixtures: pd.DataFrame,
         gd = defaultdict(int)
         gf = defaultdict(int)
         for i, j, _g in fix:
-            gi, gj = _score(p, i, j, rng)
+            # Hold completed matches fixed (either orientation); simulate the rest.
+            res = played_idx.get((i, j))
+            if res is None and (j, i) in played_idx:
+                gj_act, gi_act = played_idx[(j, i)]
+                res = (gi_act, gj_act)
+            gi, gj = res if res is not None else _score(p, i, j, rng)
             gd[i] += gi - gj
             gd[j] += gj - gi
             gf[i] += gi

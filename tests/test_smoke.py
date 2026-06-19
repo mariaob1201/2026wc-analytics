@@ -195,6 +195,37 @@ def test_momentum():
     assert c["Mexico"] > 0               # positive sentiment adds a small nudge
 
 
+def test_simulation_conditions_on_results():
+    """A team handed a fixed group win should out-advance one handed a loss."""
+    import numpy as np
+    import pandas as pd
+    import pymc as pm
+
+    from wc2026.data.teams import TEAMS, by_group
+    from wc2026.models.bayesian_score import FitResult, build_model
+    from wc2026.models.simulate import simulate_tournament
+
+    teams = [t.name for t in TEAMS]
+    matches = generate_matches().head(150)
+    with build_model(matches, teams, prior_strength=np.zeros(len(teams))):
+        idata = pm.sample(draws=40, tune=40, chains=2, cores=1,
+                          progressbar=False, random_seed=3)
+    fit = FitResult(idata=idata, teams=teams,
+                    team_to_idx={t: i for i, t in enumerate(teams)})
+    groups = {g: [t.name for t in ts] for g, ts in by_group().items()}
+    fixtures = pd.DataFrame([
+        {"group": g, "home_team": m[i], "away_team": m[j]}
+        for g, m in groups.items() for i in range(4) for j in range(i + 1, 4)
+    ])
+    a, b = groups["A"][0], groups["A"][1]
+    # Hand team `a` a thumping win over `b` in their group game.
+    sim = simulate_tournament(fit, fixtures, groups, n_sims=200,
+                              played={(a, b): (4, 0)})
+    pa = sim.loc[sim.team == a, "p_round32"].iloc[0]
+    pb = sim.loc[sim.team == b, "p_round32"].iloc[0]
+    assert pa >= pb   # the fixed winner advances at least as often
+
+
 def test_model_fits_tiny():
     """A minimal NUTS run just to prove the model compiles and samples."""
     import pymc as pm  # imported here so non-model tests don't pay the cost
