@@ -23,6 +23,20 @@ def plot_champion_probs(sim: pd.DataFrame, path, top: int = 15) -> None:
     plt.close(fig)
 
 
+def plot_team_rank(strength: pd.DataFrame, path, highlight: str) -> None:
+    """All 48 teams by net strength, with one team highlighted."""
+    d = strength.sort_values("net_strength", ascending=False).reset_index(drop=True)
+    colors = ["#d94801" if t == highlight else "#9ecae1" for t in d["team"]]
+    fig, ax = plt.subplots(figsize=(8, 11))
+    ax.barh(d["team"][::-1], d["net_strength"][::-1], color=colors[::-1])
+    rank = int(d.index[d["team"] == highlight][0]) + 1
+    ax.set_xlabel("posterior net strength (attack + defence)")
+    ax.set_title(f"WC2026 team strength from real results — {highlight} = {rank}/48")
+    fig.tight_layout()
+    fig.savefig(path, dpi=130)
+    plt.close(fig)
+
+
 def plot_strength(strength: pd.DataFrame, path, top: int = 20) -> None:
     """Posterior attack vs defence scatter for the strongest teams."""
     d = strength.nlargest(top, "net_strength")

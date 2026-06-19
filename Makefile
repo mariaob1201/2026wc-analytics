@@ -20,8 +20,21 @@ fit:
 simulate:
 	$(PY) scripts/04_simulate_tournament.py
 
-# Full pipeline, in order.
+# Full synthetic demo pipeline, in order.
 all: data features fit simulate
+
+# --- Real-data track --------------------------------------------------------
+real-players:
+	$(PY) scripts/05_extract_real_players.py
+
+real-fit:
+	$(PY) scripts/06_fit_real.py
+
+mexico:
+	$(PY) scripts/07_assess_mexico.py
+
+# Real player data -> real-match fit -> Mexico assessment.
+real: real-players real-fit mexico
 
 test:
 	$(PY) -m pytest

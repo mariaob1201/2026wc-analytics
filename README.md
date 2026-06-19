@@ -26,6 +26,30 @@ make fit        # 03: sample the posterior (NUTS)                 → artifacts/
 make simulate   # 04: Monte-Carlo the bracket                     → artifacts/champion_probs.png
 ```
 
+**Real player data + semantic profiles** (stage 05, separate from the synthetic demo):
+
+```bash
+.venv/bin/python scripts/05_extract_real_players.py
+```
+
+Downloads a public ~19k-player dataset (sofifa/FIFA schema), builds each
+nation's squad by nationality, engineers the same features, and writes a
+human-readable report to `data/processed/team_profiles.md` plus structured
+`team_interpretation.csv`. See "Real player data & semantic interpretation".
+
+**Fully real pipeline + Mexico deep-dive** (real matches + real priors + tactics):
+
+```bash
+make real    # 05 real squads → 06 fit on real intl results → 07 Mexico assessment
+```
+
+- Stage 06 fits the model on **real international results** (martj42 dataset,
+  2022–present) instead of synthetic matches → `posterior_strength_real.csv`.
+- Stage 07 produces `data/processed/mexico_assessment.md`: Bayesian strength
+  rank, real squad profile, **formation analysis** (4-4-2 vs 4-3-3 vs the
+  scouted 4-1-4-1), recent form, and key players — with public-source citations
+  encoded in [`data/scouting.py`](src/wc2026/data/scouting.py).
+
 > **Data note.** Ships with a *synthetic* data generator so the whole pipeline
 > runs offline. Each generator function in `src/wc2026/data/generate_synthetic.py`
 > is an isolated adapter — replace its body with a real source (FBref/StatsBomb
@@ -141,6 +165,33 @@ These roll up (top-16-by-overall per nation) into the per-team
 `prior_strength` covariate that informs the model.
 
 ---
+
+## Real player data & semantic interpretation
+
+`scripts/05_extract_real_players.py` pulls a real, openly-hosted player dataset
+([`data/sources.py`](src/wc2026/data/sources.py)) and builds national squads by
+nationality (top-26 by overall). It maps 1:1 onto the project's schema, so the
+same feature pipeline runs on it.
+
+On top of the numbers, [`features/interpretation.py`](src/wc2026/features/interpretation.py)
+adds a **rule-based semantic layer** — transparent, auditable, no black box:
+
+- **Per player** → an archetype: *Clinical finisher, Creative hub, Ball-playing
+  defender, Veteran talisman, Star prospect, …* (from position + age + standout skills).
+- **Per team** → a structured profile + one-paragraph narrative: quality **tier**,
+  **age profile** (youthful / balanced / veteran-heavy), stylistic **tilt** (attack
+  vs defence), squad **depth** (deep vs top-heavy), and **star power**.
+
+Example output:
+
+> *France profile as an elite contender (avg top-16 rating 85.6). The squad is
+> balanced age (mean 27.1) and attack-leaning, with moderate depth. Talisman:
+> K. Mbappé (91 ovr), giving galactico-level star power.*
+
+**Documented proxies** (the source lacks these fields): `longevity` is proxied
+from age + international reputation; `social_score`/`followers` from
+international reputation (follower APIs are paid). Vintage is FIFA 22, and squads
+are a nationality pool, not the official call-ups — see the module docstrings.
 
 ## Project layout
 

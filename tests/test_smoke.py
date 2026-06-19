@@ -43,6 +43,63 @@ def test_features():
     assert np.isfinite(team["prior_strength"]).all()
 
 
+def test_interpretation():
+    """Semantic layer runs on synthetic players and emits sane labels."""
+    from wc2026.features.interpretation import (
+        add_player_interpretation,
+        interpret_all_teams,
+        team_profiles_markdown,
+    )
+
+    players = add_player_features(generate_players())
+    roles = add_player_interpretation(players)
+    assert roles["role"].notna().all()
+
+    interp = interpret_all_teams(players)
+    assert len(interp) == 48
+    assert set(interp["tier"]).issubset({
+        "Elite contender", "Strong side", "Solid outfit", "Developing team"})
+    assert {"style", "depth", "age_profile", "narrative"} <= set(interp.columns)
+
+    md = team_profiles_markdown(interp, players)
+    assert md.startswith("#") and "avg top-16 rating" in md
+
+
+def test_sources_helpers():
+    """Position bucketing + proxies are pure and don't need the network."""
+    import pandas as pd
+
+    from wc2026.data.sources import _longevity_proxies, _primary_position, _social_proxy
+
+    assert _primary_position("GK") == "GK"
+    assert _primary_position("RW, ST, CF") == "FW"
+    assert _primary_position("CB, RB") == "DF"
+    assert _primary_position("CDM, CM") == "MF"
+
+    age = pd.Series([22, 30, 35])
+    rep = pd.Series([1, 3, 5])
+    cy, caps, debut = _longevity_proxies(age, rep)
+    assert (caps >= 1).all() and (caps <= 180).all()
+    foll, eng = _social_proxy(rep, pd.Series([70, 85, 90]))
+    assert (foll > 0).all() and (eng.between(0.002, 0.12)).all()
+
+
+def test_tactics():
+    """Formation fit + interpretation run on a synthetic squad."""
+    from wc2026.features.tactics import FORMATIONS, formation_fit, interpret_formation
+
+    squad = generate_players()
+    squad = squad[squad["team"] == squad["team"].iloc[0]]
+    fit = formation_fit(squad)
+    assert len(fit) == len(FORMATIONS)
+    assert fit["xi_rating"].is_monotonic_decreasing  # sorted best-first
+
+    res = interpret_formation(squad, actual="4-1-4-1")
+    assert res["best_formation"] in FORMATIONS
+    assert "actual_commentary" in res
+    assert res["strongest_line"] in {"defence", "midfield", "attack"}
+
+
 def test_model_fits_tiny():
     """A minimal NUTS run just to prove the model compiles and samples."""
     import pymc as pm  # imported here so non-model tests don't pay the cost
