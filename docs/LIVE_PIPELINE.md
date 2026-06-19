@@ -102,6 +102,29 @@ EA FC (FC24/FC25) ratings table and join by name. Then the prior is built from
 
 ---
 
+## Per-match data: lineups, ratings, timeline (and the Google-panel question)
+
+Wanting *team stats, lineups, player ratings, and the match timeline* per game is
+reasonable — here's what's actually usable:
+
+| Want | Usable source | Note |
+|---|---|---|
+| Lineups, formation, subs, cards, goal timeline | **ESPN hidden JSON** (`site.api.espn.com/.../summary?event=<id>`) or the match's Wikipedia report | Structured, free; the right primary feed |
+| Team match stats (shots, possession, xG) | ESPN summary endpoint; FBref via `soccerdata` | |
+| Player performance ratings | a current **EA FC** dataset (pre-match quality); post-match ratings (SofaScore/WhoScored) are paywalled/ToS-restricted | |
+| Semantic timeline / narrative | feed the match report into **`models/llm_extract.py`** → structured `{formation, injuries, momentum_signal}` | LLM turns prose → features |
+
+**On the Google search panel** (the link you shared): that match card is **not an
+API** — scraping Google results is brittle and against its ToS, so don't build on
+it. Use the sports-data feeds above (ESPN/FBref/Wikipedia) for the same lineups,
+stats, and timeline in a stable, structured form, and let the LLM extractor read
+any free-text report for the semantic layer.
+
+**The daily forecast-vs-truth ledger** ([FORECAST_LOG.md](FORECAST_LOG.md), stage
+20) is the payoff: every goal forecast is recorded before kickoff and scored
+against the real result, so accuracy (hit-rate, goals MAE, RPS) accumulates as the
+tournament runs — `make prediction-log`, refreshed daily by `.github/workflows/track.yml`.
+
 ## Suggested next builds
 
 - Wire `llm_extract` output into `momentum.combined_shifts` (news → goal nudge).

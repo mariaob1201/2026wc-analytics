@@ -57,6 +57,13 @@ live-squads:
 evaluate:
 	$(PY) scripts/19_evaluate.py
 
+prediction-log:
+	$(PY) scripts/20_prediction_log.py
+
+# The full daily refresh (used by the GitHub Action): real squads + live results
+# -> refit -> backtest/forecast -> tracker -> forecast-vs-truth log.
+daily: real-players live-squads live-features real-fit elo track champion prediction-log
+
 # Backtest + forecast, then tracking charts/sentiment/tactics. Re-run each matchday.
 track:
 	$(PY) scripts/13_match_predictions.py
