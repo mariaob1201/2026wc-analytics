@@ -1,0 +1,14 @@
+# Core scientific stack
+numpy>=1.26
+pandas>=2.1
+scipy>=1.11
+
+# Bayesian inference
+pymc>=5.10
+arviz>=0.17
+
+# Plotting
+matplotlib>=3.8
+
+# Dev / testing
+pytest>=8.0

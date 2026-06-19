@@ -1,0 +1,145 @@
+"""Hierarchical Bayesian Poisson model of match scorelines (PyMC).
+
+The model
+=========
+For a match between home team ``h`` and away team ``a`` we treat the goals each
+side scores as Poisson counts whose (log) rates depend on an attack and a
+defence ability per team::
+
+    home_goals ~ Poisson(λ_home)
+    away_goals ~ Poisson(λ_away)
+
+    log λ_home = intercept + home_adv + att[h] - def[a]
+    log λ_away = intercept            + att[a] - def[h]
+
+Why hierarchical / "partial pooling"?
+-------------------------------------
+Each team's att/def is drawn from a shared distribution whose spread (σ) is
+itself estimated. Teams with few matches are pulled toward the league average;
+teams with many matches keep their own signal. This is the Bayesian cure for
+small samples -- far more robust than fitting 48 independent strengths.
+
+Where your player analytics enter
+----------------------------------
+The PRIOR MEAN of each team's attack ability is set to the ``prior_strength``
+covariate engineered from player skills/longevity/social reach::
+
+    att[t] ~ Normal(beta_prior * prior_strength[t], σ_att)
+
+So before a single goal is observed, squads with stronger players are expected
+to attack better -- and the match data then updates that belief. ``beta_prior``
+is itself estimated, so the model decides how much to trust your covariate.
+
+Identifiability
+---------------
+Attack/defence are only defined up to a constant, so we use zero-sum
+("ZeroSumNormal") parameters -- the abilities are forced to average to zero,
+with the overall scoring level absorbed by ``intercept``.
+"""
+
+from __future__ import annotations
+
+from dataclasses import dataclass
+
+import arviz as az
+import numpy as np
+import pandas as pd
+import pymc as pm
+
+from ..config import SEED
+
+
+@dataclass
+class FitResult:
+    idata: az.InferenceData
+    teams: list[str]            # index order of att/def parameters
+    team_to_idx: dict[str, int]
+
+
+def build_model(
+    matches: pd.DataFrame,
+    teams: list[str],
+    prior_strength: np.ndarray | None = None,
+) -> pm.Model:
+    """Construct the PyMC model. ``matches`` needs home/away team + goals."""
+    team_to_idx = {t: i for i, t in enumerate(teams)}
+    n_teams = len(teams)
+
+    h_idx = matches["home_team"].map(team_to_idx).to_numpy()
+    a_idx = matches["away_team"].map(team_to_idx).to_numpy()
+    hg = matches["home_goals"].to_numpy()
+    ag = matches["away_goals"].to_numpy()
+
+    if prior_strength is None:
+        prior_strength = np.zeros(n_teams)
+
+    coords = {"team": teams, "match": np.arange(len(matches))}
+    with pm.Model(coords=coords) as model:
+        prior = pm.Data("prior_strength", prior_strength, dims="team")
+
+        # Global scoring level and home advantage.
+        intercept = pm.Normal("intercept", mu=0.0, sigma=1.0)
+        home_adv = pm.Normal("home_adv", mu=0.25, sigma=0.25)
+
+        # How strongly the player-derived covariate shifts attacking ability.
+        beta_prior = pm.Normal("beta_prior", mu=0.0, sigma=1.0)
+
+        # Hierarchical spread of abilities (partial pooling).
+        sigma_att = pm.HalfNormal("sigma_att", sigma=0.5)
+        sigma_def = pm.HalfNormal("sigma_def", sigma=0.5)
+
+        # Zero-sum abilities for identifiability; attack prior centred on the
+        # player-feature covariate, defence centred on zero.
+        att = pm.ZeroSumNormal("att", sigma=sigma_att, dims="team")
+        deff = pm.ZeroSumNormal("def", sigma=sigma_def, dims="team")
+
+        # Effective attack = data-driven att + covariate nudge.
+        att_eff = pm.Deterministic("att_eff", att + beta_prior * prior, dims="team")
+
+        log_lambda_home = intercept + home_adv + att_eff[h_idx] - deff[a_idx]
+        log_lambda_away = intercept + att_eff[a_idx] - deff[h_idx]
+
+        pm.Poisson("home_goals", mu=pm.math.exp(log_lambda_home),
+                   observed=hg, dims="match")
+        pm.Poisson("away_goals", mu=pm.math.exp(log_lambda_away),
+                   observed=ag, dims="match")
+
+    return model
+
+
+def fit(
+    matches: pd.DataFrame,
+    teams: list[str],
+    prior_strength: np.ndarray | None = None,
+    draws: int = 1000,
+    tune: int = 1000,
+    chains: int = 4,
+    target_accept: float = 0.9,
+) -> FitResult:
+    """Sample the posterior with NUTS and return inference data."""
+    model = build_model(matches, teams, prior_strength)
+    with model:
+        idata = pm.sample(
+            draws=draws,
+            tune=tune,
+            chains=chains,
+            target_accept=target_accept,
+            random_seed=SEED,
+            progressbar=True,
+        )
+    return FitResult(idata=idata, teams=teams,
+                     team_to_idx={t: i for i, t in enumerate(teams)})
+
+
+def posterior_strength_table(fit_result: FitResult) -> pd.DataFrame:
+    """Posterior mean attack/defence per team, sorted by net strength."""
+    post = fit_result.idata.posterior
+    att = post["att_eff"].mean(dim=("chain", "draw")).to_numpy()
+    deff = post["def"].mean(dim=("chain", "draw")).to_numpy()
+    df = pd.DataFrame({
+        "team": fit_result.teams,
+        "attack": att,
+        "defence": deff,
+        "net_strength": att + deff,
+    }).sort_values("net_strength", ascending=False).reset_index(drop=True)
+    return df
