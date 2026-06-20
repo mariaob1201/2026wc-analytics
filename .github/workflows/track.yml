@@ -58,7 +58,7 @@ jobs:
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-        run: make daily
+        run: make daily PY=python   # deps are installed into the runner's Python
 
       - name: Commit refreshed forecasts
         run: |

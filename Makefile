@@ -1,6 +1,7 @@
 .PHONY: setup data features fit simulate all test clean
 
-PY := .venv/bin/python
+# Overridable: locally defaults to the project venv; CI passes PY=python.
+PY ?= .venv/bin/python
 
 setup:
 	python3 -m venv .venv
