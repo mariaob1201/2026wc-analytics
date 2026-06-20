@@ -140,6 +140,9 @@ def _render(st, nxt, sim, n_played) -> str:
         L.append(f"| {r.team} | {_pct(r.p_quarter)} | {_pct(r.p_semi)} | "
                  f"{_pct(r.p_final)} | **{_pct(r.p_champion)}** |")
 
+    L.append("\n_Mexico's Round-of-32 opponent odds (per candidate): "
+             "[R32_ODDS.md](R32_ODDS.md) — `make r32-odds`._\n")
+
     L.append("\n## Next games — predicted goals\n")
     L.append("| Date | Fixture | Pred goals (xG) | Likely | P(H/D/A) | Home form |")
     L.append("|---|---|---|---|---|---|")

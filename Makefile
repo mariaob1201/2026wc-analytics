@@ -50,6 +50,10 @@ simulate-real:
 champion:
 	$(PY) scripts/16_champion_tracker.py
 
+# Knockout opponent odds for a team (default Mexico R32 at the Azteca).
+r32-odds:
+	$(PY) scripts/23_r32_odds.py $(ARGS)
+
 # Fetch real current squads from Wikipedia (fixes vintage rosters).
 live-squads:
 	$(PY) scripts/17_live_squads.py
