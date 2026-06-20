@@ -196,6 +196,18 @@ def test_momentum():
     c = combined_shifts(m, "2026-06-19", scouted={"Mexico": "leaning positive"})
     assert c["Mexico"] > 0               # positive sentiment adds a small nudge
 
+    # performance_form: a side creating more xG than it concedes is nudged up.
+    from wc2026.models.momentum import MAX_SHIFT, performance_form
+    stats = pd.DataFrame({
+        "date": ["2026-05-01", "2026-05-10", "2026-06-01"],
+        "home_team": ["Brazil", "Brazil", "Panama"],
+        "away_team": ["Panama", "Panama", "Brazil"],
+        "home_xg": [2.5, 2.0, 0.4], "away_xg": [0.5, 0.6, 2.3],
+    })
+    pf = performance_form(stats, asof="2026-06-19", metric="xg")
+    assert pf["Brazil"] > 0 > pf["Panama"]
+    assert all(abs(v) <= MAX_SHIFT + 1e-9 for v in pf.values())
+
 
 def test_simulation_conditions_on_results():
     """A team handed a fixed group win should out-advance one handed a loss."""

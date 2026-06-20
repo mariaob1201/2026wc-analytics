@@ -100,6 +100,47 @@ def form_shifts(matches: pd.DataFrame, asof: str, lookback_days: int = 540) -> d
     return shifts
 
 
+def performance_form(stats: pd.DataFrame, asof: str, metric: str = "xg",
+                     half_life_days: float = HALF_LIFE_DAYS,
+                     lookback_days: int = 540) -> dict:
+    """Recency-weighted recent-PERFORMANCE form from a match-stats table.
+
+    Conditions the next-game prediction on *how recent games actually went* —
+    using a deeper metric than goals. ``stats`` needs columns
+    ``date, home_team, away_team, home_<metric>, away_<metric>`` (e.g.
+    ``home_xg``/``away_xg`` from StatsBomb, or shots-on-target). For each team we
+    take the recency-weighted (for − against) differential in that metric,
+    standardize across the teams present, and clip to MAX_SHIFT — so a side that
+    has been creating more than it concedes (high xG) gets a positive goal-rate
+    nudge, even if the *scoreline* didn't reflect it yet.
+
+    Returns {team: shift}; feed straight into ``predict_match(shifts=...)``.
+    """
+    hf, af = f"home_{metric}", f"away_{metric}"
+    if hf not in stats.columns or af not in stats.columns:
+        raise ValueError(f"stats needs {hf} and {af} columns")
+    asof = pd.Timestamp(asof)
+    df = stats.copy()
+    df["date"] = pd.to_datetime(df["date"])
+    df = df[(df["date"] <= asof) & (df["date"] >= asof - pd.Timedelta(days=lookback_days))]
+
+    wsum: dict[str, float] = {}
+    dsum: dict[str, float] = {}
+    for r in df.itertuples():
+        w = 0.5 ** (_days(asof, r.date) / half_life_days)
+        hv, av = float(getattr(r, hf)), float(getattr(r, af))
+        for team, diff in ((r.home_team, hv - av), (r.away_team, av - hv)):
+            wsum[team] = wsum.get(team, 0.0) + w
+            dsum[team] = dsum.get(team, 0.0) + w * diff
+    teams = [t for t in wsum if wsum[t] > 0]
+    avg = {t: dsum[t] / wsum[t] for t in teams}
+    vals = list(avg.values())
+    mean = sum(vals) / len(vals)
+    sd = (sum((v - mean) ** 2 for v in vals) / len(vals)) ** 0.5 or 1.0
+    return {t: max(-MAX_SHIFT, min(MAX_SHIFT, FORM_SCALE * (avg[t] - mean) / sd))
+            for t in teams}
+
+
 def sentiment_shifts(scouted: dict[str, str] | None = None) -> dict:
     """Optional per-team sentiment nudge from scouted public-source mood."""
     out = {}

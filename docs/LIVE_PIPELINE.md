@@ -128,6 +128,25 @@ any free-text report for the semantic layer.
 against the real result, so accuracy (hit-rate, goals MAE, RPS) accumulates as the
 tournament runs — `make prediction-log`, refreshed daily by `.github/workflows/track.yml`.
 
+## Conditioning the next score on recent performance (not just results)
+
+`models/momentum.performance_form(stats, asof, metric="xg")` turns a per-match
+stats table into a recency-weighted **form nudge** from a *deeper* metric than
+goals — recent **xG** (or shots-on-target) for−against. A side that has been
+creating more than it concedes is bumped up even if the scoreline hasn't caught
+up. It returns the same `{team: shift}` dict the goal-based momentum does, so it
+drops straight into the score forecast:
+
+```python
+shifts = performance_form(stats, asof="2026-06-24", metric="xg")
+predict_match(idata, teams, home, away, shifts=shifts)   # next score, conditioned
+```
+
+`make form-signal` shows it on real StatsBomb xG (e.g. mid-2018 it flags
+Brazil/Belgium/Spain in-form, Panama/Costa Rica cold). **Live 2026 caveat:** this
+needs a per-match xG/shots feed; until 2026 xG is available it falls back to the
+goal-based momentum already wired into the tracker.
+
 ## Suggested next builds
 
 - Wire `llm_extract` output into `momentum.combined_shifts` (news → goal nudge).

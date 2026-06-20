@@ -73,6 +73,10 @@ prediction-log:
 fetch-xg:
 	$(PY) scripts/22_fetch_statsbomb_xg.py
 
+# Recent-performance form signal (xG/shots) that conditions next-game scores.
+form-signal:
+	$(PY) scripts/24_form_signal.py $(ARGS)
+
 # Backtest the xG model vs the goals model (run `make fetch-xg` first;
 # `make xg-backtest ARGS=--demo` runs a synthetic sanity check instead).
 xg-backtest:
