@@ -68,6 +68,33 @@ def compare(df: pd.DataFrame, label: str):
     verdict = "xG WINS — keep it" if delta < 0 else "goals model still better"
     print(f"\nRPS delta (xG - goals): {delta:+.4f}  ->  {verdict}")
 
+    if label == "real":
+        _write_doc(goals, xg, len(train), len(test), len(teams), delta, verdict)
+
+
+def _write_doc(goals, xg, n_train, n_test, n_teams, delta, verdict):
+    from wc2026.config import ROOT
+    L = ["# xG model vs goals model — backtest\n",
+         f"_Fit on {n_train} matches, scored on {n_test} held-out matches "
+         f"({n_teams} teams), using real per-match xG from StatsBomb open data "
+         f"(2018 + 2022 World Cups). Lower RPS/log-loss is better._\n",
+         "| Model | RPS ↓ | log-loss ↓ | hit-rate ↑ | goals MAE ↓ |",
+         "|---|---|---|---|---|"]
+    for name, m in (("goals", goals), ("xG (expected goals)", xg)):
+        L.append(f"| {name} | {m['RPS']} | {m['log_loss']} | {m['hit_rate']} | "
+                 f"{m.get('goals_MAE', '—')} |")
+    L.append(f"\n**RPS delta (xG − goals): {delta:+.4f} → {verdict}.**\n")
+    L.append("xG is a less-noisy measure of chance quality than goals, so abilities "
+             "learned from it generalize better (a side that created more but lost is "
+             "rated by what it created). Small test sample — directional, not final. "
+             "Regenerate with `make xg-backtest` after `make fetch-xg`.\n")
+    L.append("**Live use:** switching the 2026 forecast to xG needs per-match xG for "
+             "current matches (StatsBomb hasn't released 2026; FBref match-report "
+             "scraping is the fallback). Until then the live pipeline uses the goals "
+             "model and this validates xG as the upgrade path.")
+    (ROOT / "docs" / "XG_BACKTEST.md").write_text("\n".join(L))
+    print(f"saved -> {ROOT / 'docs' / 'XG_BACKTEST.md'}")
+
 
 def _demo_data() -> pd.DataFrame:
     """Synthetic matches with goals + noisy xG — to exercise the harness only."""

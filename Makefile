@@ -65,7 +65,11 @@ evaluate:
 prediction-log:
 	$(PY) scripts/20_prediction_log.py
 
-# Backtest the xG model vs the goals model (needs data/raw/xg_matches.csv;
+# Harvest real World Cup xG (StatsBomb open data) -> data/raw/xg_matches.csv.
+fetch-xg:
+	$(PY) scripts/22_fetch_statsbomb_xg.py
+
+# Backtest the xG model vs the goals model (run `make fetch-xg` first;
 # `make xg-backtest ARGS=--demo` runs a synthetic sanity check instead).
 xg-backtest:
 	$(PY) scripts/21_xg_backtest.py $(ARGS)

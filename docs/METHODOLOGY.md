@@ -157,11 +157,13 @@ The current evidence for the model is internal coherence (sensible rankings, cle
 0. **xG-based model** *(machinery built, stage 21)* — `build_xg_model` fits
    attack/defence on **expected goals** (Gamma likelihood) instead of goals, since
    xG is a less-noisy measure of chance quality. `scripts/21_xg_backtest.py`
-   compares it to the goals model by RPS and keeps it only if it wins. **Status:**
-   verified on synthetic data; the real comparison needs an xG-labelled match table
-   (`data/raw/xg_matches.csv` from FBref match reports or StatsBomb open data) —
-   bulk xG for training matches isn't cheaply scrapeable, so this is supplied, not
-   auto-harvested. xG + shots are the highest-expected-value upgrade.
+   compares it to the goals model by RPS and keeps it only if it wins. **Status:
+   validated on real data** — on the 2018+2022 World Cups (StatsBomb open-data xG,
+   `make fetch-xg`), the xG model **beat the goals model** on RPS, log-loss,
+   hit-rate and goals-MAE ([docs/XG_BACKTEST.md](XG_BACKTEST.md)). Small test
+   sample, so directional — but it confirms xG as the upgrade. **Live use** awaits
+   per-match xG for 2026 (not yet released free; FBref scraping is the fallback);
+   until then the live forecast runs on the goals model.
 1. **Calibration on held-out matches** — posterior-predictive checks; reliability diagrams for 1X2 and over/under; are 40%-favourites right ~40% of the time? This is how to *measure* (not assume) whether favourites are over-rated in the expanded field.
 2. **Strength-of-schedule / confederation effects** — add a confederation random effect or opponent-strength term; the single biggest lever for the newcomer-bias concern.
 3. **Recency weighting / in-tournament updating** — weight recent matches up, or refit as 2026 results arrive. In-tournament games are played against the *actual* field, sidestepping qualifying-schedule bias — the strongest signal once the sample grows.
