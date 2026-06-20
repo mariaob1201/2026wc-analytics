@@ -12,21 +12,21 @@ _Run after each matchday to track model calibration and read the next slate. Cha
 - **Predicted vs actual goals** (`artifacts/goals_pred_vs_actual.png`) — scatter of expected vs real total goals per played match.
 - **Forecast win/draw/win** (`artifacts/forecast_probs.png`) — stacked 1X2 bars for upcoming fixtures.
 
-**Tracking metrics (28 matches):** outcome hit-rate 54% · total-goals MAE 1.54. Re-run to update as results come in.
+**Tracking metrics (32 matches):** outcome hit-rate 59% · total-goals MAE 1.44. Re-run to update as results come in.
 
 ## Match sentiment & momentum (next fixtures)
 
 | Fixture | Home form | Away form | Momentum edge |
 |---|---|---|---|
 | Netherlands v Sweden | steady (+0.02) | steady (+0.04) | **even** |
-| Tunisia v Japan | cold (-0.13) | steady (+0.04) | **Japan** |
+| Tunisia v Japan | cold (-0.13) | steady (+0.05) | **Japan** |
 | Germany v Ivory Coast | red-hot (+0.18) | rising (+0.10) | **Germany** |
 | Ecuador v Curaçao | steady (+0.02) | cold (-0.18) | **Ecuador** |
-| Belgium v Iran | red-hot (+0.18) | steady (-0.00) | **Belgium** |
+| Belgium v Iran | red-hot (+0.18) | steady (+0.00) | **Belgium** |
 | New Zealand v Egypt | cold (-0.12) | steady (+0.01) | **Egypt** |
 | Spain v Saudi Arabia | steady (+0.04) | dipping (-0.06) | **Spain** |
 | Uruguay v Cape Verde | steady (-0.03) | steady (+0.01) | **even** |
-| France v Iraq | rising (+0.08) | dipping (-0.11) | **France** |
+| France v Iraq | rising (+0.08) | dipping (-0.12) | **France** |
 | Norway v Senegal | rising (+0.09) | dipping (-0.07) | **Norway** |
 | Argentina v Austria | red-hot (+0.18) | red-hot (+0.16) | **even** |
 | Jordan v Algeria | dipping (-0.10) | steady (-0.01) | **Algeria** |
@@ -34,12 +34,12 @@ _Run after each matchday to track model calibration and read the next slate. Cha
 | Colombia v Congo DR | rising (+0.09) | steady (-0.02) | **Colombia** |
 | England v Ghana | rising (+0.06) | dipping (-0.11) | **England** |
 | Panama v Croatia | dipping (-0.08) | dipping (-0.09) | **even** |
-| Morocco v Haiti | rising (+0.06) | steady (+0.05) | **even** |
+| Morocco v Haiti | rising (+0.07) | steady (-0.03) | **Morocco** |
 | Bosnia-Herzegovina v Qatar | dipping (-0.08) | cold (-0.18) | **Bosnia-Herzegovina** |
-| Scotland v Brazil | rising (+0.07) | rising (+0.11) | **even** |
+| Scotland v Brazil | steady (+0.04) | red-hot (+0.14) | **Brazil** |
 | South Africa v South Korea | dipping (-0.07) | dipping (-0.05) | **even** |
 | Mexico v Czechia | rising (+0.09) | steady (-0.04) | **Mexico** |
-| Canada v Switzerland | red-hot (+0.15) | rising (+0.11) | **even** |
+| Canada v Switzerland | red-hot (+0.15) | rising (+0.12) | **even** |
 
 ## Tactical read (next fixtures)
 
