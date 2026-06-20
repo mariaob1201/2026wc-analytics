@@ -264,6 +264,34 @@ def test_llm_extract_fallback(monkeypatch):
     assert abs(momentum_from_features(f)) <= 0.10
 
 
+def test_xg_model_fits_tiny():
+    """The xG (Gamma-likelihood) model compiles, samples, and predicts."""
+    import numpy as np
+    import pandas as pd
+    import pymc as pm
+
+    from wc2026.data.teams import TEAMS
+    from wc2026.models.bayesian_score import FitResult, build_xg_model, predict_match
+
+    teams = [t.name for t in TEAMS]
+    rng = np.random.default_rng(0)
+    sub = teams[:6]
+    rows = []
+    for _ in range(120):
+        h, a = rng.choice(sub, 2, replace=False)
+        rows.append({"home_team": h, "away_team": a,
+                     "home_xg": float(abs(rng.normal(1.4, 0.5))),
+                     "away_xg": float(abs(rng.normal(1.1, 0.5)))})
+    df = pd.DataFrame(rows)
+    with build_xg_model(df, teams, prior_strength=np.zeros(len(teams))):
+        idata = pm.sample(draws=40, tune=40, chains=2, cores=1,
+                          progressbar=False, random_seed=2)
+    fr = FitResult(idata=idata, teams=teams,
+                   team_to_idx={t: i for i, t in enumerate(teams)})
+    p = predict_match(idata, teams, sub[0], sub[1])
+    assert 0 <= p["p_home_win"] <= 1 and p["exp_goals_home"] > 0
+
+
 def test_recency_weights():
     """Recent matches weigh more; weights mean-normalize to 1."""
     import numpy as np

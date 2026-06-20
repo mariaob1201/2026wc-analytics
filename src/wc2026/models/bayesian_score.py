@@ -141,6 +141,55 @@ def build_model(
     return model
 
 
+def build_xg_model(
+    matches: pd.DataFrame,
+    teams: list[str],
+    prior_strength: np.ndarray | None = None,
+) -> pm.Model:
+    """Like ``build_model`` but fits attack/defence on **expected goals (xG)**
+    instead of goals.
+
+    xG is a continuous, less-noisy measure of chance quality, so abilities learned
+    from it are more stable than from goals (a battered 1-0 winner is rated by what
+    it actually created). The likelihood is **Gamma** (positive, continuous) with
+    mean ``exp(intercept [+ home_adv] + att[h] - def[a])``; the parameter block is
+    identical to ``build_model`` so ``predict_match`` works on the result unchanged
+    (it then predicts expected goals on the xG scale).
+
+    ``matches`` needs home/away team + ``home_xg`` / ``away_xg``.
+    """
+    team_to_idx = {t: i for i, t in enumerate(teams)}
+    n_teams = len(teams)
+    h_idx = matches["home_team"].map(team_to_idx).to_numpy()
+    a_idx = matches["away_team"].map(team_to_idx).to_numpy()
+    # Gamma support is > 0; floor near-zero xG so the likelihood is defined.
+    hxg = np.clip(matches["home_xg"].to_numpy(float), 0.05, None)
+    axg = np.clip(matches["away_xg"].to_numpy(float), 0.05, None)
+    if prior_strength is None:
+        prior_strength = np.zeros(n_teams)
+
+    coords = {"team": teams, "match": np.arange(len(matches))}
+    with pm.Model(coords=coords) as model:
+        prior = pm.Data("prior_strength", prior_strength, dims="team")
+        intercept = pm.Normal("intercept", mu=0.0, sigma=1.0)
+        home_adv = pm.Normal("home_adv", mu=0.25, sigma=0.25)
+        beta_prior = pm.Normal("beta_prior", mu=0.0, sigma=1.0)
+        sigma_att = pm.HalfNormal("sigma_att", sigma=0.5)
+        sigma_def = pm.HalfNormal("sigma_def", sigma=0.5)
+        att_raw = pm.ZeroSumNormal("att_raw", sigma=1.0, dims="team")
+        def_raw = pm.ZeroSumNormal("def_raw", sigma=1.0, dims="team")
+        att = pm.Deterministic("att", sigma_att * att_raw, dims="team")
+        deff = pm.Deterministic("def", sigma_def * def_raw, dims="team")
+        att_eff = pm.Deterministic("att_eff", beta_prior * prior + att, dims="team")
+
+        mu_home = pm.math.exp(intercept + home_adv + att_eff[h_idx] - deff[a_idx])
+        mu_away = pm.math.exp(intercept + att_eff[a_idx] - deff[h_idx])
+        sigma_xg = pm.HalfNormal("sigma_xg", sigma=1.0)
+        pm.Gamma("home_xg", mu=mu_home, sigma=sigma_xg, observed=hxg, dims="match")
+        pm.Gamma("away_xg", mu=mu_away, sigma=sigma_xg, observed=axg, dims="match")
+    return model
+
+
 def fit(
     matches: pd.DataFrame,
     teams: list[str],

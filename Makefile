@@ -65,6 +65,11 @@ evaluate:
 prediction-log:
 	$(PY) scripts/20_prediction_log.py
 
+# Backtest the xG model vs the goals model (needs data/raw/xg_matches.csv;
+# `make xg-backtest ARGS=--demo` runs a synthetic sanity check instead).
+xg-backtest:
+	$(PY) scripts/21_xg_backtest.py $(ARGS)
+
 # The full daily refresh (used by the GitHub Action): real squads + live results
 # -> refit -> backtest/forecast -> tracker -> forecast-vs-truth log.
 daily: real-players live-squads live-features real-fit elo track champion prediction-log
