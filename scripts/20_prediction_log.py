@@ -14,7 +14,7 @@ before kickoff, then resolved with the real score once the result lands.
 
 import pandas as pd
 
-from wc2026.config import PROCESSED, ROOT, ensure_dirs
+from wc2026.config import PROCESSED, ROOT, ensure_dirs, today
 from wc2026.models.metrics import evaluate
 
 
@@ -68,7 +68,7 @@ def _pct(x):
 def _render(log, m, resolved, pending) -> str:
     L = ["# 📒 Forecast Log — Predictions vs Ground Truth\n",
          "_A growing, append-on-result ledger: every goal forecast and how it "
-         "turned out. Updated by the daily GitHub Action. Compiled 2026-06-19._\n"]
+         f"turned out. Updated by the daily GitHub Action. Compiled {today()}._\n"]
 
     L.append("## Running accuracy (resolved matches)\n")
     L.append(f"- **Matches scored:** {m['n']}")

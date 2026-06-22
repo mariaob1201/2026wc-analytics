@@ -6,7 +6,13 @@ strings and the whole pipeline can be relocated by editing this file alone.
 
 from __future__ import annotations
 
+from datetime import date
 from pathlib import Path
+
+
+def today() -> str:
+    """Current date (ISO). The pipeline's cutoff, so it rolls forward each run."""
+    return date.today().isoformat()
 
 # Project root = two levels up from this file (src/wc2026/config.py -> repo root).
 ROOT = Path(__file__).resolve().parents[2]

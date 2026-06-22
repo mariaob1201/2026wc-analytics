@@ -23,7 +23,8 @@ from wc2026.models.bayesian_score import FitResult, predict_match
 from wc2026.models.elo import win_probability
 from wc2026.models.momentum import combined_shifts
 
-TODAY = "2026-06-19"
+from wc2026.config import today as _today
+TODAY = _today()
 
 
 def _form(wc, team):
@@ -97,7 +98,7 @@ def _render(args, rows, team_elo_rank) -> str:
     L = [f"# {args.team} — {args.stage} Opponent Odds\n",
          f"_Goal forecast + win/draw/loss vs each candidate opponent, at **{venue}**. "
          "Model = Bayesian goals (with home edge + current form); Elo = recency "
-         "cross-check (win excl. draw). Sorted hardest-first. Compiled 2026-06-19._\n",
+         f"cross-check (win excl. draw). Sorted hardest-first. Compiled {TODAY}._\n",
          "| Opponent | Likely | **Win** | Draw | Loss | Over 2.5 | Elo win | Opp Elo rank |",
          "|---|---|---|---|---|---|---|---|"]
     for r in rows:

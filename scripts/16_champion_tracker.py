@@ -28,7 +28,8 @@ from wc2026.models.momentum import combined_shifts, momentum_label
 from wc2026.models.simulate import simulate_tournament
 from wc2026.viz.plots import plot_champion_probs
 
-TODAY = "2026-06-19"
+from wc2026.config import today as _today
+TODAY = _today()
 HORIZON = "2026-06-24"
 N_SIMS = 6000
 
@@ -123,7 +124,7 @@ def _render(st, nxt, sim, n_played) -> str:
          f"_A living, state-aware forecast. Conditioned on the **{n_played} "
          "matches played so far**: completed group games are held fixed; the rest "
          "of the tournament is simulated from a Bayesian goals model (squad-skill "
-         "prior + current form + X/ESPN sentiment). Updated 2026-06-19._\n"]
+         f"prior + current form + X/ESPN sentiment). Updated {TODAY}._\n"]
 
     L.append("## How to read this\n")
     L.append("1. **Next games** — predicted goals for the upcoming fixtures.")

@@ -22,7 +22,8 @@ from wc2026.models.momentum import combined_shifts
 from wc2026.models.simulate import simulate_tournament
 from wc2026.viz.plots import plot_champion_probs
 
-TODAY = "2026-06-19"
+from wc2026.config import today as _today
+TODAY = _today()
 N_SIMS = 5000
 
 

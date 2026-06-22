@@ -24,7 +24,8 @@ from wc2026.data.teams import HOSTS, TEAMS
 from wc2026.models.bayesian_score import fit, predict_match
 from wc2026.models.momentum import combined_shifts
 
-TODAY = "2026-06-19"
+from wc2026.config import today as _today
+TODAY = _today()
 TOURNAMENT_START = "2026-06-11"
 FORECAST_HORIZON = "2026-06-24"   # next slate of group games
 
@@ -150,7 +151,7 @@ def _render(bt, fc, ctx, n, hit_rate, brier, mae_goals, mean_p_actual) -> str:
     L = ["# WC 2026 — Match Predictions vs Reality, and Forecasts\n",
          "_Model trained on pre-tournament data only (results to 2026-06-10 + FIFA "
          "squad prior). Backtest compares those out-of-sample forecasts to the "
-         "actual scorelines; forecasts cover the next slate. Compiled 2026-06-19._\n"]
+         f"actual scorelines; forecasts cover the next slate. Compiled {TODAY}._\n"]
 
     L.append("## Accuracy so far (out-of-sample)\n")
     L.append(f"- **Matches scored:** {n}")

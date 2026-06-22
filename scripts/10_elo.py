@@ -15,7 +15,7 @@ from wc2026.models.elo import run_elo
 
 def main() -> None:
     ensure_dirs()
-    matches = build_real_matches(start="2022-01-01", end="2026-06-19")
+    matches = build_real_matches(start="2022-01-01")   # end defaults to today
     elo = run_elo(matches)
     elo.to_csv(PROCESSED / "elo_ratings.csv", index=False)
 

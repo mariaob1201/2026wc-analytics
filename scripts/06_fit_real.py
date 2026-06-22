@@ -7,7 +7,7 @@ Run stage 05 first (it builds team_features_real.csv from the player dataset).
 import arviz as az
 import pandas as pd
 
-from wc2026.config import ARTIFACTS, PROCESSED, ensure_dirs
+from wc2026.config import ARTIFACTS, PROCESSED, ensure_dirs, today
 from wc2026.data.sources import build_real_matches
 from wc2026.data.teams import TEAMS
 from wc2026.models.bayesian_score import fit, posterior_strength_table
@@ -16,8 +16,9 @@ from wc2026.viz.plots import plot_strength
 
 def main() -> None:
     ensure_dirs()
-    matches = build_real_matches(start="2022-01-01", end="2026-06-19")
-    print(f"Real international matches (2022-01-01 .. 2026-06-19, our 48 teams): "
+    cutoff = today()
+    matches = build_real_matches(start="2022-01-01", end=cutoff)
+    print(f"Real international matches (2022-01-01 .. {cutoff}, our 48 teams): "
           f"{len(matches)}")
 
     # Prefer the live-roster prior (real 2026 call-ups) when it's been built.
@@ -31,7 +32,7 @@ def main() -> None:
 
     # Recency weighting: recent matches (incl. tournament games) count more.
     from wc2026.models.bayesian_score import recency_weights
-    weights = recency_weights(matches["date"], "2026-06-19", half_life_days=540)
+    weights = recency_weights(matches["date"], cutoff, half_life_days=540)
 
     print("Sampling posterior on real data (NUTS, recency-weighted)...")
     result = fit(matches, teams, prior_strength=prior, draws=1000, tune=1000,

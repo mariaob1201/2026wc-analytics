@@ -88,7 +88,7 @@ def _render(rank, n, srow, profile, tactics, fit, squad,
     L.append("# Mexico — World Cup 2026 Assessment\n")
     L.append("_Combines a Bayesian strength model fit on real international "
              "results, real squad data, formation analysis, and scouted "
-             "public-source intel. Compiled 2026-06-19._\n")
+             f"public-source intel. Compiled {today()}._\n")
 
     # 1. Headline
     L.append("## Bottom line\n")

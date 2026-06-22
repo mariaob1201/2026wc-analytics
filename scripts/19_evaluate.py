@@ -16,7 +16,7 @@ import numpy as np
 import pandas as pd
 import pymc as pm
 
-from wc2026.config import ROOT, ensure_dirs
+from wc2026.config import ROOT, ensure_dirs, today
 from wc2026.data.sources import download_intl_results
 from wc2026.models.bayesian_score import build_model, predict_match, recency_weights
 from wc2026.models.elo import BASE_RATING, HFA, _g_multiplier, _k_for, win_probability
@@ -26,7 +26,7 @@ from wc2026.models.metrics import evaluate
 WORLD_CUPS = {
     2018: ("2018-06-14", "2018-07-15"),
     2022: ("2022-11-20", "2022-12-18"),
-    2026: ("2026-06-11", "2026-06-19"),
+    2026: ("2026-06-11", today()),
 }
 NAIVE = (0.45, 0.27, 0.28)   # base-rate home/draw/away
 
@@ -133,7 +133,7 @@ def _render(results) -> str:
          "_Bayesian goals model (no player prior) fit on the 4 years before each "
          "tournament, scored on that tournament's matches against Elo and a naive "
          "base-rate baseline. Lower RPS / log-loss / Brier is better. Compiled "
-         "2026-06-19._\n"]
+         f"{today()}._\n"]
     L.append("**Why these metrics:** RPS is the football-standard ordinal score "
              "(a win-vs-draw miss hurts less than win-vs-loss); log-loss punishes "
              "confident errors; the model must beat Elo and naive to justify itself.\n")

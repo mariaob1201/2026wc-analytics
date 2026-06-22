@@ -101,13 +101,15 @@ def download_intl_results(force: bool = False) -> pd.DataFrame:
     return pd.read_csv(INTL_RESULTS_LOCAL, parse_dates=["date"])
 
 
-def build_real_matches(start: str = "2022-01-01", end: str = "2026-06-19") -> pd.DataFrame:
+def build_real_matches(start: str = "2022-01-01", end: str | None = None) -> pd.DataFrame:
     """Real international results in the project's matches schema.
 
     Filters to a recent window (so estimates reflect *current* strength, not
     decade-old form) and to our 48 teams. ``end`` defaults to "today" so we
     never train on matches that have not been played yet.
     """
+    from ..config import today
+    end = end or today()
     df = download_intl_results()
     df = df.dropna(subset=["home_score", "away_score"])
     df = df[(df["date"] >= start) & (df["date"] <= end)]

@@ -1,6 +1,6 @@
 # WC 2026 — Tracking Analytics, Sentiment & Tactics
 
-_Run after each matchday to track model calibration and read the next slate. Charts in `artifacts/`. Compiled 2026-06-19._
+_Run after each matchday to track model calibration and read the next slate. Charts in `artifacts/`. Compiled 2026-06-21._
 
 ## Tracking charts
 
@@ -12,68 +12,28 @@ _Run after each matchday to track model calibration and read the next slate. Cha
 - **Predicted vs actual goals** (`artifacts/goals_pred_vs_actual.png`) — scatter of expected vs real total goals per played match.
 - **Forecast win/draw/win** (`artifacts/forecast_probs.png`) — stacked 1X2 bars for upcoming fixtures.
 
-**Tracking metrics (32 matches):** outcome hit-rate 59% · total-goals MAE 1.44. Re-run to update as results come in.
+**Tracking metrics (36 matches):** outcome hit-rate 61% · total-goals MAE 1.49. Re-run to update as results come in.
 
 ## Match sentiment & momentum (next fixtures)
 
 | Fixture | Home form | Away form | Momentum edge |
 |---|---|---|---|
-| Netherlands v Sweden | steady (+0.02) | steady (+0.04) | **even** |
-| Tunisia v Japan | cold (-0.13) | steady (+0.05) | **Japan** |
-| Germany v Ivory Coast | red-hot (+0.18) | rising (+0.10) | **Germany** |
-| Ecuador v Curaçao | steady (+0.02) | cold (-0.18) | **Ecuador** |
-| Belgium v Iran | red-hot (+0.18) | steady (+0.00) | **Belgium** |
-| New Zealand v Egypt | cold (-0.12) | steady (+0.01) | **Egypt** |
-| Spain v Saudi Arabia | steady (+0.04) | dipping (-0.06) | **Spain** |
-| Uruguay v Cape Verde | steady (-0.03) | steady (+0.01) | **even** |
-| France v Iraq | rising (+0.08) | dipping (-0.12) | **France** |
-| Norway v Senegal | rising (+0.09) | dipping (-0.07) | **Norway** |
-| Argentina v Austria | red-hot (+0.18) | red-hot (+0.16) | **even** |
-| Jordan v Algeria | dipping (-0.10) | steady (-0.01) | **Algeria** |
+| France v Iraq | rising (+0.09) | dipping (-0.12) | **France** |
+| Norway v Senegal | rising (+0.10) | dipping (-0.07) | **Norway** |
+| Argentina v Austria | red-hot (+0.18) | red-hot (+0.17) | **even** |
+| Jordan v Algeria | dipping (-0.11) | steady (-0.01) | **Algeria** |
 | Portugal v Uzbekistan | rising (+0.06) | dipping (-0.09) | **Portugal** |
 | Colombia v Congo DR | rising (+0.09) | steady (-0.02) | **Colombia** |
 | England v Ghana | rising (+0.06) | dipping (-0.11) | **England** |
-| Panama v Croatia | dipping (-0.08) | dipping (-0.09) | **even** |
+| Panama v Croatia | dipping (-0.08) | dipping (-0.10) | **even** |
 | Morocco v Haiti | rising (+0.07) | steady (-0.03) | **Morocco** |
 | Bosnia-Herzegovina v Qatar | dipping (-0.08) | cold (-0.18) | **Bosnia-Herzegovina** |
-| Scotland v Brazil | steady (+0.04) | red-hot (+0.14) | **Brazil** |
+| Scotland v Brazil | steady (+0.04) | red-hot (+0.15) | **Brazil** |
 | South Africa v South Korea | dipping (-0.07) | dipping (-0.05) | **even** |
-| Mexico v Czechia | rising (+0.09) | steady (-0.04) | **Mexico** |
-| Canada v Switzerland | red-hot (+0.15) | rising (+0.12) | **even** |
+| Mexico v Czechia | rising (+0.09) | steady (-0.05) | **Mexico** |
+| Canada v Switzerland | red-hot (+0.16) | red-hot (+0.12) | **even** |
 
 ## Tactical read (next fixtures)
-
-**Netherlands v Sweden** — best shapes 5-3-2 vs 3-4-3.
-  - Defence: home edge (85 vs 76) · Midfield: home edge (84 vs 77) · Attack: even (83 vs 82)
-  - home controls midfield; home built around its defence, away around its attack.
-
-**Tunisia v Japan** — best shapes 3-5-2 vs 3-5-2.
-  - Defence: away edge (71 vs 74) · Midfield: away edge (74 vs 78) · Attack: away edge (72 vs 75)
-  - away controls midfield; home built around its midfield, away around its midfield.
-
-**Germany v Ivory Coast** — best shapes 4-2-3-1 vs 3-5-2.
-  - Defence: home edge (84 vs 78) · Midfield: home edge (88 vs 80) · Attack: home edge (82 vs 80)
-  - home controls midfield; home built around its midfield, away around its midfield.
-
-**Ecuador v Curaçao** — best shapes 3-4-3 vs 3-4-3.
-  - Defence: home edge (74 vs 64) · Midfield: home edge (75 vs 68) · Attack: home edge (76 vs 68)
-  - home controls midfield; home built around its midfield, away around its midfield.
-
-**Belgium v Iran** — best shapes 3-4-3 vs 4-3-3.
-  - Defence: home edge (81 vs 70) · Midfield: home edge (86 vs 69) · Attack: home edge (86 vs 75)
-  - home controls midfield; home built around its midfield, away around its attack.
-
-**New Zealand v Egypt** — best shapes 4-4-2 vs 3-4-3.
-  - Defence: even (70 vs 70) · Midfield: away edge (69 vs 72) · Attack: away edge (71 vs 79)
-  - away controls midfield; home built around its defence, away around its attack.
-
-**Spain v Saudi Arabia** — best shapes 4-2-3-1 vs 4-2-3-1.
-  - Defence: home edge (86 vs 73) · Midfield: home edge (86 vs 73) · Attack: home edge (85 vs 65)
-  - home controls midfield; home built around its defence, away around its midfield.
-
-**Uruguay v Cape Verde** — best shapes 3-4-3 vs 4-3-3.
-  - Defence: home edge (81 vs 70) · Midfield: home edge (80 vs 70) · Attack: home edge (84 vs 76)
-  - home controls midfield; home built around its attack, away around its attack.
 
 **France v Iraq** — best shapes 3-4-3 vs 3-5-2.
   - Defence: home edge (84 vs 58) · Midfield: home edge (87 vs 67) · Attack: home edge (88 vs 60)

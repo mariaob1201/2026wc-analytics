@@ -20,7 +20,8 @@ from wc2026.features.tactics import matchup_tactics
 from wc2026.models.momentum import combined_shifts, match_sentiment
 from wc2026.viz.plots import plot_calibration, plot_forecast_probs, plot_goals_scatter
 
-TODAY = "2026-06-19"
+from wc2026.config import today as _today
+TODAY = _today()
 MEX_FORMATION = "4-1-4-1"
 
 
@@ -67,7 +68,7 @@ def main() -> None:
 def _render(bt, fc, rows) -> str:
     L = ["# WC 2026 — Tracking Analytics, Sentiment & Tactics\n",
          "_Run after each matchday to track model calibration and read the next "
-         "slate. Charts in `artifacts/`. Compiled 2026-06-19._\n"]
+         f"slate. Charts in `artifacts/`. Compiled {TODAY}._\n"]
 
     L.append("## Tracking charts\n")
     L.append("![Calibration](../artifacts/calibration.png)")
