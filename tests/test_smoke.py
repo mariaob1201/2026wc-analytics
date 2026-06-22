@@ -271,8 +271,8 @@ def test_sentiment_feature(monkeypatch):
     scores = social_sentiment({"Mexico": "fans buzzing after the win",
                                "Brazil": "crisis talk in the press"})
     assert scores["Mexico"] == 0.0 and scores["Brazil"] == 0.0   # no LLM -> neutral
-    shifts = sentiment_shifts({"A": 1.0, "B": -1.0, "C": 0.2})
-    assert shifts["A"] == CAP and shifts["B"] == -CAP
+    shifts = sentiment_shifts({"A": 2.0, "B": -2.0, "C": 0.2})  # 2.0*SCALE > CAP
+    assert shifts["A"] == CAP and shifts["B"] == -CAP            # cap binds
     assert all(abs(v) <= CAP + 1e-9 for v in shifts.values())
 
 
