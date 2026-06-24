@@ -27,7 +27,8 @@ from wc2026.models.momentum import combined_shifts
 from wc2026.config import today as _today
 TODAY = _today()
 TOURNAMENT_START = "2026-06-11"
-FORECAST_HORIZON = "2026-06-24"   # next slate of group games
+# Forecast the next several days of fixtures (covers today's matches + next slate).
+FORECAST_HORIZON = (pd.Timestamp(TODAY) + pd.Timedelta(days=4)).strftime("%Y-%m-%d")
 
 
 def wc_matches() -> pd.DataFrame:
@@ -69,8 +70,12 @@ def main() -> None:
 
     wc = wc_matches()
     scored = wc["home_score"].notna() & wc["away_score"].notna()
-    played = wc[(wc["date"] <= TODAY) & scored]
-    upcoming = wc[(wc["date"] > TODAY) & (wc["date"] <= FORECAST_HORIZON)]
+    # Resolved = actually played (has a score, on/before today). Upcoming = every
+    # not-yet-resolved fixture within the horizon — INCLUDING today's matches and
+    # any the results feed hasn't scored yet (so nothing falls through the gap).
+    played_mask = (wc["date"] <= TODAY) & scored
+    played = wc[played_mask]
+    upcoming = wc[(~played_mask) & (wc["date"] <= FORECAST_HORIZON)]
 
     def neutral_for(home: str, row) -> bool:
         # WC games are neutral except host nations at home; trust the feed's flag.

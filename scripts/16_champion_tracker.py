@@ -30,7 +30,7 @@ from wc2026.viz.plots import plot_champion_probs
 
 from wc2026.config import today as _today
 TODAY = _today()
-HORIZON = "2026-06-24"
+HORIZON = (pd.Timestamp(TODAY) + pd.Timedelta(days=4)).strftime("%Y-%m-%d")
 N_SIMS = 6000
 
 
@@ -44,10 +44,12 @@ def main() -> None:
 
     wc = wc2026_matches()
     scored = wc["home_score"].notna() & wc["away_score"].notna()
-    played_df = wc[(wc["date"] <= TODAY) & scored]
+    played_mask = (wc["date"] <= TODAY) & scored
+    played_df = wc[played_mask]
     played = {(r.home, r.away): (int(r.home_score), int(r.away_score))
               for r in played_df.itertuples()}
-    upcoming = wc[(wc["date"] > TODAY) & (wc["date"] <= HORIZON)]
+    # Upcoming = not-yet-resolved fixtures within the horizon (incl. today's).
+    upcoming = wc[(~played_mask) & (wc["date"] <= HORIZON)]
 
     shifts = combined_shifts(build_real_matches(start="2022-01-01", end=TODAY), TODAY,
                              scouted={"Mexico": MEXICO_SOCIAL["net_mood"]})
