@@ -1,13 +1,13 @@
 # WC 2026 — Match Predictions vs Reality, and Forecasts
 
-_Model trained on pre-tournament data only (results to 2026-06-10 + FIFA squad prior). Backtest compares those out-of-sample forecasts to the actual scorelines; forecasts cover the next slate. Compiled 2026-06-24._
+_Model trained on pre-tournament data only (results to 2026-06-10 + FIFA squad prior). Backtest compares those out-of-sample forecasts to the actual scorelines; forecasts cover the next slate. Compiled 2026-06-25._
 
 ## Accuracy so far (out-of-sample)
 
-- **Matches scored:** 48
-- **Outcome hit-rate:** 62% (predicted W/D/L matched actual)
-- **Mean probability on the actual outcome:** 0.44 · **Brier score:** 0.535 (lower is better)
-- **Total-goals mean abs error:** 1.55 goals/match
+- **Matches scored:** 54
+- **Outcome hit-rate:** 65% (predicted W/D/L matched actual)
+- **Mean probability on the actual outcome:** 0.45 · **Brier score:** 0.524 (lower is better)
+- **Total-goals mean abs error:** 1.50 goals/match
 
 > Read these as a small-sample sanity check (one matchday), not a verdict. Blowouts like Germany 7-1 and Canada 6-0 inflate the goals error — the model is calibrated to typical scorelines, not outliers.
 
@@ -63,6 +63,12 @@ _Model trained on pre-tournament data only (results to 2026-06-10 + FIFA squad p
 | 2026-06-23 | Colombia v Congo DR | 1.5-0.7 | 1-0 | 57%/26%/17% | **1-0** | ✅ |
 | 2026-06-23 | England v Ghana | 2.1-0.8 | 1-0 | 65%/20%/15% | **0-0** | — |
 | 2026-06-23 | Panama v Croatia | 0.6-1.8 | 0-1 | 11%/22%/67% | **0-1** | ✅ |
+| 2026-06-24 | Morocco v Haiti | 1.6-0.5 | 1-0 | 65%/24%/11% | **4-2** | ✅ |
+| 2026-06-24 | Bosnia-Herzegovina v Qatar | 1.7-1.5 | 1-1 | 42%/23%/35% | **3-1** | ✅ |
+| 2026-06-24 | Scotland v Brazil | 1.0-2.0 | 0-1 | 18%/21%/61% | **0-3** | ✅ |
+| 2026-06-24 | South Africa v South Korea | 1.0-1.2 | 0-1 | 31%/29%/39% | **1-0** | — |
+| 2026-06-24 | Mexico v Czechia | 1.8-1.2 | 1-1 | 50%/23%/27% | **3-0** | ✅ |
+| 2026-06-24 | Canada v Switzerland | 1.2-1.2 | 1-1 | 36%/27%/37% | **1-2** | ✅ |
 
 ## Forecast — next fixtures (with momentum nudge)
 
@@ -70,30 +76,24 @@ _`Mom` = recency-weighted form (+ scouted sentiment) applied as a small, capped 
 
 | Date | Fixture | Pred xG | Likely | P(H/D/A) | Over 2.5 | Mom H/A |
 |---|---|---|---|---|---|---|
-| 2026-06-24 | Morocco v Haiti | 1.8-0.5 | 1-0 | 68%/22%/10% | 38% | +0.07/-0.03 |
-| 2026-06-24 | Bosnia-Herzegovina v Qatar | 1.6-1.3 | 1-1 | 44%/25%/32% | 54% | -0.08/-0.18 |
-| 2026-06-24 | Scotland v Brazil | 1.0-2.3 | 1-2 | 16%/18%/66% | 65% | +0.04/+0.14 |
-| 2026-06-24 | South Africa v South Korea | 0.9-1.1 | 0-1 | 31%/30%/39% | 33% | -0.07/-0.05 |
-| 2026-06-24 | Mexico v Czechia | 1.9-1.2 | 1-1 | 55%/22%/23% | 59% | +0.09/-0.05 |
-| 2026-06-24 | Canada v Switzerland | 1.4-1.4 | 1-1 | 38%/25%/37% | 53% | +0.15/+0.11 |
 | 2026-06-25 | United States v Türkiye | 1.9-1.1 | 1-1 | 55%/23%/22% | 56% | +0.04/-0.13 |
 | 2026-06-25 | Paraguay v Australia | 0.9-0.9 | 0-0 | 32%/33%/35% | 27% | -0.06/+0.03 |
 | 2026-06-25 | Curaçao v Ivory Coast | 0.6-2.4 | 0-2 | 8%/16%/75% | 55% | -0.18/+0.06 |
-| 2026-06-25 | Ecuador v Germany | 0.9-1.2 | 0-1 | 27%/29%/44% | 36% | +0.02/+0.18 |
-| 2026-06-25 | Japan v Sweden | 1.8-0.9 | 1-0 | 57%/23%/20% | 51% | +0.11/-0.08 |
+| 2026-06-25 | Ecuador v Germany | 0.9-1.2 | 0-1 | 27%/29%/44% | 37% | +0.02/+0.18 |
+| 2026-06-25 | Japan v Sweden | 1.8-0.9 | 1-0 | 57%/23%/20% | 51% | +0.12/-0.08 |
 | 2026-06-25 | Tunisia v Netherlands | 0.7-1.4 | 0-1 | 19%/27%/54% | 36% | -0.17/+0.09 |
 | 2026-06-26 | Senegal v Iraq | 1.1-0.6 | 1-0 | 47%/32%/21% | 26% | -0.07/-0.15 |
 | 2026-06-26 | Norway v France | 0.9-2.2 | 0-2 | 15%/19%/66% | 59% | +0.09/+0.13 |
 | 2026-06-26 | Uruguay v Spain | 1.1-1.3 | 1-1 | 30%/28%/42% | 41% | -0.02/+0.11 |
 | 2026-06-26 | New Zealand v Belgium | 0.6-2.5 | 0-2 | 7%/15%/78% | 58% | -0.13/+0.15 |
 | 2026-06-26 | Egypt v Iran | 1.1-0.9 | 1-0 | 38%/31%/31% | 32% | +0.04/+0.00 |
-| 2026-06-26 | Cape Verde v Saudi Arabia | 0.7-0.8 | 0-0 | 29%/36%/35% | 21% | +0.00/-0.11 |
-| 2026-06-27 | Panama v England | 0.6-2.1 | 0-2 | 9%/18%/73% | 49% | -0.08/+0.05 |
-| 2026-06-27 | Algeria v Austria | 1.1-1.4 | 1-1 | 30%/26%/44% | 46% | +0.01/+0.08 |
+| 2026-06-26 | Cape Verde v Saudi Arabia | 0.7-0.8 | 0-0 | 29%/36%/35% | 21% | +0.01/-0.11 |
+| 2026-06-27 | Panama v England | 0.6-2.1 | 0-2 | 9%/18%/73% | 50% | -0.08/+0.05 |
+| 2026-06-27 | Algeria v Austria | 1.1-1.4 | 1-1 | 30%/26%/44% | 46% | +0.02/+0.09 |
 | 2026-06-27 | Jordan v Argentina | 0.4-3.0 | 0-2 | 3%/10%/87% | 65% | -0.10/+0.18 |
 | 2026-06-27 | Colombia v Portugal | 1.1-1.4 | 1-1 | 28%/27%/45% | 44% | +0.09/+0.17 |
 | 2026-06-27 | Congo DR v Uzbekistan | 1.0-0.6 | 0-0 | 42%/34%/23% | 22% | -0.04/-0.16 |
-| 2026-06-27 | Croatia v Ghana | 1.7-0.7 | 1-0 | 62%/23%/15% | 44% | -0.05/-0.08 |
+| 2026-06-27 | Croatia v Ghana | 1.8-0.7 | 1-0 | 62%/23%/15% | 44% | -0.05/-0.08 |
 
 ## Squad & player context (forecast teams)
 
@@ -101,12 +101,6 @@ _From real player data: squad rating, average age (seniority), stylistic tilt, a
 
 | Team | Tier | Squad ovr | Avg age | Style | Talisman |
 |---|---|---|---|---|---|
-| Morocco | Strong side | 79.2 | 28.8 | well-balanced | A. Hakimi |
-| Bosnia-Herzegovina | Developing team | 75.4 | 29.4 | well-balanced | E. Džeko |
-| Scotland | Solid outfit | 76.9 | 28.7 | well-balanced | A. Robertson |
-| South Africa | Developing team | 70.8 | 28.4 | well-balanced | L. Singh |
-| Mexico | Strong side | 79.0 | 30.8 | attack-leaning | C. Vela |
-| Canada | Developing team | 73.6 | 27.9 | well-balanced | A. Davies |
 | United States | Developing team | 75.9 | 25.6 | well-balanced | C. Pulisic |
 | Paraguay | Developing team | 74.8 | 29.2 | attack-leaning | C. Ortiz |
 | Curaçao | Developing team | 67.5 | 27.7 | attack-leaning | J. Bacuna |
@@ -125,12 +119,6 @@ _From real player data: squad rating, average age (seniority), stylistic tilt, a
 | Colombia | Strong side | 79.4 | 29.3 | attack-leaning | J. Cuadrado |
 | Congo DR | Developing team | 74.2 | 28.1 | attack-leaning | C. Bakambu |
 | Croatia | Strong side | 80.6 | 28.2 | attack-leaning | L. Modrić |
-| Haiti | Developing team | 64.1 | 25.1 | well-balanced | C. Arcus |
-| Qatar | no data | nan | nan | - | - |
-| Brazil | Elite contender | 85.4 | 29.9 | well-balanced | Neymar Jr |
-| South Korea | Developing team | 74.4 | 28.1 | attack-leaning | H. Son |
-| Czechia | Solid outfit | 78.0 | 27.5 | well-balanced | T. Souček |
-| Switzerland | Strong side | 79.1 | 27.2 | well-balanced | R. Freuler |
 | Türkiye | Solid outfit | 77.5 | 26.5 | well-balanced | H. Çalhanoğlu |
 | Australia | Developing team | 72.8 | 29.2 | well-balanced | A. Mooy |
 | Ivory Coast | Solid outfit | 78.0 | 27.9 | attack-leaning | F. Kessié |

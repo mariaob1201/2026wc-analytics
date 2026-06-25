@@ -1,13 +1,13 @@
 # 📒 Forecast Log — Predictions vs Ground Truth
 
-_A growing, append-on-result ledger: every goal forecast and how it turned out. Updated by the daily GitHub Action. Compiled 2026-06-24._
+_A growing, append-on-result ledger: every goal forecast and how it turned out. Updated by the daily GitHub Action. Compiled 2026-06-25._
 
 ## Running accuracy (resolved matches)
 
-- **Matches scored:** 48
-- **Outcome hit-rate:** 62%
-- **Goal-total MAE:** 1.549 goals/match
-- **RPS:** 0.161 · **log-loss:** 0.8927 (lower better)
+- **Matches scored:** 54
+- **Outcome hit-rate:** 65%
+- **Goal-total MAE:** 1.495 goals/match
+- **RPS:** 0.164 · **log-loss:** 0.8794 (lower better)
 
 ## Resolved — forecast vs actual
 
@@ -61,17 +61,17 @@ _A growing, append-on-result ledger: every goal forecast and how it turned out. 
 | 2026-06-23 | Colombia v Congo DR | 1.5-0.7 | 1-0 | **1-0** | ✅ |
 | 2026-06-23 | England v Ghana | 2.1-0.8 | 1-0 | **0-0** | — |
 | 2026-06-23 | Panama v Croatia | 0.6-1.8 | 0-1 | **0-1** | ✅ |
+| 2026-06-24 | Morocco v Haiti | 1.6-0.5 | 1-0 | **4-2** | ✅ |
+| 2026-06-24 | Bosnia-Herzegovina v Qatar | 1.7-1.5 | 1-1 | **3-1** | ✅ |
+| 2026-06-24 | Scotland v Brazil | 1.0-2.0 | 0-1 | **0-3** | ✅ |
+| 2026-06-24 | South Africa v South Korea | 1.0-1.2 | 0-1 | **1-0** | — |
+| 2026-06-24 | Mexico v Czechia | 1.8-1.2 | 1-1 | **3-0** | ✅ |
+| 2026-06-24 | Canada v Switzerland | 1.2-1.2 | 1-1 | **1-2** | ✅ |
 
 ## Pending — forecasts awaiting kickoff
 
 | Date | Fixture | Forecast (xG) | Likely | P(H/D/A) |
 |---|---|---|---|---|
-| 2026-06-24 | Morocco v Haiti | 1.8-0.5 | 1-0 | 68%/22%/10% |
-| 2026-06-24 | Bosnia-Herzegovina v Qatar | 1.6-1.3 | 1-1 | 44%/25%/32% |
-| 2026-06-24 | Scotland v Brazil | 1.0-2.3 | 1-2 | 16%/18%/66% |
-| 2026-06-24 | South Africa v South Korea | 0.9-1.1 | 0-1 | 31%/30%/39% |
-| 2026-06-24 | Mexico v Czechia | 1.9-1.2 | 1-1 | 55%/22%/23% |
-| 2026-06-24 | Canada v Switzerland | 1.4-1.4 | 1-1 | 38%/25%/37% |
 | 2026-06-25 | United States v Türkiye | 1.9-1.1 | 1-1 | 55%/23%/22% |
 | 2026-06-25 | Paraguay v Australia | 0.9-0.9 | 0-0 | 32%/33%/35% |
 | 2026-06-25 | Curaçao v Ivory Coast | 0.6-2.4 | 0-2 | 8%/16%/75% |
@@ -89,6 +89,6 @@ _A growing, append-on-result ledger: every goal forecast and how it turned out. 
 | 2026-06-27 | Jordan v Argentina | 0.4-3.0 | 0-2 | 3%/10%/87% |
 | 2026-06-27 | Colombia v Portugal | 1.1-1.4 | 1-1 | 28%/27%/45% |
 | 2026-06-27 | Congo DR v Uzbekistan | 1.0-0.6 | 0-0 | 42%/34%/23% |
-| 2026-06-27 | Croatia v Ghana | 1.7-0.7 | 1-0 | 62%/23%/15% |
+| 2026-06-27 | Croatia v Ghana | 1.8-0.7 | 1-0 | 62%/23%/15% |
 
 _Ground truth comes from the live results feed; the daily Action fills `actual` once each match is played and rolls the accuracy forward. See [LIVE_PIPELINE.md](LIVE_PIPELINE.md)._
