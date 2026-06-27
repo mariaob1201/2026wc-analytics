@@ -415,3 +415,18 @@ def test_winners_elo_goals_and_sim():
     assert len(sc) == 8
     assert abs(sc["p_champion"].sum() - 1.0) < 1e-6
     assert (sc["p_round16"] <= 1.0).all() and (sc["p_round16"] >= 0.0).all()
+
+
+def test_champion_timeline_plot(tmp_path):
+    """Stage 29 viz: long-form timeline renders to a PNG without error."""
+    import pandas as pd
+
+    from wc2026.viz.plots import plot_champion_timeline
+
+    rows = []
+    for g in (0, 3, 6):
+        for t, p in (("A", 0.20 - g * 0.01), ("B", 0.10 + g * 0.01), ("C", 0.05)):
+            rows.append({"games_played": g, "team": t, "p_champion": p})
+    out = tmp_path / "tl.png"
+    plot_champion_timeline(pd.DataFrame(rows), out, top=3)
+    assert out.exists() and out.stat().st_size > 0

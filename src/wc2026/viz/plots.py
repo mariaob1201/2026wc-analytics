@@ -146,6 +146,35 @@ def plot_champion_probs(sim: pd.DataFrame, path, top: int = 15) -> None:
     plt.close(fig)
 
 
+def plot_champion_timeline(timeline: pd.DataFrame, path, top: int = 8) -> None:
+    """Title-odds over the tournament: x = games played, y = P(champion).
+
+    ``timeline`` is long-form: columns games_played, team, p_champion. One line
+    per team (the ``top`` with the highest current odds), so you can watch
+    contenders rise and fall as results come in.
+    """
+    last = timeline["games_played"].max()
+    leaders = (timeline[timeline["games_played"] == last]
+               .nlargest(top, "p_champion")["team"].tolist())
+    fig, ax = plt.subplots(figsize=(9, 5.5))
+    cmap = plt.get_cmap("tab10")
+    for k, team in enumerate(leaders):
+        d = timeline[timeline["team"] == team].sort_values("games_played")
+        ax.plot(d["games_played"], 100 * d["p_champion"], marker="o", ms=3,
+                lw=2, color=cmap(k % 10), label=team)
+        ax.text(d["games_played"].iloc[-1] + 0.5, 100 * d["p_champion"].iloc[-1],
+                team, va="center", fontsize=8, color=cmap(k % 10))
+    ax.set_xlabel("World Cup matches played")
+    ax.set_ylabel("P(win World Cup 2026)  [%]")
+    ax.set_title("Title odds over the tournament (Elo, conditioned on results so far)")
+    ax.grid(alpha=0.25)
+    ax.set_xlim(0, last + max(6, last * 0.12))
+    ax.margins(y=0.05)
+    fig.tight_layout()
+    fig.savefig(path, dpi=130)
+    plt.close(fig)
+
+
 def plot_team_rank(strength: pd.DataFrame, path, highlight: str) -> None:
     """All 48 teams by net strength, with one team highlighted."""
     d = strength.sort_values("net_strength", ascending=False).reset_index(drop=True)

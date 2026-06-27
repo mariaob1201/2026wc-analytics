@@ -146,6 +146,13 @@ def _render(st, nxt, sim, n_played) -> str:
     L.append("\n_Mexico's Round-of-32 opponent odds (per candidate): "
              "[R32_ODDS.md](R32_ODDS.md) — `make r32-odds`._\n")
 
+    L.append("\n## Title odds over time — the movie, not the snapshot\n")
+    L.append("_How each contender's championship probability moved as matches "
+             "were played (x = games played, not an abstract t). Built with a "
+             "fast Elo simulation re-run after every matchday, conditioned only "
+             "on results known by then — no look-ahead. `make timeline`._\n")
+    L.append("![Title odds timeline](../artifacts/champion_timeline.png)\n")
+
     L.append("\n## Next games — predicted goals\n")
     L.append("| Date | Fixture | Pred goals (xG) | Likely | P(H/D/A) | Home form |")
     L.append("|---|---|---|---|---|---|")

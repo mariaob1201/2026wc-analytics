@@ -95,6 +95,10 @@ dataset:
 winners:
 	$(PY) scripts/28_predict_winners.py $(ARGS)
 
+# Title-odds TIMELINE: champion probability vs games played (one line per team).
+timeline:
+	$(PY) scripts/29_champion_timeline.py
+
 # Backtest the xG model vs the goals model (run `make fetch-xg` first;
 # `make xg-backtest ARGS=--demo` runs a synthetic sanity check instead).
 xg-backtest:
@@ -102,7 +106,7 @@ xg-backtest:
 
 # The full daily refresh (used by the GitHub Action): real squads + live results
 # -> refit -> backtest/forecast -> tracker -> forecast-vs-truth log.
-daily: real-players live-squads live-features real-fit elo track champion prediction-log
+daily: real-players live-squads live-features real-fit elo track champion timeline prediction-log
 
 # Backtest + forecast, then tracking charts/sentiment/tactics. Re-run each matchday.
 track:

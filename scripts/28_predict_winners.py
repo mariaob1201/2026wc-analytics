@@ -18,44 +18,19 @@ falls back to Elo if no key is set).
 """
 
 import argparse
-import math
-from collections import defaultdict
 
-import numpy as np
 import pandas as pd
 
-from wc2026.config import PROCESSED, ROOT, SEED, ensure_dirs
+from wc2026.config import PROCESSED, ROOT, ensure_dirs
 from wc2026.config import today as _today
 from wc2026.data.sources import build_real_matches, wc2026_matches
 from wc2026.data.teams import HOSTS, TEAMS, by_group
-from wc2026.models.elo import (elo_lookup, rolling_backtest, run_elo,
-                               win_probability)
+from wc2026.models.elo import elo_lookup, rolling_backtest, run_elo
+from wc2026.models.elo_sim import N_SIMS_DEFAULT, elo_goals, poisson_1x2, simulate_champion
 
 TOURNAMENT_START = "2026-06-11"
-
 TODAY = _today()
-BASE_GOALS = 1.35   # league-average goals per side; Elo gap tilts it
-N_SIMS = 8000
-
-
-# --- A simple, self-consistent Elo goals model -----------------------------
-def elo_goals(elo_a: float, elo_b: float, neutral: bool = True) -> tuple[float, float]:
-    """Map an Elo matchup to two expected scoring rates (home a, away b)."""
-    from wc2026.models.elo import HFA
-    d = (elo_a + (0.0 if neutral else HFA) - elo_b) / 400.0
-    return BASE_GOALS * 10 ** (d / 4), BASE_GOALS * 10 ** (-d / 4)
-
-
-def poisson_1x2(lam_a: float, lam_b: float, max_goals: int = 8) -> dict:
-    """1X2 probabilities + most-likely scoreline from two independent Poissons."""
-    ga = np.exp(-lam_a) * lam_a ** np.arange(max_goals + 1) / \
-        np.array([math.factorial(k) for k in range(max_goals + 1)])
-    gb = np.exp(-lam_b) * lam_b ** np.arange(max_goals + 1) / \
-        np.array([math.factorial(k) for k in range(max_goals + 1)])
-    m = np.outer(ga, gb)
-    i, j = np.unravel_index(m.argmax(), m.shape)
-    return {"p_a": float(np.tril(m, -1).sum()), "p_draw": float(np.trace(m)),
-            "p_b": float(np.triu(m, 1).sum()), "score": f"{i}-{j}"}
+N_SIMS = N_SIMS_DEFAULT
 
 
 # --- Part 1: next match-day winner picks (simple Elo model) ----------------
@@ -110,82 +85,8 @@ def llm_repredict(picks: pd.DataFrame, elo: dict, rank: dict) -> pd.DataFrame:
     return pd.DataFrame(out)
 
 
-# --- Part 2: Elo Monte-Carlo champion scorecard (conditioned on today) -----
-def simulate_champion(elo: dict, groups: dict, played: dict, n_sims: int) -> pd.DataFrame:
-    teams = list(elo)
-    idx = {t: i for i, t in enumerate(teams)}
-    elo_arr = np.array([elo[t] for t in teams])
-    rng = np.random.default_rng(SEED)
-    group_members = {g: [idx[t] for t in ts] for g, ts in groups.items()}
-    # All within-group fixtures, keyed by (i, j); played ones are held fixed.
-    fixtures = [(idx[a], idx[b]) for ts in groups.values()
-                for k, a in enumerate(ts) for b in ts[k + 1:]]
-    played_idx = {}
-    for (h, a), (gh, ga) in played.items():
-        if h in idx and a in idx:
-            played_idx[(idx[h], idx[a])] = (gh, ga)
-
-    stages = ["round32", "round16", "quarter", "semi", "final", "champion"]
-    cnt = {s: np.zeros(len(teams)) for s in stages}
-
-    for _ in range(n_sims):
-        pts, gd, gf = defaultdict(int), defaultdict(int), defaultdict(int)
-        for i, j in fixtures:
-            res = played_idx.get((i, j)) or (
-                tuple(reversed(played_idx[(j, i)])) if (j, i) in played_idx else None)
-            if res is None:
-                la, lb = elo_goals(elo_arr[i], elo_arr[j])
-                gi, gj = rng.poisson(la), rng.poisson(lb)
-            else:
-                gi, gj = res
-            gd[i] += gi - gj; gd[j] += gj - gi; gf[i] += gi; gf[j] += gj
-            if gi > gj:
-                pts[i] += 3
-            elif gj > gi:
-                pts[j] += 3
-            else:
-                pts[i] += 1; pts[j] += 1
-
-        key = lambda t: (pts[t], gd[t], gf[t], rng.random())
-        qualifiers, thirds = [], []
-        for members in group_members.values():
-            ordered = sorted(members, key=key, reverse=True)
-            qualifiers.extend(ordered[:2]); thirds.append(ordered[2])
-        qualifiers.extend(sorted(thirds, key=key, reverse=True)[:8])
-        for t in qualifiers:
-            cnt["round32"][t] += 1
-
-        # Seed qualifiers by Elo into a standard bracket. The 2026 format yields
-        # exactly 32 (a power of 2); trim to the nearest power of 2 to stay
-        # robust for any group config (no-op for the real tournament).
-        ranked = sorted(qualifiers, key=lambda k: elo_arr[k], reverse=True)
-        ranked = ranked[:1 << (len(ranked).bit_length() - 1)] if ranked else ranked
-        bracket, lo, hi = [], 0, len(ranked) - 1
-        while lo <= hi:
-            bracket.append(ranked[lo])
-            if lo != hi:
-                bracket.append(ranked[hi])
-            lo += 1; hi -= 1
-
-        # Name rounds from the END so the final winner is always "champion"
-        # (real bracket = 32 -> all 5 rounds; robust for smaller test brackets).
-        rounds = (len(bracket)).bit_length() - 1
-        names = stages[1:][-rounds:]
-        cur = bracket
-        for s in names:
-            nxt = []
-            for k in range(0, len(cur), 2):
-                a, b = cur[k], cur[k + 1]
-                w = a if rng.random() < win_probability(elo_arr[a], elo_arr[b]) else b
-                nxt.append(w); cnt[s][w] += 1
-            cur = nxt
-            if len(cur) == 1:
-                break
-
-    df = pd.DataFrame({"team": teams})
-    for s in stages:
-        df[f"p_{s}"] = cnt[s] / n_sims
-    return df.sort_values("p_champion", ascending=False).reset_index(drop=True)
+# Part 2 (Elo champion scorecard) lives in models/elo_sim.simulate_champion,
+# shared with the title-odds timeline (stage 29).
 
 
 def track_record() -> pd.DataFrame:

@@ -31,6 +31,13 @@ Both come from one model: goals are the primitive; the winner is a simulation ov
 _Mexico's Round-of-32 opponent odds (per candidate): [R32_ODDS.md](R32_ODDS.md) — `make r32-odds`._
 
 
+## Title odds over time — the movie, not the snapshot
+
+_How each contender's championship probability moved as matches were played (x = games played, not an abstract t). Built with a fast Elo simulation re-run after every matchday, conditioned only on results known by then — no look-ahead. `make timeline`._
+
+![Title odds timeline](../artifacts/champion_timeline.png)
+
+
 ## Next games — predicted goals
 
 | Date | Fixture | Pred goals (xG) | Likely | P(H/D/A) | Home form |

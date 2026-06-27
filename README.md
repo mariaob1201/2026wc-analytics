@@ -46,8 +46,16 @@ played, and commits the refreshed reports.
 | [docs/EVALUATION.md](docs/EVALUATION.md) | Backtest vs Elo + naive baselines (2018/2022/2026), RPS/log-loss |
 | [docs/match_predictions.md](docs/match_predictions.md) | Per-match predicted goals vs actual + next-slate forecasts |
 | [docs/CHAMPION_TRACKER.md](docs/CHAMPION_TRACKER.md) | Goals rolled up → title odds, conditioned on current results |
+| [docs/WINNERS.md](docs/WINNERS.md) | Next-day match picks + Elo champion scorecard + predicted-vs-true track record |
 | [docs/analytics.md](docs/analytics.md) | Calibration chart, match sentiment & tactics |
 | [docs/METHODOLOGY.md](docs/METHODOLOGY.md) · [docs/LIVE_PIPELINE.md](docs/LIVE_PIPELINE.md) | Methodology + the live/agent automation guide |
+
+### Title odds over the tournament
+
+How each contender's championship probability moved as matches were played
+(x = games played, conditioned only on results known by then — `make timeline`):
+
+![Title odds timeline](artifacts/champion_timeline.png)
 
 > **For researchers:** a reference implementation of a Baio–Blangiardo-style
 > hierarchical Poisson goals model — partial pooling for the 48-team field,
