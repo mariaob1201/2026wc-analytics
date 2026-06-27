@@ -1,6 +1,6 @@
 # 🏆 World Cup 2026 — Champion Tracker
 
-_A living, state-aware forecast. Conditioned on the **60 matches played so far**: completed group games are held fixed; the rest of the tournament is simulated from a Bayesian goals model (squad-skill prior + current form + X/ESPN sentiment). Updated 2026-06-26._
+_A living, state-aware forecast. Conditioned on the **60 matches played so far**: completed group games are held fixed; the rest of the tournament is simulated from a Bayesian goals model (squad-skill prior + current form + X/ESPN sentiment). Updated 2026-06-27._
 
 ## How to read this
 
@@ -15,18 +15,18 @@ Both come from one model: goals are the primitive; the winner is a simulation ov
 
 | Team | Quarter | Semi | Final | **Champion** |
 |---|---|---|---|---|
-| Argentina | 50% | 28% | 17% | **12%** |
-| Portugal | 48% | 27% | 16% | **12%** |
-| France | 46% | 23% | 14% | **9%** |
-| Brazil | 46% | 24% | 12% | **8%** |
-| Spain | 43% | 22% | 11% | **7%** |
-| Colombia | 42% | 22% | 11% | **6%** |
-| Belgium | 37% | 19% | 9% | **5%** |
-| Germany | 38% | 19% | 9% | **4%** |
-| Japan | 34% | 18% | 9% | **4%** |
-| Morocco | 32% | 16% | 8% | **4%** |
-| Netherlands | 33% | 18% | 9% | **3%** |
-| Switzerland | 31% | 16% | 8% | **3%** |
+| Argentina | 50% | 29% | 19% | **14%** |
+| Portugal | 47% | 26% | 16% | **11%** |
+| France | 45% | 24% | 13% | **8%** |
+| Brazil | 45% | 24% | 12% | **7%** |
+| Colombia | 42% | 22% | 11% | **7%** |
+| Spain | 42% | 22% | 11% | **6%** |
+| Belgium | 38% | 19% | 10% | **6%** |
+| Germany | 39% | 21% | 10% | **4%** |
+| Japan | 33% | 17% | 9% | **4%** |
+| Netherlands | 32% | 17% | 8% | **4%** |
+| Morocco | 32% | 16% | 8% | **3%** |
+| Ivory Coast | 29% | 15% | 7% | **3%** |
 
 _Mexico's Round-of-32 opponent odds (per candidate): [R32_ODDS.md](R32_ODDS.md) — `make r32-odds`._
 
@@ -48,12 +48,12 @@ _How each contender's championship probability moved as matches were played. The
 | 2026-06-26 | New Zealand v Belgium | 0.5-2.5 | 0-2 | 6%/14%/80% | cold |
 | 2026-06-26 | Egypt v Iran | 1.1-0.7 | 1-0 | 45%/31%/24% | steady |
 | 2026-06-26 | Cape Verde v Saudi Arabia | 1.1-0.5 | 1-0 | 50%/33%/16% | steady |
-| 2026-06-27 | Panama v England | 0.7-1.8 | 0-1 | 16%/23%/61% | dipping |
+| 2026-06-27 | Panama v England | 0.7-1.8 | 0-1 | 16%/23%/62% | dipping |
 | 2026-06-27 | Algeria v Austria | 1.1-1.3 | 0-1 | 30%/27%/43% | steady |
 | 2026-06-27 | Jordan v Argentina | 0.5-3.1 | 0-3 | 3%/9%/88% | dipping |
 | 2026-06-27 | Colombia v Portugal | 1.1-1.5 | 1-1 | 29%/26%/45% | rising |
 | 2026-06-27 | Congo DR v Uzbekistan | 1.2-0.6 | 1-0 | 51%/31%/18% | steady |
-| 2026-06-27 | Croatia v Ghana | 1.4-0.6 | 1-0 | 56%/27%/16% | dipping |
+| 2026-06-27 | Croatia v Ghana | 1.5-0.6 | 1-0 | 56%/27%/17% | dipping |
 
 ## Current group standings (played)
 

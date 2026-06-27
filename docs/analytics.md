@@ -1,6 +1,6 @@
 # WC 2026 — Tracking Analytics, Sentiment & Tactics
 
-_Run after each matchday to track model calibration and read the next slate. Charts in `artifacts/`. Compiled 2026-06-26._
+_Run after each matchday to track model calibration and read the next slate. Charts in `artifacts/`. Compiled 2026-06-27._
 
 ## Tracking charts
 
