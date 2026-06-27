@@ -52,8 +52,10 @@ played, and commits the refreshed reports.
 
 ### Title odds over the tournament
 
-How each contender's championship probability moved as matches were played
-(x = games played, conditioned only on results known by then — `make timeline`):
+How each contender's championship probability moved as matches were played.
+The x-axis is the **cumulative number of matches played across all teams** (the
+group stage has 72 in total; each team plays 3), conditioned only on results
+known by then — `make timeline`:
 
 ![Title odds timeline](artifacts/champion_timeline.png)
 

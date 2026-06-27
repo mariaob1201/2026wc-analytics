@@ -164,7 +164,8 @@ def plot_champion_timeline(timeline: pd.DataFrame, path, top: int = 8) -> None:
                 lw=2, color=cmap(k % 10), label=team)
         ax.text(d["games_played"].iloc[-1] + 0.5, 100 * d["p_champion"].iloc[-1],
                 team, va="center", fontsize=8, color=cmap(k % 10))
-    ax.set_xlabel("World Cup matches played")
+    ax.set_xlabel("Cumulative matches played in the tournament "
+                  "(all teams; group stage = 72)")
     ax.set_ylabel("P(win World Cup 2026)  [%]")
     ax.set_title("Title odds over the tournament (Elo, conditioned on results so far)")
     ax.grid(alpha=0.25)

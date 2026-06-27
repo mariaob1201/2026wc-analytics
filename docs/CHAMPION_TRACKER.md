@@ -33,7 +33,7 @@ _Mexico's Round-of-32 opponent odds (per candidate): [R32_ODDS.md](R32_ODDS.md) 
 
 ## Title odds over time — the movie, not the snapshot
 
-_How each contender's championship probability moved as matches were played (x = games played, not an abstract t). Built with a fast Elo simulation re-run after every matchday, conditioned only on results known by then — no look-ahead. `make timeline`._
+_How each contender's championship probability moved as matches were played. The x-axis is the **cumulative number of matches played across all teams** (the group stage has 72 in total; each team plays 3), not games-per-team and not an abstract t. Built with a fast Elo simulation re-run after every matchday, conditioned only on results known by then — no look-ahead. `make timeline`._
 
 ![Title odds timeline](../artifacts/champion_timeline.png)
 
