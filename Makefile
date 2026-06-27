@@ -85,6 +85,11 @@ spatial:
 sbi-demo:
 	$(PY) scripts/26_sbi_abc.py
 
+# Build tabular datasets: per-player attributes + per-team assessment (results +
+# model ratings + aggregated player characteristics).
+dataset:
+	$(PY) scripts/27_build_player_dataset.py
+
 # Backtest the xG model vs the goals model (run `make fetch-xg` first;
 # `make xg-backtest ARGS=--demo` runs a synthetic sanity check instead).
 xg-backtest:
