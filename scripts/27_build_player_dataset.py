@@ -105,8 +105,6 @@ def main() -> None:
                                          "net_strength", "model_rank"]]
     elo = pd.read_csv(PROCESSED / "elo_ratings.csv").rename(
         columns={"rank": "elo_rank"})[["team", "elo", "elo_rank"]]
-    interp = pd.read_csv(PROCESSED / "team_interpretation.csv")[
-        ["team", "tier", "style", "star_player"]]
 
     agg = players.groupby("team").apply(lambda g: pd.Series({
         "squad_overall": g.nlargest(16, "overall")["overall"].mean().round(1),
@@ -119,13 +117,28 @@ def main() -> None:
                             * g[g.position == "DF"]["defending"].mean() / 100).round(1),
     })).reset_index()
 
+    # tier/style/talisman from the REAL 2026 squad (not the FIFA-vintage pool,
+    # which still lists retired players like Sergio Ramos).
+    def _tier(o):
+        return ("Elite contender" if o >= 82 else "Strong side" if o >= 79
+                else "Solid outfit" if o >= 76 else "Developing team")
+    agg["tier"] = agg["squad_overall"].map(_tier)
+    d = agg["attack_strength"] - agg["defence_strength"]
+    agg["style"] = np.select([d >= 2, d <= -2],
+                             ["attack-leaning", "defensively grounded"],
+                             default="well-balanced")
+    # Talisman = best outfield player actually in the squad.
+    nongk = players[players.position != "GK"].sort_values("overall", ascending=False)
+    star = nongk.drop_duplicates("team")[["team", "name"]].rename(
+        columns={"name": "star_player"})
+    agg = agg.merge(star, on="team", how="left")
+
     shifts = combined_shifts(build_real_matches(end=today()), today())
     team = (pd.DataFrame({"team": teams})
             .merge(results, on="team", how="left")
             .merge(strength, on="team", how="left")
             .merge(elo, on="team", how="left")
-            .merge(agg, on="team", how="left")
-            .merge(interp, on="team", how="left"))
+            .merge(agg, on="team", how="left"))
     team["form_momentum"] = team["team"].map(lambda t: round(shifts.get(t, 0.0), 3))
     team["fifa_code"] = team["team"].map(code_by_team)
     team["group"] = team["team"].map(group_by_team)
