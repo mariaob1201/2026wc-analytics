@@ -29,7 +29,7 @@ Mexico,MEX,A,Raúl Rangel,GK,,14,74.0,60.0,77.0,58.0,68.0,36.0,74.0,fifa-match
 Mexico,MEX,A,Jorge Sánchez,DF,,59,80.0,78.0,76.0,78.0,83.0,43.0,68.0,fifa-match
 Mexico,MEX,A,César Montes,DF,,67,77.0,62.0,73.0,77.0,80.0,59.0,69.0,fifa-match
 Mexico,MEX,A,Edson Álvarez,DF,,98,77.0,69.0,53.0,66.0,65.0,79.0,84.0,fifa-match
-Mexico,MEX,A,Johan Vásquez,DF,,46,71.0,66.0,32.0,57.0,56.0,73.0,72.0,fifa-match
+Mexico,MEX,A,Johan Vásquez,DF,,46,71.0,28.0,55.0,60.0,60.0,66.0,75.0,fifa-match
 Mexico,MEX,A,Érik Lira,MF,,25,69.0,75.0,57.0,66.0,66.0,60.0,61.0,fifa-match
 Mexico,MEX,A,Luis Romo,MF,,63,77.0,72.0,61.0,65.0,65.0,75.0,85.0,fifa-match
 Mexico,MEX,A,Álvaro Fidalgo,MF,,4,72.0,79.0,65.0,70.0,74.0,50.0,64.0,fifa-match
@@ -157,7 +157,7 @@ Canada,CAN,B,Nathan Saliba,MF,,15,75.0,70.0,33.0,62.0,66.0,76.0,77.0,fifa-match
 Canada,CAN,B,Jayden Nelson,FW,,14,72.0,85.0,65.0,66.0,76.0,34.0,53.0,fifa-match
 Qatar,QAT,B,Mahmud Abunada,GK,,6,71.0,68.0,49.0,62.0,67.0,71.0,72.0,team-median
 Qatar,QAT,B,Pedro Miguel,DF,,105,71.0,68.0,49.0,64.0,69.0,71.0,72.0,fifa-match
-Qatar,QAT,B,Lucas Mendes,DF,,25,78.0,85.0,57.0,68.0,74.0,74.0,72.0,fifa-match
+Qatar,QAT,B,Lucas Mendes,DF,,25,78.0,72.0,67.0,76.0,77.0,74.0,75.0,fifa-match
 Qatar,QAT,B,Issa Laye,DF,,4,71.0,68.0,49.0,62.0,67.0,71.0,72.0,team-median
 Qatar,QAT,B,Jassem Gaber,DF,,32,71.0,68.0,49.0,62.0,67.0,71.0,72.0,team-median
 Qatar,QAT,B,Abdulaziz Hatem,MF,,119,71.0,68.0,49.0,62.0,67.0,71.0,72.0,team-median
@@ -208,28 +208,28 @@ Switzerland,SUI,B,Aurèle Amenda,DF,,7,75.0,74.0,64.0,66.0,72.0,64.0,74.0,team-m
 Switzerland,SUI,B,Luca Jaquez,DF,,3,75.0,74.0,64.0,66.0,72.0,64.0,74.0,team-median
 Switzerland,SUI,B,Cedric Itten,FW,,15,71.0,68.0,72.0,60.0,66.0,36.0,74.0,fifa-match
 Brazil,BRA,C,Alisson Becker,GK,,78,70.0,90.0,67.0,62.0,71.0,31.0,67.0,fifa-match
-Brazil,BRA,C,Éderson,MF,,3,80.0,74.0,67.0,74.0,77.0,73.0,74.0,team-median
+Brazil,BRA,C,Éderson,MF,,3,80.0,74.0,67.0,74.0,75.0,73.0,74.0,team-median
 Brazil,BRA,C,Gabriel Magalhães,DF,,17,68.0,74.0,43.0,58.0,62.0,65.0,74.0,fifa-match
 Brazil,BRA,C,Marquinhos,DF,,105,87.0,81.0,53.0,75.0,74.0,89.0,81.0,fifa-match
 Brazil,BRA,C,Casemiro,MF,,86,89.0,65.0,73.0,76.0,73.0,86.0,90.0,fifa-match
 Brazil,BRA,C,Alex Sandro,DF,,45,83.0,81.0,65.0,77.0,79.0,78.0,79.0,fifa-match
-Brazil,BRA,C,Vinícius Júnior,FW,,49,75.0,80.0,74.0,65.0,77.0,44.0,64.0,fifa-match
+Brazil,BRA,C,Vinícius Júnior,FW,,49,75.0,87.0,72.0,64.0,74.0,34.0,72.0,fifa-match
 Brazil,BRA,C,Bruno Guimarães,MF,,43,79.0,68.0,63.0,78.0,78.0,73.0,75.0,fifa-match
 Brazil,BRA,C,Matheus Cunha,FW,,23,79.0,85.0,78.0,74.0,84.0,31.0,69.0,fifa-match
-Brazil,BRA,C,Neymar,FW,,128,80.0,74.0,67.0,74.0,77.0,73.0,74.0,team-median
+Brazil,BRA,C,Neymar,FW,,128,80.0,74.0,67.0,74.0,75.0,73.0,74.0,team-median
 Brazil,BRA,C,Raphinha,FW,,39,82.0,91.0,76.0,76.0,84.0,49.0,72.0,fifa-match
-Brazil,BRA,C,Weverton,GK,,11,80.0,74.0,67.0,74.0,77.0,73.0,74.0,team-median
+Brazil,BRA,C,Weverton,GK,,11,80.0,74.0,67.0,74.0,75.0,73.0,74.0,team-median
 Brazil,BRA,C,Danilo,DF,,70,81.0,73.0,67.0,73.0,74.0,82.0,79.0,fifa-match
 Brazil,BRA,C,Gleison Bremer,DF,,8,76.0,64.0,35.0,51.0,62.0,77.0,74.0,fifa-match
 Brazil,BRA,C,Léo Pereira,DF,,4,84.0,83.0,67.0,78.0,82.0,80.0,75.0,fifa-match
 Brazil,BRA,C,Douglas Santos,DF,,7,79.0,83.0,79.0,65.0,81.0,28.0,64.0,fifa-match
 Brazil,BRA,C,Fabinho,MF,,33,86.0,67.0,69.0,78.0,78.0,85.0,83.0,fifa-match
 Brazil,BRA,C,Danilo,MF,,4,81.0,73.0,67.0,73.0,74.0,82.0,79.0,fifa-match
-Brazil,BRA,C,Endrick,FW,,17,80.0,74.0,67.0,74.0,77.0,73.0,74.0,team-median
+Brazil,BRA,C,Endrick,FW,,17,80.0,74.0,67.0,74.0,75.0,73.0,74.0,team-median
 Brazil,BRA,C,Lucas Paquetá,MF,,63,81.0,74.0,75.0,79.0,83.0,69.0,78.0,fifa-match
 Brazil,BRA,C,Luiz Henrique,FW,,15,77.0,72.0,54.0,74.0,75.0,73.0,59.0,fifa-match
 Brazil,BRA,C,Gabriel Martinelli,FW,,23,76.0,87.0,69.0,67.0,78.0,44.0,67.0,fifa-match
-Brazil,BRA,C,Ederson,GK,,32,89.0,74.0,67.0,74.0,77.0,73.0,74.0,fifa-match
+Brazil,BRA,C,Ederson,GK,,32,89.0,74.0,67.0,74.0,75.0,73.0,74.0,fifa-match
 Brazil,BRA,C,Roger Ibañez,DF,,7,77.0,81.0,32.0,45.0,57.0,79.0,77.0,fifa-match
 Brazil,BRA,C,Igor Thiago,FW,,4,86.0,63.0,72.0,86.0,90.0,70.0,66.0,fifa-match
 Brazil,BRA,C,Rayan,FW,,2,67.0,66.0,67.0,51.0,66.0,40.0,69.0,fifa-match
@@ -341,25 +341,25 @@ Paraguay,PAR,D,Gatito Fernández,GK,,31,81.0,78.0,37.0,66.0,69.0,81.0,80.0,fifa-
 Paraguay,PAR,D,Gustavo Velázquez,DF,,13,73.0,62.0,43.0,49.0,53.0,75.0,78.0,fifa-match
 Paraguay,PAR,D,Omar Alderete,DF,,36,74.0,66.0,56.0,59.0,63.0,74.0,77.0,fifa-match
 Paraguay,PAR,D,Juan José Cáceres,DF,,17,76.0,70.0,51.0,63.0,69.0,77.0,75.0,fifa-match
-Paraguay,PAR,D,Fabián Balbuena,DF,,48,74.0,71.0,68.0,64.0,69.0,52.0,66.0,team-median
+Paraguay,PAR,D,Fabián Balbuena,DF,,48,74.0,70.0,66.0,64.0,70.0,52.0,66.0,team-median
 Paraguay,PAR,D,Júnior Alonso,DF,,71,79.0,58.0,74.0,78.0,77.0,75.0,77.0,fifa-match
-Paraguay,PAR,D,Ramón Sosa,MF,,29,78.0,71.0,68.0,64.0,69.0,52.0,66.0,fifa-match
+Paraguay,PAR,D,Ramón Sosa,MF,,29,78.0,70.0,66.0,64.0,70.0,52.0,66.0,fifa-match
 Paraguay,PAR,D,Diego Gómez,MF,,24,85.0,87.0,78.0,84.0,87.0,39.0,55.0,fifa-match
 Paraguay,PAR,D,Antonio Sanabria,FW,,48,74.0,73.0,72.0,70.0,75.0,32.0,62.0,fifa-match
 Paraguay,PAR,D,Miguel Almirón,MF,,76,77.0,86.0,72.0,74.0,79.0,53.0,63.0,fifa-match
 Paraguay,PAR,D,Maurício,MF,,3,75.0,72.0,70.0,73.0,74.0,73.0,72.0,fifa-match
-Paraguay,PAR,D,Orlando Gill,GK,,6,53.0,71.0,68.0,64.0,69.0,52.0,66.0,fifa-match
+Paraguay,PAR,D,Orlando Gill,GK,,6,53.0,70.0,66.0,64.0,70.0,52.0,66.0,fifa-match
 Paraguay,PAR,D,José Canale,DF,,2,68.0,66.0,31.0,48.0,48.0,68.0,71.0,fifa-match
 Paraguay,PAR,D,Andrés Cubas,MF,,33,75.0,69.0,52.0,68.0,73.0,74.0,59.0,fifa-match
 Paraguay,PAR,D,Gustavo Gómez,DF,,89,85.0,87.0,78.0,84.0,87.0,39.0,55.0,fifa-match
-Paraguay,PAR,D,Damián Bobadilla,MF,,19,74.0,71.0,68.0,64.0,69.0,52.0,66.0,team-median
+Paraguay,PAR,D,Damián Bobadilla,MF,,19,74.0,70.0,66.0,64.0,70.0,52.0,66.0,team-median
 Paraguay,PAR,D,Kaku,FW,,33,75.0,82.0,68.0,73.0,77.0,52.0,65.0,fifa-match
-Paraguay,PAR,D,Álex Arce,FW,,15,68.0,75.0,69.0,63.0,68.0,34.0,56.0,fifa-match
+Paraguay,PAR,D,Álex Arce,FW,,15,68.0,62.0,64.0,63.0,70.0,38.0,50.0,fifa-match
 Paraguay,PAR,D,Julio Enciso,FW,,32,61.0,68.0,55.0,53.0,63.0,31.0,43.0,fifa-match
 Paraguay,PAR,D,Braian Ojeda,MF,,17,73.0,81.0,71.0,69.0,74.0,33.0,59.0,fifa-match
 Paraguay,PAR,D,Gabriel Ávalos,FW,,23,71.0,67.0,69.0,48.0,69.0,34.0,75.0,fifa-match
-Paraguay,PAR,D,Gastón Olveira,GK,,1,67.0,71.0,68.0,64.0,69.0,52.0,66.0,fifa-match
-Paraguay,PAR,D,Matías Galarza,MF,,15,74.0,71.0,68.0,64.0,69.0,52.0,66.0,team-median
+Paraguay,PAR,D,Gastón Olveira,GK,,1,67.0,70.0,66.0,64.0,70.0,52.0,66.0,fifa-match
+Paraguay,PAR,D,Matías Galarza,MF,,15,74.0,70.0,66.0,64.0,70.0,52.0,66.0,team-median
 Paraguay,PAR,D,Gustavo Caballero,MF,,2,63.0,73.0,50.0,57.0,65.0,44.0,60.0,fifa-match
 Paraguay,PAR,D,Isidro Pitta,FW,,5,68.0,66.0,70.0,45.0,63.0,24.0,66.0,fifa-match
 Paraguay,PAR,D,Alexandro Maidana,DF,,2,73.0,33.0,37.0,62.0,51.0,72.0,75.0,fifa-match
@@ -389,30 +389,30 @@ Türkiye,TUR,D,Uğurcan Çakır,GK,,39,79.0,70.0,54.0,60.0,68.0,63.0,72.0,fifa-m
 Türkiye,TUR,D,Oğuz Aydın,FW,,11,60.0,66.0,56.0,55.0,60.0,31.0,50.0,fifa-match
 Türkiye,TUR,D,Samet Akaydin,DF,,19,60.0,53.0,35.0,34.0,38.0,61.0,68.0,fifa-match
 Türkiye,TUR,D,Can Uzun,FW,,6,75.0,70.0,54.0,60.0,68.0,63.0,72.0,team-median
-United States,USA,D,Matt Turner,GK,31.0,54,75.0,77.0,51.0,63.0,72.0,67.0,68.0,fifa-match
+United States,USA,D,Matt Turner,GK,31.0,54,75.0,77.0,59.0,65.0,73.0,54.0,65.0,fifa-match
 United States,USA,D,Sergiño Dest,DF,25.0,39,76.0,87.0,59.0,72.0,81.0,67.0,66.0,fifa-match
 United States,USA,D,Chris Richards,DF,26.0,36,74.0,81.0,46.0,60.0,73.0,69.0,63.0,fifa-match
 United States,USA,D,Tyler Adams,MF,27.0,54,77.0,81.0,48.0,70.0,73.0,74.0,75.0,fifa-match
-United States,USA,D,Antonee Robinson,DF,28.0,54,73.0,87.0,42.0,57.0,72.0,68.0,70.0,fifa-match
+United States,USA,D,Antonee Robinson,DF,28.0,54,73.0,79.0,73.0,65.0,74.0,32.0,61.0,fifa-match
 United States,USA,D,Auston Trusty,DF,27.0,8,68.0,77.0,40.0,47.0,47.0,68.0,78.0,fifa-match
 United States,USA,D,Giovanni Reyna,MF,23.0,38,77.0,77.0,71.0,74.0,82.0,36.0,71.0,fifa-match
 United States,USA,D,Weston McKennie,MF,27.0,66,77.0,81.0,71.0,74.0,76.0,76.0,83.0,fifa-match
 United States,USA,D,Ricardo Pepi,FW,23.0,37,65.0,62.0,65.0,49.0,61.0,34.0,58.0,fifa-match
 United States,USA,D,Christian Pulisic,FW,27.0,86,82.0,89.0,70.0,73.0,86.0,37.0,59.0,fifa-match
 United States,USA,D,Brenden Aaronson,FW,25.0,58,70.0,80.0,62.0,63.0,73.0,50.0,56.0,fifa-match
-United States,USA,D,Miles Robinson,DF,29.0,40,73.0,87.0,42.0,57.0,72.0,68.0,70.0,fifa-match
+United States,USA,D,Miles Robinson,DF,29.0,40,73.0,79.0,73.0,65.0,74.0,32.0,61.0,fifa-match
 United States,USA,D,Tim Ream,DF,38.0,82,69.0,57.0,43.0,67.0,68.0,70.0,69.0,fifa-match
 United States,USA,D,Sebastian Berhalter,MF,25.0,13,59.0,68.0,43.0,57.0,62.0,51.0,60.0,fifa-match
 United States,USA,D,Cristian Roldan,MF,31.0,47,75.0,71.0,67.0,70.0,75.0,70.0,79.0,fifa-match
 United States,USA,D,Alex Freeman,DF,21.0,17,70.0,69.0,66.0,71.0,73.0,51.0,62.0,fifa-match
 United States,USA,D,Malik Tillman,MF,24.0,30,65.0,70.0,51.0,64.0,72.0,35.0,62.0,fifa-match
-United States,USA,D,Max Arfsten,DF,25.0,20,73.0,77.0,51.0,63.0,72.0,67.0,68.0,team-median
+United States,USA,D,Max Arfsten,DF,25.0,20,73.0,77.0,59.0,65.0,73.0,54.0,65.0,team-median
 United States,USA,D,Haji Wright,FW,28.0,20,68.0,63.0,38.0,51.0,54.0,67.0,74.0,fifa-match
 United States,USA,D,Folarin Balogun,FW,24.0,27,74.0,70.0,45.0,59.0,60.0,73.0,79.0,fifa-match
 United States,USA,D,Timothy Weah,FW,26.0,51,74.0,87.0,71.0,67.0,76.0,45.0,61.0,fifa-match
 United States,USA,D,Mark McKenzie,DF,27.0,29,70.0,77.0,36.0,48.0,59.0,72.0,70.0,fifa-match
 United States,USA,D,Joe Scally,DF,23.0,26,62.0,79.0,31.0,56.0,63.0,54.0,68.0,fifa-match
-United States,USA,D,Matt Freese,GK,27.0,15,64.0,77.0,51.0,63.0,72.0,67.0,68.0,fifa-match
+United States,USA,D,Matt Freese,GK,27.0,15,64.0,77.0,59.0,65.0,73.0,54.0,65.0,fifa-match
 United States,USA,D,Chris Brady,GK,22.0,1,73.0,66.0,70.0,74.0,74.0,65.0,63.0,fifa-match
 United States,USA,D,Alejandro Zendejas,FW,28.0,14,68.0,76.0,59.0,63.0,71.0,40.0,65.0,fifa-match
 Curaçao,CUW,E,Eloy Room,GK,,71,74.0,74.0,62.0,60.0,68.0,62.0,72.0,fifa-match
@@ -441,8 +441,8 @@ Curaçao,CUW,E,Riechedly Bazoer,DF,,5,76.0,72.0,68.0,77.0,78.0,74.0,75.0,fifa-ma
 Curaçao,CUW,E,Deveron Fonville,DF,,2,70.0,74.0,62.0,60.0,68.0,62.0,72.0,team-median
 Curaçao,CUW,E,Tyrick Bodak,GK,,4,70.0,74.0,62.0,60.0,68.0,62.0,72.0,team-median
 Curaçao,CUW,E,Trevor Doornbusch,GK,,8,70.0,74.0,62.0,60.0,68.0,62.0,72.0,team-median
-Ecuador,ECU,E,Hernán Galíndez,GK,,35,74.0,74.0,60.0,65.0,70.0,56.0,70.0,team-median
-Ecuador,ECU,E,Félix Torres,DF,,49,82.0,71.0,38.0,67.0,70.0,84.0,80.0,fifa-match
+Ecuador,ECU,E,Hernán Galíndez,GK,,35,74.0,74.0,63.0,65.0,71.0,51.0,70.0,team-median
+Ecuador,ECU,E,Félix Torres,DF,,49,82.0,82.0,79.0,78.0,82.0,35.0,66.0,fifa-match
 Ecuador,ECU,E,Piero Hincapié,DF,,52,70.0,75.0,27.0,58.0,60.0,70.0,69.0,fifa-match
 Ecuador,ECU,E,Joel Ordóñez,DF,,17,64.0,65.0,34.0,40.0,51.0,63.0,71.0,fifa-match
 Ecuador,ECU,E,Jordy Alcívar,MF,,11,68.0,66.0,64.0,65.0,63.0,66.0,68.0,fifa-match
@@ -450,7 +450,7 @@ Ecuador,ECU,E,Willian Pacho,DF,,34,61.0,60.0,32.0,47.0,53.0,61.0,65.0,fifa-match
 Ecuador,ECU,E,Pervis Estupiñán,DF,,54,79.0,82.0,34.0,68.0,72.0,75.0,75.0,fifa-match
 Ecuador,ECU,E,Anthony Valencia,MF,,3,75.0,88.0,74.0,66.0,73.0,46.0,75.0,fifa-match
 Ecuador,ECU,E,John Yeboah,FW,,23,68.0,90.0,62.0,57.0,73.0,25.0,52.0,fifa-match
-Ecuador,ECU,E,Kendry Páez,MF,,26,74.0,74.0,60.0,65.0,70.0,56.0,70.0,team-median
+Ecuador,ECU,E,Kendry Páez,MF,,26,74.0,74.0,63.0,65.0,71.0,51.0,70.0,team-median
 Ecuador,ECU,E,Kevin Rodríguez,FW,,31,81.0,53.0,86.0,86.0,86.0,50.0,60.0,fifa-match
 Ecuador,ECU,E,Moisés Ramírez,GK,,7,74.0,76.0,70.0,71.0,78.0,62.0,66.0,fifa-match
 Ecuador,ECU,E,Enner Valencia,FW,,105,75.0,88.0,74.0,66.0,73.0,46.0,75.0,fifa-match
@@ -458,15 +458,15 @@ Ecuador,ECU,E,Alan Minda,MF,,20,54.0,73.0,46.0,45.0,58.0,22.0,48.0,fifa-match
 Ecuador,ECU,E,Pedro Vite,MF,,17,64.0,67.0,56.0,56.0,63.0,52.0,50.0,fifa-match
 Ecuador,ECU,E,Jordy Caicedo,FW,,20,78.0,74.0,78.0,70.0,75.0,44.0,80.0,fifa-match
 Ecuador,ECU,E,Ángelo Preciado,DF,,55,70.0,85.0,71.0,64.0,70.0,32.0,66.0,fifa-match
-Ecuador,ECU,E,Denil Castillo,MF,,5,75.0,77.0,68.0,72.0,79.0,39.0,65.0,fifa-match
+Ecuador,ECU,E,Denil Castillo,MF,,5,75.0,92.0,75.0,63.0,81.0,43.0,73.0,fifa-match
 Ecuador,ECU,E,Gonzalo Plata,FW,,50,74.0,85.0,66.0,65.0,79.0,43.0,64.0,fifa-match
 Ecuador,ECU,E,Nilson Angulo,FW,,14,75.0,73.0,58.0,69.0,68.0,73.0,75.0,fifa-match
 Ecuador,ECU,E,Alan Franco,MF,,58,74.0,63.0,34.0,51.0,64.0,75.0,79.0,fifa-match
-Ecuador,ECU,E,Gonzalo Valle,GK,,4,64.0,74.0,60.0,65.0,70.0,56.0,70.0,fifa-match
+Ecuador,ECU,E,Gonzalo Valle,GK,,4,64.0,74.0,63.0,65.0,71.0,51.0,70.0,fifa-match
 Ecuador,ECU,E,Moisés Caicedo,MF,,61,78.0,74.0,78.0,70.0,75.0,44.0,80.0,fifa-match
-Ecuador,ECU,E,Jeremy Arévalo,FW,,4,74.0,74.0,60.0,65.0,70.0,56.0,70.0,team-median
+Ecuador,ECU,E,Jeremy Arévalo,FW,,4,74.0,74.0,63.0,65.0,71.0,51.0,70.0,team-median
 Ecuador,ECU,E,Jackson Porozo,DF,,10,67.0,62.0,31.0,36.0,39.0,68.0,73.0,fifa-match
-Ecuador,ECU,E,Yaimar Medina,DF,,6,75.0,78.0,33.0,60.0,68.0,76.0,75.0,fifa-match
+Ecuador,ECU,E,Yaimar Medina,DF,,6,75.0,75.0,49.0,67.0,68.0,73.0,74.0,fifa-match
 Germany,GER,E,Manuel Neuer,GK,,124,90.0,68.0,61.0,64.0,68.0,60.0,70.0,fifa-match
 Germany,GER,E,Antonio Rüdiger,DF,,82,83.0,75.0,43.0,68.0,64.0,84.0,84.0,fifa-match
 Germany,GER,E,Waldemar Anton,DF,,13,75.0,66.0,46.0,57.0,64.0,76.0,79.0,fifa-match
@@ -501,24 +501,24 @@ Ivory Coast,CIV,E,Wilfried Singo,DF,,34,66.0,77.0,40.0,57.0,67.0,62.0,59.0,fifa-
 Ivory Coast,CIV,E,Seko Fofana,MF,,33,78.0,76.0,71.0,72.0,78.0,72.0,79.0,fifa-match
 Ivory Coast,CIV,E,Odilon Kossounou,DF,,36,73.0,75.0,32.0,58.0,65.0,73.0,78.0,fifa-match
 Ivory Coast,CIV,E,Franck Kessié,MF,,102,84.0,78.0,74.0,74.0,80.0,82.0,87.0,fifa-match
-Ivory Coast,CIV,E,Ange-Yoan Bonny,FW,,1,74.0,76.0,55.0,66.0,74.0,70.0,73.0,team-median
+Ivory Coast,CIV,E,Ange-Yoan Bonny,FW,,1,74.0,76.0,53.0,64.0,74.0,70.0,73.0,team-median
 Ivory Coast,CIV,E,Simon Adingra,FW,,29,57.0,83.0,49.0,47.0,60.0,25.0,40.0,fifa-match
 Ivory Coast,CIV,E,Yan Diomande,FW,,10,72.0,63.0,46.0,60.0,60.0,71.0,74.0,fifa-match
 Ivory Coast,CIV,E,Elye Wahi,FW,,2,70.0,84.0,68.0,60.0,74.0,30.0,64.0,fifa-match
-Ivory Coast,CIV,E,Christopher Opéri,DF,,12,74.0,76.0,55.0,66.0,74.0,70.0,73.0,team-median
-Ivory Coast,CIV,E,Oumar Diakité,FW,,30,68.0,68.0,53.0,64.0,73.0,62.0,55.0,fifa-match
+Ivory Coast,CIV,E,Christopher Opéri,DF,,12,74.0,76.0,53.0,64.0,74.0,70.0,73.0,team-median
+Ivory Coast,CIV,E,Oumar Diakité,FW,,30,68.0,61.0,38.0,57.0,56.0,68.0,72.0,fifa-match
 Ivory Coast,CIV,E,Amad Diallo,FW,,19,78.0,74.0,39.0,71.0,76.0,78.0,77.0,fifa-match
 Ivory Coast,CIV,E,Mohamed Koné,GK,,0,72.0,91.0,68.0,57.0,74.0,32.0,65.0,fifa-match
-Ivory Coast,CIV,E,Guéla Doué,DF,,20,74.0,76.0,55.0,66.0,74.0,70.0,73.0,team-median
+Ivory Coast,CIV,E,Guéla Doué,DF,,20,74.0,76.0,53.0,64.0,74.0,70.0,73.0,team-median
 Ivory Coast,CIV,E,Ibrahim Sangaré,MF,,57,77.0,66.0,65.0,70.0,70.0,77.0,84.0,fifa-match
 Ivory Coast,CIV,E,Nicolas Pépé,FW,,56,81.0,88.0,79.0,75.0,83.0,36.0,65.0,fifa-match
 Ivory Coast,CIV,E,Emmanuel Agbadou,DF,,20,68.0,65.0,30.0,50.0,57.0,66.0,79.0,fifa-match
 Ivory Coast,CIV,E,Evan Ndicka,DF,,28,77.0,75.0,47.0,70.0,74.0,77.0,76.0,fifa-match
 Ivory Coast,CIV,E,Evann Guessand,FW,,21,67.0,76.0,65.0,52.0,66.0,23.0,68.0,fifa-match
-Ivory Coast,CIV,E,Alban Lafont,GK,,4,78.0,76.0,55.0,66.0,74.0,70.0,73.0,fifa-match
+Ivory Coast,CIV,E,Alban Lafont,GK,,4,78.0,76.0,53.0,64.0,74.0,70.0,73.0,fifa-match
 Ivory Coast,CIV,E,Bazoumana Touré,FW,,6,74.0,79.0,57.0,67.0,73.0,72.0,72.0,fifa-match
-Ivory Coast,CIV,E,Parfait Guiagon,MF,,5,74.0,76.0,55.0,66.0,74.0,70.0,73.0,team-median
-Ivory Coast,CIV,E,Christ Inao Oulaï,MF,,9,74.0,76.0,55.0,66.0,74.0,70.0,73.0,team-median
+Ivory Coast,CIV,E,Parfait Guiagon,MF,,5,74.0,76.0,53.0,64.0,74.0,70.0,73.0,team-median
+Ivory Coast,CIV,E,Christ Inao Oulaï,MF,,9,74.0,76.0,53.0,64.0,74.0,70.0,73.0,team-median
 Japan,JPN,F,Zion Suzuki,GK,,24,72.0,70.0,71.0,65.0,68.0,44.0,71.0,fifa-match
 Japan,JPN,F,Yukinari Sugawara,DF,,21,72.0,78.0,47.0,65.0,70.0,64.0,71.0,fifa-match
 Japan,JPN,F,Shōgo Taniguchi,DF,,38,72.0,64.0,45.0,59.0,60.0,73.0,72.0,fifa-match
@@ -527,24 +527,24 @@ Japan,JPN,F,Yūto Nagatomo,DF,,145,73.0,70.0,49.0,65.0,69.0,72.0,65.0,fifa-match
 Japan,JPN,F,Shūto Machino,FW,,14,62.0,65.0,62.0,54.0,55.0,26.0,67.0,fifa-match
 Japan,JPN,F,Ao Tanaka,MF,,38,72.0,71.0,66.0,69.0,70.0,68.0,70.0,fifa-match
 Japan,JPN,F,Takefusa Kubo,MF,,49,75.0,81.0,66.0,68.0,82.0,39.0,56.0,fifa-match
-Japan,JPN,F,Keisuke Gotō,FW,,4,72.0,70.0,52.0,62.0,68.0,53.0,69.0,team-median
-Japan,JPN,F,Ritsu Dōan,MF,,65,72.0,70.0,52.0,62.0,68.0,53.0,69.0,team-median
+Japan,JPN,F,Keisuke Gotō,FW,,4,72.0,70.0,52.0,62.0,68.0,53.0,70.0,team-median
+Japan,JPN,F,Ritsu Dōan,MF,,65,72.0,70.0,52.0,62.0,68.0,53.0,70.0,team-median
 Japan,JPN,F,Daizen Maeda,MF,,27,70.0,89.0,72.0,60.0,70.0,39.0,65.0,fifa-match
 Japan,JPN,F,Keisuke Ōsako,GK,,11,71.0,63.0,69.0,62.0,76.0,41.0,62.0,fifa-match
-Japan,JPN,F,Keito Nakamura,MF,,25,68.0,70.0,52.0,62.0,68.0,53.0,69.0,fifa-match
+Japan,JPN,F,Keito Nakamura,MF,,25,68.0,70.0,52.0,62.0,68.0,53.0,70.0,fifa-match
 Japan,JPN,F,Junya Itō,MF,,69,64.0,79.0,49.0,56.0,73.0,22.0,35.0,fifa-match
 Japan,JPN,F,Daichi Kamada,MF,,49,79.0,75.0,68.0,79.0,83.0,41.0,59.0,fifa-match
 Japan,JPN,F,Tsuyoshi Watanabe,DF,,11,68.0,61.0,29.0,46.0,53.0,67.0,75.0,fifa-match
 Japan,JPN,F,Yuito Suzuki,MF,,6,72.0,70.0,71.0,65.0,68.0,44.0,71.0,fifa-match
 Japan,JPN,F,Ayase Ueda,FW,,39,68.0,49.0,30.0,50.0,52.0,69.0,68.0,fifa-match
 Japan,JPN,F,Kōki Ogawa,FW,,15,69.0,79.0,55.0,62.0,64.0,62.0,77.0,fifa-match
-Japan,JPN,F,Ayumu Seko,DF,,14,67.0,66.0,49.0,67.0,65.0,63.0,67.0,fifa-match
+Japan,JPN,F,Ayumu Seko,DF,,14,67.0,60.0,35.0,50.0,56.0,68.0,70.0,fifa-match
 Japan,JPN,F,Hiroki Itō,DF,,24,64.0,79.0,49.0,56.0,73.0,22.0,35.0,fifa-match
 Japan,JPN,F,Takehiro Tomiyasu,DF,,43,75.0,68.0,32.0,63.0,69.0,76.0,77.0,fifa-match
-Japan,JPN,F,Tomoki Hayakawa,GK,,4,56.0,70.0,52.0,62.0,68.0,53.0,69.0,fifa-match
-Japan,JPN,F,Kaishū Sano,MF,,13,72.0,70.0,52.0,62.0,68.0,53.0,69.0,team-median
+Japan,JPN,F,Tomoki Hayakawa,GK,,4,56.0,70.0,52.0,62.0,68.0,53.0,70.0,fifa-match
+Japan,JPN,F,Kaishū Sano,MF,,13,72.0,70.0,52.0,62.0,68.0,53.0,70.0,team-median
 Japan,JPN,F,Junnosuke Suzuki,DF,,6,72.0,70.0,71.0,65.0,68.0,44.0,71.0,fifa-match
-Japan,JPN,F,Kento Shiogai,FW,,2,72.0,70.0,52.0,62.0,68.0,53.0,69.0,team-median
+Japan,JPN,F,Kento Shiogai,FW,,2,72.0,70.0,52.0,62.0,68.0,53.0,70.0,team-median
 Netherlands,NED,F,Bart Verbruggen,GK,,29,65.0,80.0,69.0,69.0,72.0,67.0,75.0,fifa-match
 Netherlands,NED,F,Lutsharel Geertruida,DF,,21,76.0,80.0,52.0,66.0,71.0,74.0,75.0,fifa-match
 Netherlands,NED,F,Marten de Roon,MF,,43,82.0,66.0,68.0,71.0,73.0,82.0,83.0,fifa-match
@@ -727,15 +727,15 @@ New Zealand,NZL,G,Ryan Thomas,MF,,25,76.0,35.0,33.0,54.0,48.0,78.0,73.0,fifa-mat
 New Zealand,NZL,G,Callan Elliot,DF,,11,69.0,70.0,58.0,59.0,63.0,53.0,71.0,fifa-match
 New Zealand,NZL,G,Lachlan Bayliss,MF,,4,63.0,70.0,51.0,63.0,68.0,54.0,65.0,fifa-match
 New Zealand,NZL,G,Tommy Smith,DF,,56,73.0,68.0,60.0,70.0,71.0,70.0,70.0,fifa-match
-Cape Verde,CPV,H,Vozinha,GK,,90,78.0,74.0,61.0,68.0,73.0,70.0,72.0,team-median
-Cape Verde,CPV,H,Stopira,DF,,61,78.0,74.0,61.0,68.0,73.0,70.0,72.0,team-median
-Cape Verde,CPV,H,Diney,DF,,32,78.0,74.0,61.0,68.0,73.0,70.0,72.0,team-median
-Cape Verde,CPV,H,Pico Lopes,DF,,45,82.0,74.0,61.0,68.0,73.0,70.0,72.0,fifa-match
+Cape Verde,CPV,H,Vozinha,GK,,90,78.0,73.0,62.0,70.0,73.0,70.0,72.0,team-median
+Cape Verde,CPV,H,Stopira,DF,,61,78.0,73.0,62.0,70.0,73.0,70.0,72.0,team-median
+Cape Verde,CPV,H,Diney,DF,,32,78.0,73.0,62.0,70.0,73.0,70.0,72.0,team-median
+Cape Verde,CPV,H,Pico Lopes,DF,,45,82.0,73.0,62.0,70.0,73.0,70.0,72.0,fifa-match
 Cape Verde,CPV,H,Logan Costa,DF,,28,78.0,73.0,61.0,71.0,73.0,77.0,68.0,fifa-match
 Cape Verde,CPV,H,Kevin Pina,MF,,31,76.0,42.0,66.0,72.0,73.0,73.0,72.0,fifa-match
 Cape Verde,CPV,H,Jovane Cabral,MF,,29,78.0,86.0,76.0,73.0,80.0,38.0,69.0,fifa-match
 Cape Verde,CPV,H,João Paulo Fernandes,MF,,41,88.0,75.0,86.0,89.0,84.0,70.0,77.0,fifa-match
-Cape Verde,CPV,H,Gilson Benchimol,FW,,21,78.0,74.0,61.0,68.0,73.0,70.0,72.0,team-median
+Cape Verde,CPV,H,Gilson Benchimol,FW,,21,78.0,73.0,62.0,70.0,73.0,70.0,72.0,team-median
 Cape Verde,CPV,H,Jamiro Monteiro,MF,,55,75.0,75.0,63.0,73.0,78.0,64.0,76.0,fifa-match
 Cape Verde,CPV,H,Garry Rodrigues,MF,,61,75.0,75.0,59.0,75.0,72.0,70.0,60.0,fifa-match
 Cape Verde,CPV,H,Márcio Rosa,GK,,11,67.0,70.0,67.0,54.0,64.0,18.0,63.0,fifa-match
@@ -746,12 +746,12 @@ Cape Verde,CPV,H,Yannick Semedo,MF,,11,80.0,82.0,57.0,68.0,81.0,75.0,75.0,fifa-m
 Cape Verde,CPV,H,Willy Semedo,MF,,38,80.0,82.0,57.0,68.0,81.0,75.0,75.0,fifa-match
 Cape Verde,CPV,H,Telmo Arcanjo,MF,,16,61.0,69.0,51.0,60.0,64.0,38.0,51.0,fifa-match
 Cape Verde,CPV,H,Dailon Livramento,FW,,22,62.0,79.0,46.0,56.0,58.0,56.0,58.0,fifa-match
-Cape Verde,CPV,H,Ryan Mendes,FW,,96,78.0,85.0,57.0,68.0,74.0,74.0,72.0,fifa-match
+Cape Verde,CPV,H,Ryan Mendes,FW,,96,78.0,72.0,67.0,76.0,77.0,74.0,75.0,fifa-match
 Cape Verde,CPV,H,Nuno da Costa,MF,,9,78.0,73.0,61.0,71.0,73.0,77.0,68.0,fifa-match
 Cape Verde,CPV,H,Steven Moreira,DF,,20,70.0,48.0,64.0,64.0,66.0,66.0,72.0,fifa-match
 Cape Verde,CPV,H,CJ dos Santos,GK,,1,79.0,83.0,79.0,65.0,81.0,28.0,64.0,fifa-match
 Cape Verde,CPV,H,Wagner Pina,DF,,14,76.0,42.0,66.0,72.0,73.0,73.0,72.0,fifa-match
-Cape Verde,CPV,H,Kelvin Pires,DF,,6,80.0,74.0,61.0,68.0,73.0,70.0,72.0,fifa-match
+Cape Verde,CPV,H,Kelvin Pires,DF,,6,80.0,73.0,62.0,70.0,73.0,70.0,72.0,fifa-match
 Cape Verde,CPV,H,Hélio Varela,MF,,21,72.0,63.0,44.0,54.0,59.0,71.0,81.0,fifa-match
 Saudi Arabia,KSA,H,Nawaf Al-Aqidi,GK,,24,62.0,80.0,47.0,53.0,62.0,58.0,70.0,team-median
 Saudi Arabia,KSA,H,Ali Majrashi,DF,,21,62.0,80.0,45.0,48.0,62.0,54.0,73.0,fifa-match
@@ -779,13 +779,13 @@ Saudi Arabia,KSA,H,Mohamed Kanno,MF,,79,70.0,72.0,69.0,68.0,70.0,67.0,75.0,fifa-
 Saudi Arabia,KSA,H,Moteb Al-Harbi,DF,,13,62.0,80.0,47.0,53.0,62.0,58.0,70.0,team-median
 Saudi Arabia,KSA,H,Jehad Thakri,DF,,8,62.0,80.0,47.0,53.0,62.0,58.0,70.0,team-median
 Saudi Arabia,KSA,H,Mohammed Abu Al-Shamat,DF,,8,62.0,80.0,47.0,53.0,62.0,58.0,70.0,team-median
-Spain,ESP,H,David Raya,GK,,13,74.0,71.0,67.0,72.0,78.0,73.0,75.0,fifa-match
-Spain,ESP,H,Marc Pubill,DF,,2,81.0,71.0,67.0,72.0,78.0,73.0,75.0,team-median
+Spain,ESP,H,David Raya,GK,,13,74.0,74.0,67.0,73.0,78.0,66.0,74.0,fifa-match
+Spain,ESP,H,Marc Pubill,DF,,2,81.0,74.0,67.0,73.0,78.0,66.0,74.0,team-median
 Spain,ESP,H,Álex Grimaldo,DF,,14,82.0,87.0,65.0,81.0,83.0,74.0,71.0,fifa-match
 Spain,ESP,H,Eric García,DF,,21,80.0,41.0,82.0,81.0,78.0,65.0,83.0,fifa-match
 Spain,ESP,H,Marcos Llorente,DF,,24,86.0,88.0,80.0,81.0,82.0,78.0,82.0,fifa-match
 Spain,ESP,H,Mikel Merino,MF,,43,83.0,74.0,78.0,81.0,82.0,82.0,81.0,fifa-match
-Spain,ESP,H,Ferran Torres,FW,,57,82.0,71.0,38.0,67.0,70.0,84.0,80.0,fifa-match
+Spain,ESP,H,Ferran Torres,FW,,57,82.0,82.0,79.0,78.0,82.0,35.0,66.0,fifa-match
 Spain,ESP,H,Fabián Ruiz,MF,,42,78.0,50.0,42.0,65.0,60.0,79.0,78.0,fifa-match
 Spain,ESP,H,Gavi,MF,,30,66.0,66.0,53.0,67.0,69.0,50.0,48.0,fifa-match
 Spain,ESP,H,Dani Olmo,FW,,50,82.0,67.0,76.0,81.0,86.0,50.0,60.0,fifa-match
@@ -797,11 +797,11 @@ Spain,ESP,H,Álex Baena,MF,,17,67.0,66.0,70.0,63.0,71.0,39.0,46.0,fifa-match
 Spain,ESP,H,Rodri,MF,,62,86.0,61.0,70.0,77.0,78.0,82.0,82.0,fifa-match
 Spain,ESP,H,Nico Williams,FW,,30,81.0,94.0,78.0,72.0,78.0,37.0,81.0,fifa-match
 Spain,ESP,H,Martín Zubimendi,MF,,26,74.0,62.0,61.0,71.0,71.0,74.0,69.0,fifa-match
-Spain,ESP,H,Lamine Yamal,FW,,25,81.0,71.0,67.0,72.0,78.0,73.0,75.0,team-median
+Spain,ESP,H,Lamine Yamal,FW,,25,81.0,74.0,67.0,73.0,78.0,66.0,74.0,team-median
 Spain,ESP,H,Pedri,MF,,41,81.0,78.0,65.0,79.0,84.0,66.0,63.0,fifa-match
 Spain,ESP,H,Mikel Oyarzabal,FW,,53,85.0,82.0,82.0,81.0,84.0,41.0,63.0,fifa-match
-Spain,ESP,H,Pau Cubarsí,DF,,12,81.0,71.0,67.0,72.0,78.0,73.0,75.0,team-median
-Spain,ESP,H,Unai Simón,GK,,58,82.0,71.0,67.0,72.0,78.0,73.0,75.0,fifa-match
+Spain,ESP,H,Pau Cubarsí,DF,,12,81.0,74.0,67.0,73.0,78.0,66.0,74.0,team-median
+Spain,ESP,H,Unai Simón,GK,,58,82.0,74.0,67.0,73.0,78.0,66.0,74.0,fifa-match
 Spain,ESP,H,Marc Cucurella,DF,,24,81.0,79.0,67.0,78.0,80.0,73.0,74.0,fifa-match
 Spain,ESP,H,Víctor Muñoz,FW,,2,76.0,78.0,50.0,67.0,71.0,75.0,76.0,fifa-match
 Spain,ESP,H,Borja Iglesias,FW,,8,80.0,65.0,80.0,64.0,74.0,35.0,80.0,fifa-match
@@ -914,7 +914,7 @@ Senegal,SEN,I,Mamadou Sarr,DF,,8,78.0,94.0,76.0,67.0,80.0,22.0,67.0,fifa-match
 Senegal,SEN,I,Kalidou Koulibaly,DF,,104,86.0,81.0,28.0,51.0,65.0,87.0,85.0,fifa-match
 Senegal,SEN,I,Abdoulaye Seck,DF,,25,73.0,74.0,47.0,57.0,58.0,70.0,86.0,fifa-match
 Senegal,SEN,I,Idrissa Gueye,MF,,132,82.0,69.0,62.0,71.0,78.0,83.0,77.0,fifa-match
-Senegal,SEN,I,Pathé Ciss,MF,,30,70.0,66.0,51.0,57.0,55.0,70.0,83.0,fifa-match
+Senegal,SEN,I,Pathé Ciss,MF,,30,70.0,80.0,62.0,62.0,67.0,65.0,79.0,fifa-match
 Senegal,SEN,I,Assane Diao,FW,,5,76.0,81.0,64.0,67.0,78.0,61.0,77.0,team-median
 Senegal,SEN,I,Lamine Camara,MF,,45,77.0,76.0,74.0,73.0,75.0,74.0,83.0,fifa-match
 Senegal,SEN,I,Bamba Dieng,FW,,23,72.0,81.0,64.0,67.0,78.0,61.0,77.0,fifa-match
@@ -961,7 +961,7 @@ Algeria,ALG,J,Luca Zidane,GK,,7,70.0,74.0,62.0,72.0,75.0,60.0,70.0,fifa-match
 Algeria,ALG,J,Yacine Titraoui,MF,,5,72.0,74.0,62.0,72.0,75.0,60.0,70.0,team-median
 Algeria,ALG,J,Farès Ghedjemis,FW,,1,72.0,74.0,62.0,72.0,75.0,60.0,70.0,team-median
 Algeria,ALG,J,Samir Chergui,DF,,5,61.0,54.0,43.0,59.0,61.0,57.0,59.0,fifa-match
-Argentina,ARG,J,Juan Musso,GK,,4,81.0,78.0,71.0,69.0,76.0,69.0,75.0,fifa-match
+Argentina,ARG,J,Juan Musso,GK,,4,81.0,76.0,71.0,69.0,76.0,69.0,74.0,fifa-match
 Argentina,ARG,J,Marcos Senesi,DF,,3,79.0,61.0,39.0,63.0,71.0,81.0,78.0,fifa-match
 Argentina,ARG,J,Nicolás Tagliafico,DF,,76,82.0,80.0,55.0,73.0,76.0,81.0,81.0,fifa-match
 Argentina,ARG,J,Gonzalo Montiel,DF,,39,78.0,86.0,53.0,70.0,74.0,73.0,81.0,fifa-match
@@ -972,7 +972,7 @@ Argentina,ARG,J,Valentín Barco,MF,,4,74.0,82.0,67.0,68.0,79.0,28.0,53.0,fifa-ma
 Argentina,ARG,J,Julián Alvarez,FW,,51,65.0,67.0,61.0,64.0,70.0,28.0,43.0,fifa-match
 Argentina,ARG,J,Lionel Messi,FW,,199,93.0,85.0,92.0,91.0,95.0,34.0,65.0,fifa-match
 Argentina,ARG,J,Giovani Lo Celso,MF,,67,81.0,75.0,76.0,82.0,83.0,69.0,73.0,fifa-match
-Argentina,ARG,J,Gerónimo Rulli,GK,,8,80.0,78.0,71.0,69.0,76.0,69.0,75.0,fifa-match
+Argentina,ARG,J,Gerónimo Rulli,GK,,8,80.0,76.0,71.0,69.0,76.0,69.0,74.0,fifa-match
 Argentina,ARG,J,Cristian Romero,DF,,51,82.0,76.0,46.0,52.0,61.0,83.0,84.0,fifa-match
 Argentina,ARG,J,Exequiel Palacios,MF,,40,77.0,55.0,73.0,74.0,77.0,72.0,71.0,fifa-match
 Argentina,ARG,J,Nicolás González,MF,,51,77.0,87.0,71.0,64.0,82.0,45.0,60.0,fifa-match
@@ -981,11 +981,11 @@ Argentina,ARG,J,Giuliano Simeone,FW,,13,75.0,76.0,74.0,59.0,75.0,37.0,70.0,fifa-
 Argentina,ARG,J,Nico Paz,FW,,9,68.0,40.0,41.0,51.0,54.0,70.0,74.0,fifa-match
 Argentina,ARG,J,Nicolás Otamendi,DF,,132,81.0,63.0,57.0,62.0,59.0,83.0,81.0,fifa-match
 Argentina,ARG,J,Alexis Mac Allister,MF,,46,75.0,70.0,76.0,77.0,74.0,56.0,62.0,fifa-match
-Argentina,ARG,J,José Manuel López,FW,,5,80.0,78.0,71.0,69.0,76.0,69.0,75.0,fifa-match
+Argentina,ARG,J,José Manuel López,FW,,5,80.0,76.0,71.0,69.0,76.0,69.0,74.0,fifa-match
 Argentina,ARG,J,Lautaro Martínez,FW,,77,85.0,84.0,81.0,72.0,85.0,48.0,84.0,fifa-match
 Argentina,ARG,J,Emiliano Martínez,GK,,59,85.0,84.0,81.0,72.0,85.0,48.0,84.0,fifa-match
 Argentina,ARG,J,Enzo Fernández,MF,,42,81.0,78.0,37.0,66.0,69.0,81.0,80.0,fifa-match
-Argentina,ARG,J,Facundo Medina,DF,,9,75.0,78.0,33.0,60.0,68.0,76.0,75.0,fifa-match
+Argentina,ARG,J,Facundo Medina,DF,,9,75.0,75.0,49.0,67.0,68.0,73.0,74.0,fifa-match
 Argentina,ARG,J,Nahuel Molina,DF,,58,77.0,36.0,81.0,67.0,68.0,41.0,70.0,fifa-match
 Austria,AUT,J,Alexander Schlager,GK,,26,80.0,69.0,70.0,73.0,77.0,73.0,81.0,fifa-match
 Austria,AUT,J,David Affengruber,DF,,1,64.0,73.0,42.0,51.0,53.0,62.0,67.0,fifa-match
@@ -1039,30 +1039,30 @@ Jordan,JOR,J,Ihsan Haddad,DF,,92,61.0,60.0,62.0,53.0,69.0,19.0,39.0,fifa-match
 Jordan,JOR,J,Ali Azaizeh,FW,,4,61.0,81.0,58.0,50.0,64.0,23.0,56.0,team-median
 Jordan,JOR,J,Mohammad Al-Dawoud,MF,,13,61.0,81.0,58.0,50.0,64.0,23.0,56.0,team-median
 Jordan,JOR,J,Anas Badawi,DF,,1,61.0,81.0,58.0,50.0,64.0,23.0,56.0,team-median
-Colombia,COL,K,David Ospina,GK,,130,79.0,72.0,66.0,70.0,74.0,63.0,72.0,fifa-match
+Colombia,COL,K,David Ospina,GK,,130,79.0,73.0,65.0,70.0,76.0,64.0,72.0,fifa-match
 Colombia,COL,K,Daniel Muñoz,DF,,46,76.0,78.0,50.0,67.0,71.0,75.0,76.0,fifa-match
 Colombia,COL,K,Jhon Lucumí,DF,,37,74.0,68.0,28.0,59.0,63.0,73.0,80.0,fifa-match
-Colombia,COL,K,Santiago Arias,DF,,68,79.0,72.0,66.0,70.0,74.0,63.0,72.0,fifa-match
+Colombia,COL,K,Santiago Arias,DF,,68,79.0,77.0,53.0,70.0,76.0,77.0,74.0,fifa-match
 Colombia,COL,K,Kevin Castaño,MF,,25,57.0,69.0,46.0,56.0,63.0,40.0,42.0,fifa-match
 Colombia,COL,K,Richard Ríos,MF,,32,69.0,66.0,54.0,61.0,63.0,68.0,75.0,fifa-match
 Colombia,COL,K,Luis Díaz,FW,,74,80.0,92.0,77.0,70.0,82.0,32.0,71.0,fifa-match
 Colombia,COL,K,Jorge Carrascal,MF,,24,73.0,72.0,67.0,70.0,81.0,41.0,55.0,fifa-match
 Colombia,COL,K,Jhon Córdoba,FW,,21,75.0,82.0,71.0,71.0,77.0,64.0,69.0,fifa-match
 Colombia,COL,K,James Rodríguez,MF,,126,81.0,53.0,86.0,86.0,86.0,50.0,60.0,fifa-match
-Colombia,COL,K,Jhon Arias,MF,,38,79.0,72.0,66.0,70.0,74.0,63.0,72.0,fifa-match
-Colombia,COL,K,Camilo Vargas,GK,,42,77.0,72.0,66.0,70.0,74.0,63.0,72.0,fifa-match
+Colombia,COL,K,Jhon Arias,MF,,38,79.0,77.0,53.0,70.0,76.0,77.0,74.0,fifa-match
+Colombia,COL,K,Camilo Vargas,GK,,42,77.0,73.0,65.0,70.0,76.0,64.0,72.0,fifa-match
 Colombia,COL,K,Yerry Mina,DF,,54,79.0,45.0,54.0,60.0,60.0,80.0,81.0,fifa-match
-Colombia,COL,K,Gustavo Puerta,DF,,6,77.0,72.0,66.0,70.0,74.0,63.0,72.0,team-median
-Colombia,COL,K,Juan Portilla,MF,,10,77.0,72.0,66.0,70.0,74.0,63.0,72.0,team-median
+Colombia,COL,K,Gustavo Puerta,DF,,6,77.0,73.0,65.0,70.0,76.0,64.0,72.0,team-median
+Colombia,COL,K,Juan Portilla,MF,,10,77.0,73.0,65.0,70.0,76.0,64.0,72.0,team-median
 Colombia,COL,K,Jefferson Lerma,MF,,65,75.0,71.0,64.0,70.0,72.0,72.0,81.0,fifa-match
 Colombia,COL,K,Johan Mojica,DF,,45,74.0,91.0,65.0,70.0,71.0,68.0,72.0,fifa-match
 Colombia,COL,K,Willer Ditta,DF,,5,66.0,56.0,24.0,46.0,53.0,62.0,78.0,fifa-match
 Colombia,COL,K,Cucho Hernández,FW,,9,84.0,93.0,71.0,76.0,81.0,77.0,82.0,fifa-match
 Colombia,COL,K,Juan Fernando Quintero,MF,,49,79.0,73.0,76.0,81.0,83.0,39.0,51.0,fifa-match
-Colombia,COL,K,Jaminton Campaz,FW,,10,77.0,72.0,66.0,70.0,74.0,63.0,72.0,team-median
+Colombia,COL,K,Jaminton Campaz,FW,,10,77.0,73.0,65.0,70.0,76.0,64.0,72.0,team-median
 Colombia,COL,K,Deiver Machado,DF,,15,71.0,86.0,56.0,63.0,71.0,65.0,70.0,fifa-match
 Colombia,COL,K,Davinson Sánchez,DF,,79,80.0,78.0,76.0,78.0,83.0,43.0,68.0,fifa-match
-Colombia,COL,K,Álvaro Montero,GK,,12,72.0,72.0,66.0,70.0,74.0,63.0,72.0,fifa-match
+Colombia,COL,K,Álvaro Montero,GK,,12,72.0,64.0,74.0,70.0,74.0,43.0,63.0,fifa-match
 Colombia,COL,K,Luis Suárez,FW,,12,88.0,72.0,90.0,82.0,84.0,47.0,83.0,fifa-match
 Colombia,COL,K,Andrés Gómez,FW,,8,85.0,87.0,78.0,84.0,87.0,39.0,55.0,fifa-match
 Congo DR,COD,K,Lionel Mpasi,GK,,29,68.0,79.0,62.0,66.0,75.0,66.0,71.0,fifa-match
@@ -1102,20 +1102,20 @@ Portugal,POR,K,Bruno Fernandes,MF,,89,88.0,75.0,86.0,89.0,84.0,70.0,77.0,fifa-ma
 Portugal,POR,K,Gonçalo Ramos,FW,,25,88.0,70.0,70.0,76.0,74.0,88.0,84.0,fifa-match
 Portugal,POR,K,Bernardo Silva,MF,,109,86.0,80.0,76.0,83.0,91.0,54.0,67.0,fifa-match
 Portugal,POR,K,João Félix,FW,,54,83.0,82.0,79.0,76.0,86.0,40.0,68.0,fifa-match
-Portugal,POR,K,José Sá,GK,,5,79.0,79.0,70.0,71.0,77.0,68.0,71.0,fifa-match
+Portugal,POR,K,José Sá,GK,,5,79.0,78.0,70.0,71.0,77.0,68.0,71.0,fifa-match
 Portugal,POR,K,Renato Veiga,DF,,13,64.0,63.0,60.0,68.0,65.0,48.0,66.0,fifa-match
 Portugal,POR,K,Gonçalo Inácio,DF,,22,76.0,79.0,30.0,60.0,59.0,77.0,74.0,fifa-match
 Portugal,POR,K,João Neves,MF,,22,82.0,59.0,75.0,85.0,77.0,74.0,73.0,fifa-match
 Portugal,POR,K,Francisco Trincão,FW,,18,76.0,79.0,71.0,70.0,81.0,37.0,69.0,fifa-match
 Portugal,POR,K,Rafael Leão,FW,,44,77.0,88.0,73.0,68.0,79.0,27.0,70.0,fifa-match
-Portugal,POR,K,Pedro Neto,FW,,25,82.0,79.0,70.0,71.0,77.0,68.0,71.0,fifa-match
+Portugal,POR,K,Pedro Neto,FW,,25,82.0,78.0,70.0,71.0,77.0,68.0,71.0,fifa-match
 Portugal,POR,K,Gonçalo Guedes,FW,,34,81.0,86.0,79.0,76.0,82.0,36.0,68.0,fifa-match
 Portugal,POR,K,João Cancelo,DF,,68,86.0,85.0,71.0,83.0,84.0,80.0,72.0,fifa-match
 Portugal,POR,K,Rúben Neves,MF,,67,82.0,59.0,75.0,85.0,77.0,74.0,73.0,fifa-match
 Portugal,POR,K,Rui Silva,GK,,3,86.0,80.0,76.0,83.0,91.0,54.0,67.0,fifa-match
 Portugal,POR,K,Vitinha,MF,,38,67.0,72.0,57.0,67.0,72.0,51.0,49.0,fifa-match
 Portugal,POR,K,Samú Costa,DF,,6,78.0,73.0,61.0,71.0,73.0,77.0,68.0,fifa-match
-Portugal,POR,K,Nuno Mendes,DF,,44,78.0,85.0,57.0,68.0,74.0,74.0,72.0,fifa-match
+Portugal,POR,K,Nuno Mendes,DF,,44,78.0,72.0,67.0,76.0,77.0,74.0,75.0,fifa-match
 Portugal,POR,K,Francisco Conceição,FW,,17,70.0,78.0,61.0,63.0,76.0,31.0,44.0,fifa-match
 Uzbekistan,UZB,K,Utkir Yusupov,GK,,40,66.0,71.0,59.0,62.0,61.0,51.0,69.0,team-median
 Uzbekistan,UZB,K,Abdukodir Khusanov,DF,,27,66.0,71.0,59.0,62.0,61.0,51.0,69.0,team-median
@@ -1195,30 +1195,30 @@ England,ENG,L,James Trafford,GK,,2,59.0,77.0,68.0,71.0,75.0,65.0,75.0,fifa-match
 England,ENG,L,Reece James,DF,,24,81.0,80.0,58.0,77.0,77.0,76.0,80.0,fifa-match
 England,ENG,L,Djed Spence,DF,,6,65.0,80.0,33.0,50.0,64.0,60.0,57.0,fifa-match
 England,ENG,L,Jarell Quansah,DF,,3,78.0,77.0,68.0,71.0,75.0,65.0,75.0,team-median
-Ghana,GHA,L,Lawrence Ati-Zigi,GK,,29,68.0,76.0,55.0,61.0,69.0,62.0,71.0,team-median
+Ghana,GHA,L,Lawrence Ati-Zigi,GK,,29,68.0,76.0,53.0,60.0,67.0,63.0,72.0,team-median
 Ghana,GHA,L,Alidu Seidu,DF,,24,62.0,64.0,28.0,45.0,58.0,63.0,43.0,fifa-match
-Ghana,GHA,L,Caleb Yirenkyi,MF,,11,68.0,76.0,55.0,61.0,69.0,62.0,71.0,team-median
-Ghana,GHA,L,Jonas Adjetey,DF,,10,68.0,76.0,55.0,61.0,69.0,62.0,71.0,team-median
+Ghana,GHA,L,Caleb Yirenkyi,MF,,11,68.0,76.0,53.0,60.0,67.0,63.0,72.0,team-median
+Ghana,GHA,L,Jonas Adjetey,DF,,10,68.0,76.0,53.0,60.0,67.0,63.0,72.0,team-median
 Ghana,GHA,L,Thomas Partey,MF,,57,83.0,69.0,71.0,82.0,81.0,80.0,84.0,fifa-match
 Ghana,GHA,L,Abdul Mumin,DF,,5,68.0,79.0,36.0,58.0,61.0,65.0,74.0,fifa-match
-Ghana,GHA,L,Abdul Fatawu,FW,,28,68.0,76.0,55.0,61.0,69.0,62.0,71.0,team-median
-Ghana,GHA,L,Kwasi Sibo,MF,,8,68.0,76.0,55.0,61.0,69.0,62.0,71.0,team-median
+Ghana,GHA,L,Abdul Fatawu,FW,,28,68.0,76.0,53.0,60.0,67.0,63.0,72.0,team-median
+Ghana,GHA,L,Kwasi Sibo,MF,,8,68.0,76.0,53.0,60.0,67.0,63.0,72.0,team-median
 Ghana,GHA,L,Jordan Ayew,FW,,120,75.0,76.0,74.0,70.0,78.0,46.0,72.0,fifa-match
 Ghana,GHA,L,Brandon Thomas-Asante,FW,,8,63.0,90.0,57.0,54.0,64.0,29.0,71.0,fifa-match
 Ghana,GHA,L,Antoine Semenyo,MF,,34,68.0,84.0,62.0,56.0,69.0,21.0,73.0,fifa-match
-Ghana,GHA,L,Joseph Anang,GK,,1,61.0,76.0,55.0,61.0,69.0,62.0,71.0,fifa-match
+Ghana,GHA,L,Joseph Anang,GK,,1,61.0,76.0,53.0,60.0,67.0,63.0,72.0,fifa-match
 Ghana,GHA,L,Christopher Bonsu Baah,FW,,9,60.0,85.0,55.0,51.0,63.0,31.0,56.0,fifa-match
-Ghana,GHA,L,Gideon Mensah,DF,,40,72.0,77.0,70.0,71.0,74.0,62.0,70.0,fifa-match
+Ghana,GHA,L,Gideon Mensah,DF,,40,72.0,63.0,46.0,56.0,55.0,71.0,81.0,fifa-match
 Ghana,GHA,L,Elisha Owusu,MF,,20,72.0,68.0,53.0,64.0,71.0,69.0,72.0,fifa-match
-Ghana,GHA,L,Benjamin Asare,GK,,11,68.0,76.0,55.0,61.0,69.0,62.0,71.0,team-median
+Ghana,GHA,L,Benjamin Asare,GK,,11,68.0,76.0,53.0,60.0,67.0,63.0,72.0,team-median
 Ghana,GHA,L,Abdul Rahman Baba,DF,,51,73.0,66.0,49.0,61.0,59.0,73.0,78.0,fifa-match
 Ghana,GHA,L,Jerome Opoku,DF,,11,67.0,82.0,49.0,64.0,70.0,39.0,62.0,fifa-match
 Ghana,GHA,L,Iñaki Williams,FW,,26,81.0,94.0,78.0,72.0,78.0,37.0,81.0,fifa-match
 Ghana,GHA,L,Augustine Boakye,MF,,0,59.0,76.0,45.0,52.0,58.0,55.0,59.0,fifa-match
-Ghana,GHA,L,Kojo Peprah Oppong,DF,,4,68.0,76.0,55.0,61.0,69.0,62.0,71.0,team-median
+Ghana,GHA,L,Kojo Peprah Oppong,DF,,4,68.0,76.0,53.0,60.0,67.0,63.0,72.0,team-median
 Ghana,GHA,L,Kamaldeen Sulemana,FW,,28,72.0,93.0,66.0,60.0,76.0,28.0,63.0,fifa-match
 Ghana,GHA,L,Derrick Luckassen,DF,,1,71.0,75.0,58.0,64.0,67.0,68.0,79.0,fifa-match
-Ghana,GHA,L,Ernest Nuamah,FW,,18,68.0,76.0,55.0,61.0,69.0,62.0,71.0,team-median
+Ghana,GHA,L,Ernest Nuamah,FW,,18,68.0,76.0,53.0,60.0,67.0,63.0,72.0,team-median
 Ghana,GHA,L,Prince Kwabena Adu,FW,,5,67.0,47.0,43.0,66.0,71.0,63.0,57.0,fifa-match
 Ghana,GHA,L,Marvin Senaya,DF,,2,60.0,67.0,37.0,40.0,53.0,63.0,57.0,fifa-match
 Panama,PAN,L,Luis Mejía,GK,,56,75.0,73.0,63.0,66.0,73.0,61.0,69.0,fifa-match
