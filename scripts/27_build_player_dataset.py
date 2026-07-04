@@ -106,16 +106,27 @@ def main() -> None:
     elo = pd.read_csv(PROCESSED / "elo_ratings.csv").rename(
         columns={"rank": "elo_rank"})[["team", "elo", "elo_rank"]]
 
-    agg = players.groupby("team").apply(lambda g: pd.Series({
-        "squad_overall": g.nlargest(16, "overall")["overall"].mean().round(1),
-        "avg_age": g["age"].mean().round(1),
-        "total_caps": int(g["caps"].sum()),
-        "attack_strength": g[ATT_ATTR].mean().mean().round(1),
-        "defence_strength": g[g.position == "DF"]["defending"].mean().round(1),
-        "young_pace": g[g.position.isin(["FW", "MF"])]["pace"].mean().round(1),
-        "senior_solidity": (g[g.position == "DF"]["age"].mean()
-                            * g[g.position == "DF"]["defending"].mean() / 100).round(1),
-    })).reset_index()
+    # round to 1 dp robustly: newer pandas returns a plain float from .mean()
+    # (no .round method), and empty position groups yield NaN.
+    r1 = lambda x: round(float(x), 1)
+
+    def _agg(g):
+        return pd.Series({
+            "squad_overall": r1(g.nlargest(16, "overall")["overall"].mean()),
+            "avg_age": r1(g["age"].mean()),
+            "total_caps": int(g["caps"].sum()),
+            "attack_strength": r1(g[ATT_ATTR].mean().mean()),
+            "defence_strength": r1(g[g.position == "DF"]["defending"].mean()),
+            "young_pace": r1(g[g.position.isin(["FW", "MF"])]["pace"].mean()),
+            "senior_solidity": r1(g[g.position == "DF"]["age"].mean()
+                                  * g[g.position == "DF"]["defending"].mean() / 100),
+        })
+
+    grouped = players.groupby("team")
+    try:  # include_groups arg is pandas >= 2.2 (silences a deprecation warning)
+        agg = grouped.apply(_agg, include_groups=False).reset_index()
+    except TypeError:
+        agg = grouped.apply(_agg).reset_index()
 
     # tier/style/talisman from the REAL 2026 squad (not the FIFA-vintage pool,
     # which still lists retired players like Sergio Ramos).
