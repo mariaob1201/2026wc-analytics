@@ -1,6 +1,6 @@
 # 🏆 World Cup 2026 — Champion Tracker
 
-_A living, state-aware forecast. Conditioned on the **60 matches played so far**: completed group games are held fixed; the rest of the tournament is simulated from a Bayesian goals model (squad-skill prior + current form + X/ESPN sentiment). Updated 2026-06-26._
+_A living, state-aware forecast. Conditioned on the **79 matches played so far**: completed group games are held fixed; the rest of the tournament is simulated from a Bayesian goals model (squad-skill prior + current form + X/ESPN sentiment). Updated 2026-07-01._
 
 ## How to read this
 
@@ -15,18 +15,18 @@ Both come from one model: goals are the primitive; the winner is a simulation ov
 
 | Team | Quarter | Semi | Final | **Champion** |
 |---|---|---|---|---|
-| Argentina | 50% | 28% | 17% | **12%** |
-| Portugal | 48% | 27% | 16% | **12%** |
-| France | 46% | 23% | 14% | **9%** |
-| Brazil | 46% | 24% | 12% | **8%** |
-| Spain | 43% | 22% | 11% | **7%** |
-| Colombia | 42% | 22% | 11% | **6%** |
-| Belgium | 37% | 19% | 9% | **5%** |
-| Germany | 38% | 19% | 9% | **4%** |
-| Japan | 34% | 18% | 9% | **4%** |
-| Morocco | 32% | 16% | 8% | **4%** |
-| Netherlands | 33% | 18% | 9% | **3%** |
-| Switzerland | 31% | 16% | 8% | **3%** |
+| France | 48% | 27% | 16% | **12%** |
+| Argentina | 48% | 27% | 16% | **11%** |
+| Portugal | 47% | 26% | 15% | **11%** |
+| Brazil | 44% | 22% | 11% | **7%** |
+| Belgium | 44% | 23% | 11% | **7%** |
+| Spain | 43% | 23% | 11% | **6%** |
+| Colombia | 40% | 21% | 10% | **6%** |
+| Germany | 36% | 19% | 9% | **4%** |
+| Netherlands | 31% | 17% | 9% | **3%** |
+| Japan | 31% | 16% | 8% | **3%** |
+| Switzerland | 31% | 16% | 9% | **3%** |
+| Morocco | 32% | 17% | 8% | **3%** |
 
 _Mexico's Round-of-32 opponent odds (per candidate): [R32_ODDS.md](R32_ODDS.md) — `make r32-odds`._
 
@@ -42,71 +42,71 @@ _How each contender's championship probability moved as matches were played. The
 
 | Date | Fixture | Pred goals (xG) | Likely | P(H/D/A) | Home form |
 |---|---|---|---|---|---|
-| 2026-06-26 | Senegal v Iraq | 1.5-0.6 | 1-0 | 60%/26%/14% | dipping |
-| 2026-06-26 | Norway v France | 1.0-2.1 | 0-2 | 18%/20%/62% | rising |
-| 2026-06-26 | Uruguay v Spain | 1.0-1.6 | 0-1 | 23%/25%/52% | steady |
-| 2026-06-26 | New Zealand v Belgium | 0.5-2.5 | 0-2 | 6%/14%/80% | cold |
-| 2026-06-26 | Egypt v Iran | 1.1-0.7 | 1-0 | 45%/31%/24% | steady |
-| 2026-06-26 | Cape Verde v Saudi Arabia | 1.1-0.5 | 1-0 | 50%/33%/16% | steady |
-| 2026-06-27 | Panama v England | 0.7-1.8 | 0-1 | 16%/23%/61% | dipping |
-| 2026-06-27 | Algeria v Austria | 1.1-1.3 | 0-1 | 30%/27%/43% | steady |
-| 2026-06-27 | Jordan v Argentina | 0.5-3.1 | 0-3 | 3%/9%/88% | dipping |
-| 2026-06-27 | Colombia v Portugal | 1.1-1.5 | 1-1 | 29%/26%/45% | rising |
-| 2026-06-27 | Congo DR v Uzbekistan | 1.2-0.6 | 1-0 | 51%/31%/18% | steady |
-| 2026-06-27 | Croatia v Ghana | 1.4-0.6 | 1-0 | 56%/27%/16% | dipping |
+| 2026-07-01 | United States v Bosnia-Herzegovina | 2.3-1.2 | 2-1 | 62%/19%/19% | steady |
+| 2026-07-01 | Belgium v Senegal | 2.3-1.2 | 2-1 | 62%/19%/19% | red-hot |
+| 2026-07-01 | England v Congo DR | 1.2-0.9 | 1-0 | 44%/29%/27% | rising |
+| 2026-07-02 | Spain v Austria | 1.9-1.3 | 1-1 | 51%/22%/27% | rising |
+| 2026-07-02 | Portugal v Croatia | 1.7-0.8 | 1-0 | 59%/24%/17% | red-hot |
+| 2026-07-02 | Switzerland v Algeria | 1.7-1.3 | 1-1 | 48%/23%/29% | rising |
+| 2026-07-03 | Australia v Egypt | 0.9-1.0 | 0-0 | 34%/32%/35% | steady |
+| 2026-07-03 | Argentina v Cape Verde | 1.9-0.6 | 1-0 | 67%/21%/12% | red-hot |
+| 2026-07-03 | Colombia v Ghana | 2.0-0.5 | 1-0 | 72%/19%/9% | rising |
+| 2026-07-04 | Canada v Morocco | 1.0-1.1 | 0-1 | 32%/30%/38% | rising |
+| 2026-07-04 | Paraguay v France | 0.7-1.9 | 0-1 | 13%/21%/66% | steady |
+| 2026-07-05 | Brazil v Norway | 2.5-1.2 | 2-1 | 65%/18%/17% | red-hot |
 
 ## Current group standings (played)
 
 | Team | P | Pts | GD |
 |---|---|---|---|
-| Mexico | 3 | 9 | +6 |
-| Brazil | 3 | 7 | +6 |
-| Netherlands | 3 | 7 | +6 |
+| France | 4 | 12 | +11 |
+| Mexico | 4 | 12 | +8 |
+| Brazil | 4 | 10 | +7 |
+| Argentina | 3 | 9 | +7 |
+| Norway | 4 | 9 | +2 |
+| Netherlands | 4 | 8 | +6 |
+| Morocco | 4 | 8 | +3 |
+| Canada | 4 | 7 | +6 |
+| Germany | 4 | 7 | +6 |
+| Spain | 3 | 7 | +5 |
 | Switzerland | 3 | 7 | +4 |
-| Morocco | 3 | 7 | +3 |
-| Germany | 3 | 6 | +6 |
-| France | 2 | 6 | +5 |
-| Argentina | 2 | 6 | +5 |
+| England | 3 | 7 | +4 |
+| Colombia | 3 | 7 | +3 |
 | United States | 3 | 6 | +4 |
-| Norway | 2 | 6 | +4 |
-| Colombia | 2 | 6 | +3 |
-| Ivory Coast | 3 | 6 | +2 |
-| Japan | 3 | 5 | +4 |
-| Canada | 3 | 4 | +5 |
-| Portugal | 2 | 4 | +5 |
-| Spain | 2 | 4 | +4 |
-| Egypt | 2 | 4 | +2 |
-| England | 2 | 4 | +2 |
-| Ghana | 2 | 4 | +1 |
+| Ivory Coast | 4 | 6 | +1 |
+| Croatia | 3 | 6 | +0 |
+| Portugal | 3 | 5 | +5 |
+| Belgium | 3 | 5 | +4 |
+| Japan | 4 | 5 | +3 |
+| Egypt | 3 | 5 | +2 |
+| Paraguay | 4 | 5 | -2 |
+| Congo DR | 3 | 4 | +1 |
 | Australia | 3 | 4 | +0 |
-| Ecuador | 3 | 4 | +0 |
-| Sweden | 3 | 4 | +0 |
-| South Africa | 3 | 4 | -1 |
+| Austria | 3 | 4 | +0 |
+| Ghana | 3 | 4 | +0 |
 | Bosnia-Herzegovina | 3 | 4 | -1 |
-| Paraguay | 3 | 4 | -2 |
-| Austria | 2 | 3 | +0 |
+| South Africa | 4 | 4 | -2 |
+| Ecuador | 4 | 4 | -2 |
+| Algeria | 3 | 4 | -2 |
+| Sweden | 4 | 4 | -3 |
+| Senegal | 3 | 3 | +2 |
+| Iran | 3 | 3 | +0 |
+| Cape Verde | 3 | 3 | +0 |
 | South Korea | 3 | 3 | -1 |
-| Croatia | 2 | 3 | -1 |
 | Türkiye | 3 | 3 | -2 |
-| Algeria | 2 | 3 | -2 |
 | Scotland | 3 | 3 | -3 |
-| Belgium | 2 | 2 | +0 |
-| Iran | 2 | 2 | +0 |
-| Cape Verde | 2 | 2 | +0 |
-| Uruguay | 2 | 2 | +0 |
-| Congo DR | 2 | 1 | -1 |
-| New Zealand | 2 | 1 | -2 |
+| Uruguay | 3 | 2 | -1 |
+| Saudi Arabia | 3 | 2 | -4 |
 | Czechia | 3 | 1 | -4 |
-| Saudi Arabia | 2 | 1 | -4 |
+| New Zealand | 3 | 1 | -6 |
 | Qatar | 3 | 1 | -8 |
 | Curaçao | 3 | 1 | -8 |
-| Panama | 2 | 0 | -2 |
-| Senegal | 2 | 0 | -3 |
-| Jordan | 2 | 0 | -3 |
+| Panama | 3 | 0 | -4 |
+| Jordan | 3 | 0 | -5 |
 | Haiti | 3 | 0 | -6 |
-| Iraq | 2 | 0 | -6 |
-| Uzbekistan | 2 | 0 | -7 |
+| Uzbekistan | 3 | 0 | -9 |
 | Tunisia | 3 | 0 | -10 |
+| Iraq | 3 | 0 | -11 |
 
 ## What feeds the prediction
 
