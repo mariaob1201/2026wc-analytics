@@ -1,6 +1,6 @@
 # 🏆 World Cup 2026 — Champion Tracker
 
-_A living, state-aware forecast. Conditioned on the **88 matches played so far**: completed group games are held fixed; the rest of the tournament is simulated from a Bayesian goals model (squad-skill prior + current form + X/ESPN sentiment). Updated 2026-07-04._
+_A living, state-aware forecast. Conditioned on the **90 matches played so far**: completed group games are held fixed; the rest of the tournament is simulated from a Bayesian goals model (squad-skill prior + current form + X/ESPN sentiment). Updated 2026-07-05._
 
 ## How to read this
 
@@ -15,18 +15,18 @@ Both come from one model: goals are the primitive; the winner is a simulation ov
 
 | Team | Quarter | Semi | Final | **Champion** |
 |---|---|---|---|---|
-| France | 50% | 29% | 18% | **13%** |
-| Argentina | 47% | 25% | 14% | **9%** |
+| France | 50% | 27% | 17% | **12%** |
+| Argentina | 46% | 25% | 14% | **9%** |
 | Portugal | 45% | 24% | 14% | **9%** |
-| Spain | 45% | 24% | 12% | **8%** |
-| Belgium | 44% | 23% | 12% | **7%** |
-| Brazil | 44% | 23% | 11% | **7%** |
-| Colombia | 40% | 21% | 10% | **5%** |
-| Germany | 38% | 20% | 10% | **5%** |
+| Spain | 46% | 23% | 12% | **8%** |
+| Belgium | 44% | 24% | 12% | **8%** |
+| Brazil | 44% | 23% | 12% | **8%** |
+| Colombia | 40% | 21% | 11% | **6%** |
+| Morocco | 38% | 20% | 9% | **5%** |
 | Switzerland | 36% | 19% | 10% | **4%** |
-| Japan | 34% | 18% | 9% | **4%** |
-| Morocco | 32% | 16% | 8% | **4%** |
-| Netherlands | 32% | 16% | 8% | **3%** |
+| Germany | 37% | 19% | 9% | **4%** |
+| Netherlands | 33% | 18% | 9% | **4%** |
+| Japan | 35% | 18% | 9% | **4%** |
 
 _Mexico's Round-of-32 opponent odds (per candidate): [R32_ODDS.md](R32_ODDS.md) — `make r32-odds`._
 
@@ -42,22 +42,22 @@ _How each contender's championship probability moved as matches were played. The
 
 | Date | Fixture | Pred goals (xG) | Likely | P(H/D/A) | Home form |
 |---|---|---|---|---|---|
-| 2026-07-04 | Canada v Morocco | 1.0-1.1 | 0-1 | 32%/30%/38% | rising |
-| 2026-07-04 | Paraguay v France | 0.6-1.9 | 0-1 | 12%/21%/67% | steady |
-| 2026-07-05 | Brazil v Norway | 2.4-1.3 | 2-1 | 62%/18%/20% | red-hot |
 | 2026-07-05 | Mexico v England | 1.3-1.1 | 1-1 | 41%/27%/32% | red-hot |
+| 2026-07-05 | Brazil v Norway | 2.5-1.3 | 2-1 | 62%/18%/19% | red-hot |
 | 2026-07-06 | Argentina v Egypt | 1.9-0.9 | 1-0 | 62%/21%/17% | red-hot |
+| 2026-07-06 | Switzerland v Colombia | 1.3-1.5 | 1-1 | 32%/25%/43% | red-hot |
 | 2026-07-06 | Portugal v Spain | 1.3-1.2 | 1-1 | 39%/26%/35% | red-hot |
-| 2026-07-06 | United States v Belgium | 1.4-2.6 | 1-2 | 20%/18%/63% | steady |
-| 2026-07-06 | Switzerland v Colombia | 1.2-1.5 | 1-1 | 32%/25%/43% | red-hot |
+| 2026-07-06 | United States v Belgium | 1.4-2.6 | 1-2 | 19%/17%/63% | rising |
+| 2026-07-09 | France v Morocco | 1.6-1.0 | 1-0 | 51%/25%/24% | red-hot |
 
 ## Current group standings (played)
 
 | Team | P | Pts | GD |
 |---|---|---|---|
-| France | 4 | 12 | +11 |
+| France | 5 | 15 | +12 |
 | Mexico | 4 | 12 | +8 |
 | Argentina | 4 | 12 | +8 |
+| Morocco | 5 | 11 | +6 |
 | Spain | 4 | 10 | +8 |
 | Brazil | 4 | 10 | +7 |
 | Switzerland | 4 | 10 | +6 |
@@ -68,15 +68,14 @@ _How each contender's championship probability moved as matches were played. The
 | Netherlands | 4 | 8 | +6 |
 | Portugal | 4 | 8 | +6 |
 | Belgium | 4 | 8 | +5 |
-| Morocco | 4 | 8 | +3 |
-| Canada | 4 | 7 | +6 |
 | Germany | 4 | 7 | +6 |
+| Canada | 5 | 7 | +3 |
 | Egypt | 4 | 6 | +2 |
 | Ivory Coast | 4 | 6 | +1 |
 | Croatia | 4 | 6 | -1 |
 | Japan | 4 | 5 | +3 |
 | Australia | 4 | 5 | +0 |
-| Paraguay | 4 | 5 | -2 |
+| Paraguay | 5 | 5 | -3 |
 | Congo DR | 4 | 4 | +0 |
 | Ghana | 4 | 4 | -1 |
 | South Africa | 4 | 4 | -2 |
