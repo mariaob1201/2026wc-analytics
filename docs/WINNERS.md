@@ -1,17 +1,14 @@
 # 🔮 WC 2026 — Winners: next-day picks + champion scorecard
 
-_A simple **Elo** model, conditioned on the **90 matches played so far** and the real 2026 bracket. Updated 2026-07-05._
+_A simple **Elo** model, conditioned on the **92 matches played so far** and the real 2026 bracket. Updated 2026-07-06._
 
 ## Next match day — who wins (Elo goals model)
 
-_Elo gap → two Poisson scoring rates → 1X2 + likely score. Date: **2026-07-06**._
+_Elo gap → two Poisson scoring rates → 1X2 + likely score. Date: **2026-07-09**._
 
 | Fixture | Elo | Pred goals | Likely | P(H/D/A) | **Pick** |
 |---|---|---|---|---|---|
-| Argentina v Egypt | 1739 v 1527 | 1.8-1.0 | 1-0 | 57%/23%/20% | **Argentina** (57%) |
-| Switzerland v Colombia | 1624 v 1663 | 1.3-1.4 | 1-1 | 34%/26%/41% | **Colombia** (41%) |
-| Portugal v Spain | 1717 v 1750 | 1.3-1.4 | 1-1 | 34%/26%/40% | **Spain** (40%) |
-| United States v Belgium | 1516 v 1590 | 1.3-1.4 | 1-1 | 36%/26%/38% | **Belgium** (38%) |
+| France v Morocco | 1763 v 1647 | 1.6-1.1 | 1-1 | 48%/25%/27% | **France** (48%) |
 
 ## Champion scorecard — simulated from today's state
 
@@ -20,32 +17,30 @@ _8,000 Elo tournaments. Played group games are held fixed; the rest of the group
 | # | Team | R16 | QF | SF | Final | **Champion** |
 |--:|---|---|---|---|---|---|
 | 1 | France | 91% | 50% | 29% | 19% | **14%** |
-| 2 | Argentina | 89% | 52% | 26% | 16% | **12%** |
-| 3 | Spain | 90% | 47% | 25% | 15% | **11%** |
-| 4 | Brazil | 81% | 48% | 29% | 12% | **8%** |
-| 5 | Portugal | 83% | 42% | 20% | 12% | **8%** |
-| 6 | Switzerland | 69% | 38% | 23% | 14% | **6%** |
-| 7 | Colombia | 77% | 40% | 22% | 9% | **6%** |
-| 8 | Mexico | 75% | 43% | 21% | 8% | **5%** |
-| 9 | Morocco | 73% | 40% | 20% | 7% | **4%** |
-| 10 | England | 67% | 37% | 22% | 13% | **4%** |
-| 11 | Netherlands | 63% | 36% | 19% | 11% | **4%** |
-| 12 | Belgium | 60% | 31% | 15% | 8% | **3%** |
-| 13 | Germany | 57% | 31% | 18% | 8% | **2%** |
-| 14 | Japan | 56% | 28% | 15% | 7% | **2%** |
-| 15 | Ecuador | 54% | 28% | 14% | 6% | **2%** |
-| 16 | Norway | 51% | 25% | 12% | 5% | **1%** |
+| 2 | Argentina | 89% | 52% | 26% | 17% | **12%** |
+| 3 | Spain | 90% | 47% | 25% | 16% | **12%** |
+| 4 | Portugal | 83% | 42% | 20% | 12% | **8%** |
+| 5 | Colombia | 78% | 44% | 25% | 10% | **6%** |
+| 6 | England | 77% | 43% | 24% | 10% | **6%** |
+| 7 | Switzerland | 69% | 39% | 23% | 14% | **6%** |
+| 8 | Morocco | 74% | 44% | 22% | 8% | **5%** |
+| 9 | Mexico | 66% | 36% | 20% | 12% | **4%** |
+| 10 | Netherlands | 63% | 35% | 19% | 11% | **4%** |
+| 11 | Brazil | 71% | 38% | 19% | 7% | **4%** |
+| 12 | Norway | 62% | 32% | 16% | 9% | **3%** |
+| 13 | Belgium | 59% | 33% | 19% | 9% | **3%** |
+| 14 | Germany | 57% | 29% | 16% | 7% | **2%** |
+| 15 | Japan | 56% | 30% | 15% | 7% | **2%** |
+| 16 | Ecuador | 52% | 26% | 12% | 6% | **2%** |
 
 ## Track record — predicted vs true winners (out-of-sample)
 
-_Each WC match was predicted from Elo as it stood **before** that game (then the rating updated). Running accuracy: **62%** on 90 matches. Full log: `data/processed/winners_track.csv`._
+_Each WC match was predicted from Elo as it stood **before** that game (then the rating updated). Running accuracy: **61%** on 92 matches. Full log: `data/processed/winners_track.csv`._
 
 | Date | Fixture | Score | Predicted | Actual | ✓ |
 |---|---|---|---|---|:--:|
-| 2026-06-30 | Ivory Coast v Norway | 1-2 | Ivory Coast | **Norway** | — |
 | 2026-07-01 | England v Congo DR | 2-1 | England | **England** | ✅ |
 | 2026-07-01 | Belgium v Senegal | 3-2 | Belgium | **Belgium** | ✅ |
-| 2026-07-01 | United States v Bosnia-Herzegovina | 2-0 | United States | **United States** | ✅ |
 | 2026-07-02 | Spain v Austria | 3-0 | Spain | **Spain** | ✅ |
 | 2026-07-02 | Portugal v Croatia | 2-1 | Portugal | **Portugal** | ✅ |
 | 2026-07-02 | Switzerland v Algeria | 2-0 | Switzerland | **Switzerland** | ✅ |
@@ -54,8 +49,10 @@ _Each WC match was predicted from Elo as it stood **before** that game (then the
 | 2026-07-03 | Colombia v Ghana | 1-0 | Colombia | **Colombia** | ✅ |
 | 2026-07-04 | Canada v Morocco | 0-3 | Morocco | **Morocco** | ✅ |
 | 2026-07-04 | Paraguay v France | 0-1 | France | **France** | ✅ |
+| 2026-07-05 | Brazil v Norway | 0-2 | Brazil | **Norway** | — |
+| 2026-07-05 | Mexico v England | 2-3 | Mexico | **England** | — |
 
-_Showing the latest 12 of 90. Elo hit-rate vs a coin-flip baseline is the honest scoreboard for these picks._
+_Showing the latest 12 of 92. Elo hit-rate vs a coin-flip baseline is the honest scoreboard for these picks._
 
 
 ## Method (simple by design)
