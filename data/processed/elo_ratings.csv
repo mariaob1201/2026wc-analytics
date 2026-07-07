@@ -1,17 +1,17 @@
 team,elo,games,rank
-France,1763.3,36,1
-Spain,1750.1,35,2
+Spain,1777.2,36,1
+France,1763.3,36,2
 Argentina,1738.7,30,3
-Portugal,1716.9,31,4
+Portugal,1689.7,32,4
 Colombia,1662.8,38,5
 England,1659.2,25,6
-Morocco,1647.4,32,7
-Brazil,1629.2,41,8
-Switzerland,1623.9,28,9
-Mexico,1614.0,51,10
-Netherlands,1608.4,32,11
-Norway,1600.6,20,12
-Belgium,1590.5,23,13
+Brazil,1650.6,41,7
+Morocco,1647.4,32,8
+Belgium,1641.5,24,9
+Switzerland,1623.9,28,10
+Mexico,1614.0,51,11
+Netherlands,1608.4,32,12
+Norway,1579.3,20,13
 Germany,1572.6,31,14
 Japan,1563.1,36,15
 Ecuador,1548.8,37,16
@@ -20,12 +20,12 @@ Croatia,1527.3,35,18
 Egypt,1527.1,29,19
 Austria,1522.6,26,20
 Australia,1522.1,32,21
-United States,1515.5,49,22
-Uruguay,1505.0,36,23
-South Korea,1500.8,32,24
-Algeria,1498.2,19,25
-Paraguay,1488.5,31,26
-Senegal,1472.4,25,27
+Uruguay,1505.0,36,22
+South Korea,1500.8,32,23
+Algeria,1498.2,19,24
+Paraguay,1488.5,31,25
+Senegal,1472.4,25,26
+United States,1464.5,50,27
 Canada,1462.0,36,28
 Iran,1458.6,22,29
 South Africa,1452.5,17,30

@@ -1,13 +1,13 @@
 # 📒 Forecast Log — Predictions vs Ground Truth
 
-_A growing, append-on-result ledger: every goal forecast and how it turned out. Updated by the daily GitHub Action. Compiled 2026-07-06._
+_A growing, append-on-result ledger: every goal forecast and how it turned out. Updated by the daily GitHub Action. Compiled 2026-07-07._
 
 ## Running accuracy (resolved matches)
 
-- **Matches scored:** 92
+- **Matches scored:** 94
 - **Outcome hit-rate:** 65%
-- **Goal-total MAE:** 1.406 goals/match
-- **RPS:** 0.164 · **log-loss:** 0.8701 (lower better)
+- **Goal-total MAE:** 1.402 goals/match
+- **RPS:** 0.1658 · **log-loss:** 0.8716 (lower better)
 
 ## Resolved — forecast vs actual
 
@@ -64,9 +64,9 @@ _A growing, append-on-result ledger: every goal forecast and how it turned out. 
 | 2026-06-24 | Scotland v Brazil | 1.0-2.0 | 0-1 | **0-3** | ✅ |
 | 2026-06-24 | Morocco v Haiti | 1.7-0.5 | 1-0 | **4-2** | ✅ |
 | 2026-06-24 | Bosnia-Herzegovina v Qatar | 1.7-1.5 | 1-1 | **3-1** | ✅ |
-| 2026-06-24 | Mexico v Czechia | 1.8-1.2 | 1-1 | **3-0** | ✅ |
 | 2026-06-24 | South Africa v South Korea | 1.0-1.2 | 0-1 | **1-0** | — |
 | 2026-06-24 | Canada v Switzerland | 1.2-1.2 | 1-1 | **1-2** | ✅ |
+| 2026-06-24 | Mexico v Czechia | 1.8-1.2 | 1-1 | **3-0** | ✅ |
 | 2026-06-25 | United States v Türkiye | 1.8-1.2 | 1-1 | **2-3** | — |
 | 2026-06-25 | Paraguay v Australia | 0.9-0.9 | 0-0 | **0-0** | — |
 | 2026-06-25 | Curaçao v Ivory Coast | 0.7-2.2 | 0-2 | **0-2** | ✅ |
@@ -76,9 +76,9 @@ _A growing, append-on-result ledger: every goal forecast and how it turned out. 
 | 2026-06-26 | Senegal v Iraq | 1.2-0.7 | 1-0 | **5-0** | ✅ |
 | 2026-06-26 | Norway v France | 0.8-1.9 | 0-1 | **1-4** | ✅ |
 | 2026-06-26 | Uruguay v Spain | 1.1-1.1 | 1-1 | **0-1** | ✅ |
+| 2026-06-26 | Cape Verde v Saudi Arabia | 0.7-0.9 | 0-0 | **0-0** | — |
 | 2026-06-26 | New Zealand v Belgium | 0.7-2.1 | 0-2 | **1-5** | ✅ |
 | 2026-06-26 | Egypt v Iran | 1.0-0.9 | 0-0 | **1-1** | — |
-| 2026-06-26 | Cape Verde v Saudi Arabia | 0.7-0.9 | 0-0 | **0-0** | — |
 | 2026-06-27 | Algeria v Austria | 1.1-1.3 | 1-1 | **3-3** | — |
 | 2026-06-27 | Jordan v Argentina | 0.5-2.5 | 0-2 | **1-3** | ✅ |
 | 2026-06-27 | Colombia v Portugal | 1.0-1.2 | 0-1 | **0-0** | — |
@@ -98,22 +98,24 @@ _A growing, append-on-result ledger: every goal forecast and how it turned out. 
 | 2026-07-02 | Spain v Austria | 1.5-1.1 | 1-1 | **3-0** | ✅ |
 | 2026-07-02 | Portugal v Croatia | 1.3-0.9 | 1-0 | **2-1** | ✅ |
 | 2026-07-02 | Switzerland v Algeria | 1.3-1.3 | 1-1 | **2-0** | ✅ |
-| 2026-07-03 | Argentina v Cape Verde | 2.0-0.5 | 1-0 | **3-2** | ✅ |
 | 2026-07-03 | Colombia v Ghana | 2.0-0.7 | 1-0 | **1-0** | ✅ |
 | 2026-07-03 | Australia v Egypt | 1.1-0.8 | 1-0 | **1-1** | — |
+| 2026-07-03 | Argentina v Cape Verde | 2.0-0.5 | 1-0 | **3-2** | ✅ |
 | 2026-07-04 | Canada v Morocco | 1.0-1.1 | 0-1 | **0-3** | ✅ |
 | 2026-07-04 | Paraguay v France | 0.7-1.5 | 0-1 | **0-1** | ✅ |
-| 2026-07-05 | Brazil v Norway | 2.1-1.1 | 1-1 | **0-2** | — |
+| 2026-07-05 | Brazil v Norway | 2.1-1.1 | 1-1 | **1-2** | — |
 | 2026-07-05 | Mexico v England | 1.3-1.5 | 1-1 | **2-3** | ✅ |
+| 2026-07-06 | Portugal v Spain | 1.4-1.1 | 1-1 | **0-1** | — |
+| 2026-07-06 | United States v Belgium | 1.2-1.8 | 1-1 | **1-4** | ✅ |
 
 ## Pending — forecasts awaiting kickoff
 
 | Date | Fixture | Forecast (xG) | Likely | P(H/D/A) |
 |---|---|---|---|---|
-| 2026-07-06 | Portugal v Spain | 1.6-1.3 | 1-1 | 44%/25%/32% |
-| 2026-07-06 | United States v Belgium | 1.3-2.1 | 1-2 | 23%/20%/56% |
-| 2026-07-06 | Argentina v Egypt | 2.1-0.7 | 2-0 | 71%/19%/11% |
 | 2026-07-06 | Switzerland v Colombia | 1.1-1.6 | 1-1 | 27%/25%/49% |
+| 2026-07-06 | Argentina v Egypt | 2.1-0.7 | 2-0 | 71%/19%/11% |
 | 2026-07-09 | France v Morocco | 1.7-0.9 | 1-0 | 55%/24%/21% |
+| 2026-07-10 | Spain v Belgium | 1.7-1.6 | 1-1 | 41%/23%/36% |
+| 2026-07-11 | Norway v England | 1.1-1.9 | 1-1 | 23%/22%/55% |
 
 _Ground truth comes from the live results feed; the daily Action fills `actual` once each match is played and rolls the accuracy forward. See [LIVE_PIPELINE.md](LIVE_PIPELINE.md)._
