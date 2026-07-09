@@ -1,14 +1,14 @@
 # 🔮 WC 2026 — Winners: next-day picks + champion scorecard
 
-_A simple **Elo** model, conditioned on the **96 matches played so far** and the real 2026 bracket. Updated 2026-07-08._
+_A simple **Elo** model, conditioned on the **96 matches played so far** and the real 2026 bracket. Updated 2026-07-09._
 
 ## Next match day — who wins (Elo goals model)
 
-_Elo gap → two Poisson scoring rates → 1X2 + likely score. Date: **2026-07-09**._
+_Elo gap → two Poisson scoring rates → 1X2 + likely score. Date: **2026-07-10**._
 
 | Fixture | Elo | Pred goals | Likely | P(H/D/A) | **Pick** |
 |---|---|---|---|---|---|
-| France v Morocco | 1763 v 1647 | 1.6-1.1 | 1-1 | 48%/25%/27% | **France** (48%) |
+| Spain v Belgium | 1777 v 1642 | 1.6-1.1 | 1-1 | 50%/25%/26% | **Spain** (50%) |
 
 ## Champion scorecard — simulated from today's state
 
