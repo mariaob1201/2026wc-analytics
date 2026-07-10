@@ -1,13 +1,13 @@
 # 📒 Forecast Log — Predictions vs Ground Truth
 
-_A growing, append-on-result ledger: every goal forecast and how it turned out. Updated by the daily GitHub Action. Compiled 2026-07-09._
+_A growing, append-on-result ledger: every goal forecast and how it turned out. Updated by the daily GitHub Action. Compiled 2026-07-10._
 
 ## Running accuracy (resolved matches)
 
-- **Matches scored:** 96
+- **Matches scored:** 97
 - **Outcome hit-rate:** 65%
-- **Goal-total MAE:** 1.426 goals/match
-- **RPS:** 0.1646 · **log-loss:** 0.8719 (lower better)
+- **Goal-total MAE:** 1.413 goals/match
+- **RPS:** 0.1644 · **log-loss:** 0.87 (lower better)
 
 ## Resolved — forecast vs actual
 
@@ -16,14 +16,14 @@ _A growing, append-on-result ledger: every goal forecast and how it turned out. 
 | 2026-06-11 | Mexico v South Africa | 1.6-0.8 | 1-0 | **2-0** | ✅ |
 | 2026-06-11 | South Korea v Czechia | 1.3-1.5 | 1-1 | **2-1** | — |
 | 2026-06-12 | Canada v Bosnia-Herzegovina | 1.8-0.9 | 1-0 | **1-1** | — |
-| 2026-06-12 | United States v Paraguay | 1.3-1.0 | 1-1 | **4-1** | ✅ |
+| 2026-06-12 | United States v Paraguay | 1.3-1.1 | 1-1 | **4-1** | ✅ |
 | 2026-06-13 | Qatar v Switzerland | 1.0-2.3 | 1-2 | **1-1** | — |
-| 2026-06-13 | Brazil v Morocco | 1.5-1.0 | 1-0 | **1-1** | — |
+| 2026-06-13 | Brazil v Morocco | 1.5-1.0 | 1-1 | **1-1** | — |
 | 2026-06-13 | Haiti v Scotland | 0.7-1.6 | 0-1 | **0-1** | ✅ |
 | 2026-06-13 | Australia v Türkiye | 1.3-1.1 | 1-1 | **2-0** | ✅ |
-| 2026-06-14 | Germany v Curaçao | 3.5-0.8 | 3-0 | **7-1** | ✅ |
+| 2026-06-14 | Germany v Curaçao | 3.6-0.8 | 3-0 | **7-1** | ✅ |
 | 2026-06-14 | Ivory Coast v Ecuador | 0.7-0.8 | 0-0 | **1-0** | — |
-| 2026-06-14 | Netherlands v Japan | 1.2-1.1 | 1-1 | **2-2** | — |
+| 2026-06-14 | Netherlands v Japan | 1.2-1.2 | 1-1 | **2-2** | — |
 | 2026-06-14 | Sweden v Tunisia | 1.1-1.2 | 1-1 | **5-1** | — |
 | 2026-06-15 | Saudi Arabia v Uruguay | 0.5-1.2 | 0-1 | **1-1** | — |
 | 2026-06-15 | Spain v Cape Verde | 2.0-0.6 | 1-0 | **0-0** | — |
@@ -35,7 +35,7 @@ _A growing, append-on-result ledger: every goal forecast and how it turned out. 
 | 2026-06-16 | Austria v Jordan | 2.0-0.6 | 1-0 | **3-1** | ✅ |
 | 2026-06-17 | Portugal v Congo DR | 1.8-0.6 | 1-0 | **1-1** | — |
 | 2026-06-17 | Uzbekistan v Colombia | 0.5-1.6 | 0-1 | **1-3** | ✅ |
-| 2026-06-17 | England v Croatia | 1.1-1.1 | 1-1 | **4-2** | ✅ |
+| 2026-06-17 | England v Croatia | 1.2-1.1 | 1-1 | **4-2** | ✅ |
 | 2026-06-17 | Ghana v Panama | 1.3-1.0 | 1-0 | **1-0** | ✅ |
 | 2026-06-18 | Canada v Qatar | 2.0-0.9 | 1-0 | **6-0** | ✅ |
 | 2026-06-18 | Switzerland v Bosnia-Herzegovina | 2.1-1.0 | 1-0 | **4-1** | ✅ |
@@ -56,13 +56,13 @@ _A growing, append-on-result ledger: every goal forecast and how it turned out. 
 | 2026-06-22 | France v Iraq | 1.8-0.5 | 1-0 | **3-0** | ✅ |
 | 2026-06-22 | Norway v Senegal | 1.2-1.3 | 1-1 | **3-2** | — |
 | 2026-06-22 | Argentina v Austria | 1.5-0.9 | 1-0 | **2-0** | ✅ |
-| 2026-06-22 | Jordan v Algeria | 0.7-1.9 | 0-1 | **1-2** | ✅ |
+| 2026-06-22 | Jordan v Algeria | 0.6-1.9 | 0-1 | **1-2** | ✅ |
 | 2026-06-23 | Portugal v Uzbekistan | 1.8-0.5 | 1-0 | **5-0** | ✅ |
 | 2026-06-23 | Colombia v Congo DR | 1.5-0.7 | 1-0 | **1-0** | ✅ |
-| 2026-06-23 | England v Ghana | 2.1-0.8 | 1-0 | **0-0** | — |
+| 2026-06-23 | England v Ghana | 2.1-0.8 | 2-0 | **0-0** | — |
 | 2026-06-23 | Panama v Croatia | 0.6-1.8 | 0-1 | **0-1** | ✅ |
 | 2026-06-24 | Scotland v Brazil | 1.0-2.0 | 0-1 | **0-3** | ✅ |
-| 2026-06-24 | Morocco v Haiti | 1.6-0.5 | 1-0 | **4-2** | ✅ |
+| 2026-06-24 | Morocco v Haiti | 1.7-0.5 | 1-0 | **4-2** | ✅ |
 | 2026-06-24 | Bosnia-Herzegovina v Qatar | 1.7-1.5 | 1-1 | **3-1** | ✅ |
 | 2026-06-24 | South Africa v South Korea | 1.0-1.2 | 0-1 | **1-0** | — |
 | 2026-06-24 | Canada v Switzerland | 1.2-1.2 | 1-1 | **1-2** | ✅ |
@@ -70,7 +70,7 @@ _A growing, append-on-result ledger: every goal forecast and how it turned out. 
 | 2026-06-25 | United States v Türkiye | 1.8-1.2 | 1-1 | **2-3** | — |
 | 2026-06-25 | Paraguay v Australia | 0.9-0.9 | 0-0 | **0-0** | — |
 | 2026-06-25 | Curaçao v Ivory Coast | 0.7-2.2 | 0-2 | **0-2** | ✅ |
-| 2026-06-25 | Ecuador v Germany | 0.9-1.0 | 0-0 | **2-1** | — |
+| 2026-06-25 | Ecuador v Germany | 0.9-1.1 | 0-1 | **2-1** | — |
 | 2026-06-25 | Japan v Sweden | 1.6-1.0 | 1-0 | **1-1** | — |
 | 2026-06-25 | Tunisia v Netherlands | 0.8-1.3 | 0-1 | **1-3** | ✅ |
 | 2026-06-26 | Senegal v Iraq | 1.2-0.7 | 1-0 | **5-0** | ✅ |
@@ -84,7 +84,7 @@ _A growing, append-on-result ledger: every goal forecast and how it turned out. 
 | 2026-06-27 | Colombia v Portugal | 1.0-1.2 | 0-1 | **0-0** | — |
 | 2026-06-27 | Congo DR v Uzbekistan | 1.0-0.8 | 0-0 | **3-1** | ✅ |
 | 2026-06-27 | Panama v England | 0.6-2.0 | 0-1 | **0-2** | ✅ |
-| 2026-06-27 | Croatia v Ghana | 1.8-0.8 | 1-0 | **2-1** | ✅ |
+| 2026-06-27 | Croatia v Ghana | 1.9-0.8 | 1-0 | **2-1** | ✅ |
 | 2026-06-28 | South Africa v Canada | 0.8-1.0 | 0-0 | **0-1** | ✅ |
 | 2026-06-29 | Netherlands v Morocco | 1.2-1.1 | 1-1 | **1-1** | — |
 | 2026-06-29 | Germany v Paraguay | 1.6-1.0 | 1-0 | **1-1** | — |
@@ -95,26 +95,26 @@ _A growing, append-on-result ledger: every goal forecast and how it turned out. 
 | 2026-07-01 | England v Congo DR | 1.6-0.8 | 1-0 | **2-1** | ✅ |
 | 2026-07-01 | Belgium v Senegal | 1.6-1.0 | 1-0 | **3-2** | ✅ |
 | 2026-07-01 | United States v Bosnia-Herzegovina | 2.1-1.1 | 2-1 | **2-0** | ✅ |
-| 2026-07-02 | Spain v Austria | 1.4-1.1 | 1-1 | **3-0** | ✅ |
+| 2026-07-02 | Spain v Austria | 1.5-1.1 | 1-1 | **3-0** | ✅ |
 | 2026-07-02 | Portugal v Croatia | 1.3-0.9 | 1-0 | **2-1** | ✅ |
 | 2026-07-02 | Switzerland v Algeria | 1.3-1.3 | 1-1 | **2-0** | ✅ |
 | 2026-07-03 | Colombia v Ghana | 2.0-0.7 | 1-0 | **1-0** | ✅ |
-| 2026-07-03 | Argentina v Cape Verde | 2.0-0.6 | 1-0 | **3-2** | ✅ |
-| 2026-07-03 | Australia v Egypt | 1.1-0.9 | 1-0 | **1-1** | — |
+| 2026-07-03 | Argentina v Cape Verde | 2.0-0.5 | 1-0 | **3-2** | ✅ |
+| 2026-07-03 | Australia v Egypt | 1.1-0.8 | 1-0 | **1-1** | — |
 | 2026-07-04 | Canada v Morocco | 1.0-1.1 | 0-1 | **0-3** | ✅ |
 | 2026-07-04 | Paraguay v France | 0.7-1.5 | 0-1 | **0-1** | ✅ |
 | 2026-07-05 | Brazil v Norway | 2.1-1.1 | 1-1 | **1-2** | — |
 | 2026-07-05 | Mexico v England | 1.3-1.5 | 1-1 | **2-3** | ✅ |
-| 2026-07-06 | Portugal v Spain | 1.3-1.1 | 1-1 | **0-1** | — |
+| 2026-07-06 | Portugal v Spain | 1.4-1.1 | 1-1 | **0-1** | — |
 | 2026-07-06 | United States v Belgium | 1.2-1.8 | 1-1 | **1-4** | ✅ |
 | 2026-07-07 | Argentina v Egypt | 1.8-0.6 | 1-0 | **3-2** | ✅ |
 | 2026-07-07 | Switzerland v Colombia | 1.0-1.5 | 0-1 | **0-0** | — |
+| 2026-07-09 | France v Morocco | 1.4-0.8 | 1-0 | **2-0** | ✅ |
 
 ## Pending — forecasts awaiting kickoff
 
 | Date | Fixture | Forecast (xG) | Likely | P(H/D/A) |
 |---|---|---|---|---|
-| 2026-07-09 | France v Morocco | 1.7-0.9 | 1-0 | 56%/24%/20% |
 | 2026-07-10 | Spain v Belgium | 1.7-1.6 | 1-1 | 41%/23%/36% |
 | 2026-07-11 | Norway v England | 1.1-1.9 | 1-1 | 23%/22%/55% |
 | 2026-07-11 | Argentina v Switzerland | 2.0-1.1 | 1-1 | 59%/21%/20% |

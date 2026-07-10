@@ -1,14 +1,15 @@
 # 🔮 WC 2026 — Winners: next-day picks + champion scorecard
 
-_A simple **Elo** model, conditioned on the **96 matches played so far** and the real 2026 bracket. Updated 2026-07-09._
+_A simple **Elo** model, conditioned on the **97 matches played so far** and the real 2026 bracket. Updated 2026-07-10._
 
 ## Next match day — who wins (Elo goals model)
 
-_Elo gap → two Poisson scoring rates → 1X2 + likely score. Date: **2026-07-10**._
+_Elo gap → two Poisson scoring rates → 1X2 + likely score. Date: **2026-07-11**._
 
 | Fixture | Elo | Pred goals | Likely | P(H/D/A) | **Pick** |
 |---|---|---|---|---|---|
-| Spain v Belgium | 1777 v 1642 | 1.6-1.1 | 1-1 | 50%/25%/26% | **Spain** (50%) |
+| Norway v England | 1579 v 1659 | 1.2-1.5 | 1-1 | 30%/25%/44% | **England** (44%) |
+| Argentina v Switzerland | 1752 v 1627 | 1.6-1.1 | 1-1 | 49%/25%/27% | **Argentina** (49%) |
 
 ## Champion scorecard — simulated from today's state
 
@@ -16,33 +17,32 @@ _8,000 Elo tournaments. Played group games are held fixed; the rest of the group
 
 | # | Team | R16 | QF | SF | Final | **Champion** |
 |--:|---|---|---|---|---|---|
-| 1 | Spain | 91% | 50% | 30% | 20% | **15%** |
-| 2 | Argentina | 90% | 58% | 29% | 19% | **14%** |
-| 3 | France | 90% | 47% | 26% | 17% | **13%** |
-| 4 | Belgium | 73% | 42% | 25% | 16% | **7%** |
+| 1 | France | 92% | 51% | 31% | 22% | **17%** |
+| 2 | Spain | 91% | 47% | 27% | 18% | **14%** |
+| 3 | Argentina | 90% | 58% | 28% | 18% | **13%** |
+| 4 | Switzerland | 72% | 40% | 24% | 15% | **6%** |
 | 5 | England | 77% | 43% | 24% | 9% | **6%** |
 | 6 | Colombia | 78% | 43% | 24% | 9% | **6%** |
-| 7 | Portugal | 81% | 36% | 15% | 8% | **6%** |
-| 8 | Brazil | 74% | 43% | 22% | 8% | **5%** |
-| 9 | Morocco | 74% | 41% | 21% | 8% | **4%** |
-| 10 | Switzerland | 69% | 38% | 22% | 13% | **4%** |
-| 11 | Mexico | 66% | 37% | 19% | 11% | **4%** |
+| 7 | Portugal | 81% | 36% | 14% | 8% | **5%** |
+| 8 | Brazil | 74% | 44% | 22% | 8% | **5%** |
+| 9 | Belgium | 73% | 40% | 20% | 7% | **4%** |
+| 10 | Mexico | 66% | 37% | 20% | 11% | **4%** |
+| 11 | Morocco | 68% | 37% | 21% | 12% | **4%** |
 | 12 | Netherlands | 64% | 34% | 17% | 10% | **3%** |
 | 13 | Norway | 58% | 32% | 18% | 8% | **2%** |
-| 14 | Germany | 58% | 30% | 16% | 7% | **2%** |
+| 14 | Germany | 58% | 30% | 16% | 8% | **2%** |
 | 15 | Japan | 56% | 30% | 15% | 7% | **2%** |
-| 16 | Ecuador | 52% | 26% | 12% | 5% | **2%** |
+| 16 | Ecuador | 52% | 26% | 12% | 6% | **2%** |
 
 ## Track record — predicted vs true winners (out-of-sample)
 
-_Each WC match was predicted from Elo as it stood **before** that game (then the rating updated). Running accuracy: **61%** on 96 matches. Full log: `data/processed/winners_track.csv`._
+_Each WC match was predicted from Elo as it stood **before** that game (then the rating updated). Running accuracy: **62%** on 97 matches. Full log: `data/processed/winners_track.csv`._
 
 | Date | Fixture | Score | Predicted | Actual | ✓ |
 |---|---|---|---|---|:--:|
-| 2026-07-02 | Spain v Austria | 3-0 | Spain | **Spain** | ✅ |
-| 2026-07-03 | Australia v Egypt | 1-1 | Egypt | **Draw** | — |
 | 2026-07-03 | Argentina v Cape Verde | 3-2 | Argentina | **Argentina** | ✅ |
 | 2026-07-03 | Colombia v Ghana | 1-0 | Colombia | **Colombia** | ✅ |
+| 2026-07-03 | Australia v Egypt | 1-1 | Egypt | **Draw** | — |
 | 2026-07-04 | Canada v Morocco | 0-3 | Morocco | **Morocco** | ✅ |
 | 2026-07-04 | Paraguay v France | 0-1 | France | **France** | ✅ |
 | 2026-07-05 | Brazil v Norway | 1-2 | Brazil | **Norway** | — |
@@ -51,8 +51,9 @@ _Each WC match was predicted from Elo as it stood **before** that game (then the
 | 2026-07-06 | United States v Belgium | 1-4 | Belgium | **Belgium** | ✅ |
 | 2026-07-07 | Argentina v Egypt | 3-2 | Argentina | **Argentina** | ✅ |
 | 2026-07-07 | Switzerland v Colombia | 0-0 | Colombia | **Draw** | — |
+| 2026-07-09 | France v Morocco | 2-0 | France | **France** | ✅ |
 
-_Showing the latest 12 of 96. Elo hit-rate vs a coin-flip baseline is the honest scoreboard for these picks._
+_Showing the latest 12 of 97. Elo hit-rate vs a coin-flip baseline is the honest scoreboard for these picks._
 
 
 ## Method (simple by design)
