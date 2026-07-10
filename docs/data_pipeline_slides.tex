@@ -1,0 +1,336 @@
+\documentclass[aspectratio=169]{beamer}
+% Data pipeline deck for the 2026 World Cup analytics project.
+% Compile:  pdflatex data_pipeline_slides.tex   (or upload to Overleaf)
+% To .pptx: pandoc data_pipeline_slides.tex -o data_pipeline_slides.pptx
+
+\usetheme{Madrid}
+\usecolortheme{seahorse}
+\usepackage{booktabs}
+\usepackage{listings}
+\lstset{basicstyle=\ttfamily\scriptsize, breaklines=true,
+        columns=fullflexible, keepspaces=true}
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{caption}{\raggedright\insertcaption\par}
+
+\title[WC2026 Data Pipeline]{The 2026 World Cup Analytics Data Pipeline}
+\subtitle{Collection, organization, and aggregation --- a developer walkthrough}
+\author{github.com/mariaob1201/2026-world-cup-analytics}
+\date{}
+
+\begin{document}
+
+\begin{frame}[plain]\titlepage\end{frame}
+
+\begin{frame}{Pipeline at a glance}
+\footnotesize
+\begin{verbatim}
+SOURCES                EXTRACTION            FEATURES            STRUCTURE
+-------                ----------            --------            ---------
+martj42 results  --\   wc2026_matches()      per-player:        48 teams
+FIFA-22 attrs    ---+->build_real_matches()->longevity,        12 groups
+Wikipedia squads --/   fetch_squads()         skill_index,      (teams.py)
+worldcup2026 repo      + FIFA surname join    social, age x role     |
+                            |                       |                 v
+                            v                       v            by_group() ->
+                   wc2026_players.csv     team_features_live.csv  group ->
+                                          -> Bayesian prior       knockout sim
+\end{verbatim}
+\centering\scriptsize Keyless $\cdot$ cached to \texttt{data/raw/} $\cdot$ re-run daily by CI.
+\end{frame}
+
+\begin{frame}{Design principles}
+\begin{itemize}
+  \item \textbf{Keyless \& public} --- every source is a raw GitHub URL or a
+        public API; no credentials required to reproduce.
+  \item \textbf{Cache-first} --- downloads land in \texttt{data/raw/}; the live
+        results feed refreshes on a time-to-live, statics are cached forever.
+  \item \textbf{Canonicalized} --- one naming convention for 48 teams; every
+        source is aliased into it on ingest.
+  \item \textbf{Schema-stable} --- each stage emits a fixed, documented schema,
+        so a source can be swapped without touching downstream code.
+  \item \textbf{Reproducible} --- \texttt{make daily} runs the full chain and
+        the CI bot commits the diff.
+\end{itemize}
+\end{frame}
+
+\section{Collection}
+
+\begin{frame}{Collection --- transport \& formats}
+\centering
+\begin{tabular}{@{}llll@{}}
+\toprule
+Source & Transport & Format & Loader (\texttt{data/sources.py}) \\
+\midrule
+martj42 results   & HTTPS GET & CSV       & \texttt{download\_intl\_results()} \\
+FIFA-22 attributes& HTTPS GET & CSV       & \texttt{download\_fifa()} \\
+Wikipedia squads  & MediaWiki API & wikitext & \texttt{fetch\_squads()} \\
+worldcup2026 repo & HTTPS GET & JSON      & \texttt{fetch\_team\_metadata()} \\
+\bottomrule
+\end{tabular}
+\vspace{1em}
+\footnotesize All fetched with the standard library (\texttt{urllib.request});
+no scraping frameworks. Each loader is idempotent and offline-safe once cached.
+\end{frame}
+
+\begin{frame}[fragile]{Collection --- (1) live match results}
+\textbf{Source:} \texttt{martj42/international\_results} --- every men's
+international since 1872, updated within days of each match.
+\begin{itemize}\footnotesize
+  \item \textbf{Method:} \texttt{urllib.urlretrieve(URL, data/raw/intl\_results.csv)}.
+  \item \textbf{Freshness (TTL):} re-download when the cache file's mtime is
+        older than \texttt{max\_age\_hours=6} --- so during the tournament the
+        feed never lags reality by more than a few hours.
+  \item \textbf{Resilience:} on a network error, fall back to the cached copy
+        instead of raising (the pipeline still runs offline).
+\end{itemize}
+\begin{lstlisting}
+if cache exists and age <= max_age_hours: return read(cache)
+try:    urlretrieve(URL, cache)
+except: if cache exists: return read(cache)  # offline fallback
+        else: raise
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}{Collection --- (2) player attributes}
+\textbf{Source:} FIFA-22 complete player dataset (sofifa dump).
+\begin{itemize}
+  \item \textbf{Method:} one-time HTTPS GET of the CSV to
+        \texttt{data/raw/fifa\_players\_22.csv}; \textbf{static cache}
+        (attributes don't change), refreshed only with \texttt{force=True}.
+  \item \textbf{Columns used:} \texttt{short\_name, overall} and the six skills
+        \texttt{pace, shooting, passing, dribbling, defending, physic}.
+  \item \textbf{Role:} the quantitative skill layer that the real roster is
+        joined against (Stage 2).
+\end{itemize}
+\vspace{0.5em}
+\footnotesize\emph{Vintage caveat:} FIFA-22 is a fixed snapshot; swap
+\texttt{FIFA\_CSV\_URL} for an FC24/25 dump or an exact per-player API when
+available --- the schema contract stays the same.
+\end{frame}
+
+\begin{frame}{Collection --- (3) real 2026 squads}
+\textbf{Source:} Wikipedia ``2026 FIFA World Cup squads'' (per nation).
+\begin{itemize}
+  \item \textbf{Method:} MediaWiki API request for page \emph{wikitext}
+        (not rendered HTML), with an explicit \texttt{User-Agent} header
+        (Wikipedia rejects blank UAs with HTTP 403).
+  \item \textbf{Parse:} \texttt{parse\_squads()} reads the
+        \texttt{\{\{National football squad\}\}} template rows into
+        \texttt{name, position, age, caps} per player; team names normalized
+        via \texttt{WIKI\_TEAM\_ALIASES}.
+  \item \textbf{Why:} this is the \emph{ground-truth roster} --- it keeps
+        retired/uncalled players out of every table.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Collection --- (4) official metadata}
+\textbf{Source:} \texttt{rezarahiminia/worldcup2026} (open JSON).
+\begin{itemize}
+  \item \textbf{Method:} HTTPS GET of \texttt{football.teams.json}, parsed to a
+        DataFrame of \texttt{name, fifa\_code, group, flag}.
+  \item \textbf{Role:} authoritative FIFA codes, group letters, and flag emoji
+        for presentation --- decoupled from our hard-coded draw so the two can
+        be cross-checked.
+  \item \textbf{Degrades gracefully:} if unreachable, the build falls back to
+        local metadata and logs a warning.
+\end{itemize}
+\end{frame}
+
+\section{Organization}
+
+\begin{frame}{Organization --- canonicalization}
+Different sources spell teams differently; all are mapped to one canon on ingest.
+\centering
+\begin{tabular}{@{}lll@{}}
+\toprule
+Alias map & Scope & Example \\
+\midrule
+\texttt{INTL\_NAME\_ALIASES}  & results feed & Czechia $\to$ Czech Republic \\
+\texttt{FIFA\_NATION\_ALIASES}& FIFA nationality & South Korea $\to$ Korea Republic \\
+\texttt{WIKI\_TEAM\_ALIASES}  & Wikipedia pages & Ivory Coast $\to$ C\^ote d'Ivoire \\
+\bottomrule
+\end{tabular}
+\vspace{1em}
+\footnotesize Mapping is applied \emph{to} the source name on read and
+\emph{back} to canon on emit, so joins across sources are exact.
+\end{frame}
+
+\begin{frame}{Organization --- derived match frames}
+Two clean frames are built from the raw results feed:
+\vspace{0.5em}
+\textbf{\texttt{build\_real\_matches(start, end)}} --- the training frame.
+Drops unscored rows, filters to $[\text{start}, \text{end}]$ (\texttt{end}
+defaults to \emph{today}) and to the 48 teams. Schema:
+\begin{center}\scriptsize
+\texttt{match\_id, date, home\_team, away\_team, home\_goals, away\_goals,
+tournament, neutral}
+\end{center}
+\textbf{\texttt{wc2026\_matches()}} --- all 2026 fixtures. Adds canonical
+\texttt{home}/\texttt{away}; \textbf{rows with null score = not yet played}.
+\vspace{0.5em}
+\footnotesize That scored-vs-null split is exactly what separates
+\emph{backtest} (played) from \emph{forecast} (upcoming) downstream.
+\end{frame}
+
+\begin{frame}{Organization --- on-disk layout}
+\centering
+\begin{tabular}{@{}ll@{}}
+\toprule
+Directory & Contents \\
+\midrule
+\texttt{data/raw/}       & cached source downloads (git-ignored) \\
+\texttt{data/interim/}   & scratch / intermediate frames \\
+\texttt{data/processed/} & published CSVs (committed) \\
+\texttt{artifacts/}      & posteriors (.nc, ignored) + charts (.png, committed) \\
+\texttt{docs/}           & generated reports \& this deck \\
+\bottomrule
+\end{tabular}
+\vspace{1em}
+\footnotesize Two published tables live in \texttt{data/processed/}:
+\texttt{wc2026\_players.csv} (per player) and
+\texttt{wc2026\_team\_assessment.csv} (per team).
+\end{frame}
+
+\section{Extraction \& Features}
+
+\begin{frame}[fragile]{Player extraction --- the surname join}
+Real roster $\times$ FIFA attributes, in \texttt{scripts/27\_build\_player\_dataset.py}:
+\begin{lstlisting}
+key = lambda name: name.split()[-1].lower()   # surname
+fifa = fifa.sort_values("overall", desc).drop_duplicates(key)  # best namesake
+players = live.merge(fifa, on=key, how="left")  # keep every real player
+rating_source = "fifa-match" if overall not null else "team-median"
+# back-fill unmatched skills: team median, then global median
+\end{lstlisting}
+\begin{itemize}\footnotesize
+  \item \textbf{Left join} $\Rightarrow$ no real player is ever dropped.
+  \item \textbf{Provenance flag} \texttt{rating\_source} marks matched vs.
+        filled rows ($\approx$70\% exact match coverage).
+  \item GKs (no pace/defending in FIFA) get the same median fill.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Per-player features}
+On each player row (\texttt{features/player\_features.py}):
+\centering
+\begin{tabular}{@{}ll@{}}
+\toprule
+Feature & Definition \\
+\midrule
+\texttt{longevity}    & $\tfrac{1}{2}\big(z(\text{career\_years}) + z(\text{caps})\big)$ \\[2pt]
+\texttt{skill\_index} & $\sum_c w_c\,\text{rating}_c$ \; (shoot .25, pass/drib .20, pace .15, def/phys .10) \\[2pt]
+\texttt{social\_score}& $z\!\big(\log_{10}\text{followers}\cdot(1+\text{engagement})\big)$ \\
+\bottomrule
+\end{tabular}
+\vspace{0.8em}
+\footnotesize $z(\cdot)$ = population standardization (mean 0, sd 1). Position
+is also one-hot encoded for per-line analysis.
+\end{frame}
+
+\begin{frame}{Age $\times$ role weighting}
+A role-aware adjustment: youth boosts attacking pace, seniority boosts
+defensive solidity (\texttt{data/live\_squads.py}).
+\[
+w_{\text{pace}}(a) = \mathrm{clip}\big(1.20 - 0.03\max(0,a-23),\;0.75,\;1.20\big)
+\quad\text{\scriptsize ($\approx$1.2 at 20, 0.85 at 35)}
+\]
+\[
+w_{\text{exp}}(a) = \mathrm{clip}\big(0.80 + 0.025\max(0,a-22),\;0.80,\;1.25\big)
+\quad\text{\scriptsize ($\approx$0.8 at 22, 1.25 at 35)}
+\]
+\[
+\text{pace\_w} = \text{pace}\cdot w_{\text{pace}}(\text{age}),\qquad
+\text{def\_w} = \text{defending}\cdot w_{\text{exp}}(\text{age})
+\]
+\footnotesize Applied per player, then aggregated over attackers / defenders.
+\end{frame}
+
+\section{Aggregation}
+
+\begin{frame}{Aggregation --- player $\to$ team prior}
+Per team, over the strongest 16 by \texttt{overall}
+(\texttt{live\_team\_features}):
+\[
+\text{age\_role} = \tfrac12 z(\text{young\_pace}) + \tfrac12 z(\text{senior\_solidity})
+\]
+\[
+\text{composite} = 0.80\,z(\text{squad\_overall}) + 0.06\,z(\log(1{+}\text{caps}))
+                 + 0.04\,z(\text{age}) + 0.10\,z(\text{age\_role})
+\]
+\[
+\boxed{\;\text{prior\_strength} = z(\text{composite})\cdot 0.5\;}\quad\text{(the model's prior mean on attack)}
+\]
+\footnotesize Skill dominates; caps/age/role add small, auditable nudges. The
+match data can still override the prior --- \texttt{beta\_prior} learns how much
+to trust it.
+\end{frame}
+
+\begin{frame}[fragile]{Aggregation --- published team assessment}
+A separate roll-up for presentation (\texttt{scripts/27}), assembled by a
+left-join chain keyed on \texttt{team}:
+\begin{lstlisting}
+team = DataFrame(48 teams)
+   .merge(results)   # 2026 W/D/L, GF/GA, points   (from wc2026_matches)
+   .merge(strength)  # attack/defence/net/model_rank (posterior_strength_real.csv)
+   .merge(elo)       # elo, elo_rank               (elo_ratings.csv)
+   .merge(agg)       # squad_overall, attack/defence_strength,
+                     # young_pace, senior_solidity, tier, style, star_player
+form_momentum = combined_shifts(...)   # recency form + sentiment nudge
+flag = fifa_code -> flag               # worldcup_repo metadata
+\end{lstlisting}
+\footnotesize \texttt{tier} from \texttt{squad\_overall}; \texttt{style} from
+sign(attack$-$defence); \texttt{star\_player} = top outfield by \texttt{overall}.
+\end{frame}
+
+\begin{frame}{Per-group structure}
+\begin{itemize}
+  \item \texttt{data/teams.py}: 48 \texttt{Team(name, code, confederation,
+        group, latent\_strength)} records encode the real draw.
+  \item \texttt{by\_group()} $\to$ \texttt{\{letter: [4 teams]\}}; asserts
+        enforce \textbf{12 groups $\times$ 4}.
+  \item The \texttt{group} column rides through both published tables.
+  \item \texttt{by\_group()} drives the group stage in \emph{both} simulators
+        (top-2 + 8 best thirds $\to$ knockout): \texttt{models/simulate.py}
+        (Bayesian) and \texttt{models/elo\_sim.py} (Elo).
+\end{itemize}
+\end{frame}
+
+\section{Presentation}
+
+\begin{frame}[fragile]{Presentation \& the daily chain}
+\textbf{Surfaces:} \texttt{wc2026\_players.csv}, \texttt{wc2026\_team\_assessment.csv};
+\texttt{docs/WINNERS.md}, \texttt{CHAMPION\_TRACKER.md}, \texttt{FORECAST\_LOG.md};
+\texttt{artifacts/*.png} (calibration, champion timeline).
+\vspace{0.5em}
+\begin{lstlisting}
+make daily:
+  real-players -> live-squads -> live-features -> real-fit -> elo
+    -> dataset(27) -> winners(28) -> track/champion -> timeline -> log
+\end{lstlisting}
+\footnotesize Each run: fresh squads + results $\to$ recompute features/prior
+$\to$ refit $\to$ rebuild both tables $\to$ regenerate every forecast $\to$ the
+CI bot commits the diff.
+\end{frame}
+
+\begin{frame}{Extending it \& honest limits}
+\begin{itemize}
+  \item \textbf{Better attributes:} replace the surname join with an exact-ID
+        feed; the PLAYER schema (and everything downstream) is unchanged.
+  \item \textbf{New prior signal:} add a column in \texttt{live\_team\_features},
+        fold it into \texttt{composite} with a small weight, then
+        \textbf{validate on the RPS scoreboard} --- a feature stays only if it
+        lowers RPS.
+  \item \textbf{New source:} add a loader returning a documented schema; wire
+        aliases if names differ.
+  \item \textbf{Limits:} $\approx$70\% surname-join coverage (flagged), FIFA-22
+        vintage, results feed lags real time by hours.
+\end{itemize}
+\end{frame}
+
+\begin{frame}[plain]
+\centering\Large Thank you\\[0.5em]
+\normalsize\texttt{docs/DATA\_PIPELINE.md} --- the written reference\\
+\texttt{github.com/mariaob1201/2026-world-cup-analytics}
+\end{frame}
+
+\end{document}

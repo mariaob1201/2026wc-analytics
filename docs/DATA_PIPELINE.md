@@ -4,6 +4,12 @@ How raw public data becomes per-player rows, per-team covariates, and the two
 published tables. Everything here is keyless and reproducible; the daily GitHub
 Action re-runs the whole chain ([LIVE_PIPELINE.md](LIVE_PIPELINE.md)).
 
+> **Slides:** a presentation version of this doc —
+> [`data_pipeline_slides.pptx`](data_pipeline_slides.pptx) (PowerPoint) and
+> [`data_pipeline_slides.tex`](data_pipeline_slides.tex) (Beamer/LaTeX source;
+> compile with `pdflatex` or Overleaf, or regenerate the pptx with
+> `pandoc data_pipeline_slides.md -o data_pipeline_slides.pptx --slide-level=2`).
+
 ```
 PUBLIC SOURCES                 EXTRACTION                 FEATURES                  STRUCTURE
 ─────────────                  ──────────                 ────────                  ─────────
