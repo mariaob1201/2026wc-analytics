@@ -49,7 +49,7 @@ played, and commits the refreshed reports.
 | [docs/WINNERS.md](docs/WINNERS.md) | Next-day match picks + Elo champion scorecard + predicted-vs-true track record |
 | [docs/analytics.md](docs/analytics.md) | Calibration chart, match sentiment & tactics |
 | [docs/METHODOLOGY.md](docs/METHODOLOGY.md) · [docs/LIVE_PIPELINE.md](docs/LIVE_PIPELINE.md) | Methodology + the live/agent automation guide |
-| [docs/DATA_PIPELINE.md](docs/DATA_PIPELINE.md) | Data collection → player extraction → features → per-group structure |
+| [docs/DATA_PIPELINE.md](docs/DATA_PIPELINE.md) | **Developer reference:** collection → player extraction → features → per-player/team aggregation → presentation (signatures, schemas, formulas) |
 
 ### Title odds over the tournament
 
