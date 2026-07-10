@@ -194,6 +194,79 @@ flag = fifa_code -> flag               # worldcup_repo metadata
 - The `group` column rides through both published tables.
 - `by_group()` drives the group stage in *both* simulators (top-2 + 8 best thirds → knockout): `models/simulate.py` (Bayesian) and `models/elo_sim.py` (Elo).
 
+# Modeling — goals → winners
+
+## Goals as the primitive
+
+**Generative model** — a hierarchical Bayesian Poisson (Baio–Blangiardo):
+
+- home_goals ~ Poisson(λ_h), away_goals ~ Poisson(λ_a)
+- log λ_h = μ + home_adv + att_h − def_a
+- log λ_a = μ + att_a − def_h
+
+Why this shape:
+
+- Rate teams *individually* (attack/defence), not matchups ⇒ can price fixtures never played (48-team bracket).
+- Keeps goal margins (a 4–0 says more than a 1–0) — unlike a Bradley–Terry / win-only model.
+- Bayesian ⇒ every ability carries uncertainty that flows through to the final probabilities.
+
+## Player prior, pooling & identifiability
+
+Effective attack = a learned covariate on the squad prior + a pooled residual:
+
+- **att_eff_t = β_prior · prior_strength_t + att_t**
+- att_t = σ_att · att_raw_t,  att_raw ~ ZeroSumNormal(1)
+
+- **β_prior is estimated** — the model learns how much to trust FIFA squad ratings; live fit β_prior ≈ 0.53.
+- **Partial pooling** shrinks thin-record teams toward the mean — the principled fix for debutants.
+- **ZeroSumNormal** pins abilities to average zero; μ absorbs the overall scoring level (identifiability).
+- **Recency-weighted likelihood:** exponential decay (half-life ~540 d) so current squads count more.
+
+## Inference — NUTS & the funnel
+
+Fit with PyMC / NUTS (4 chains) on 586 real results (2022→cutoff, 48 teams).
+
+- **Reproducibility note:** the first (centered) parameterization produced the classic *funnel* — σ_att → 0, R̂ ≈ 1.6, ESS in single digits; raising `target_accept` made it *worse*.
+- **Fix:** the non-centered form above (sample standardized offsets, scale by σ separately) ⇒ R̂ ≈ 1.0, ESS up ~100×.
+- Diagnostics gate: R̂ < 1.01, no divergences, healthy ESS.
+
+The canonical hierarchical pathology — and its canonical cure.
+
+## From goals to winners
+
+Two derived layers, both just sums / simulations over the scoreline distribution:
+
+1. **Per match** (`predict_match`): for *every* posterior draw form λ = exp(μ [+home_adv] + att_eff − def), build the Poisson scoreline matrix, average over draws (*posterior-predictive*). Read off 1X2 = P(home)/P(draw)/P(away), most-likely score, over/under 2.5, both-teams-score.
+2. **Whole tournament** (Monte-Carlo): draw a full parameter set per simulated tournament, run the real 12-group → knockout structure, **holding played games fixed**. Aggregate ⇒ each team's P(advance) … P(champion).
+
+Parameter uncertainty propagates into the headline odds.
+
+## Cross-checks — Elo & LLM-as-a-Judge
+
+- **Elo** (recency-weighted): R' = R + K·G·(W − E), K larger for World Cups, G a goal-diff multiplier. Sequential ⇒ "who is hot now"; also drives the fast timeline / scorecard simulator.
+- **LLM-as-a-Judge:** fuses both ratings + form + venue into a calibrated 1X2 for a single fixture (Elo fallback with no API key).
+- **Disagreement = signal:** pooled Bayesian ranks Mexico 20th, Elo 7th — the gap localizes where the data is least certain.
+
+## Results — the scoreboard (RPS ↓)
+
+Out-of-sample: fit on the 4 years before each tournament, scored on its matches.
+
+| Model | WC 2018 | WC 2022 | WC 2026* |
+|---|---|---|---|
+| **Bayesian** | **0.213** | **0.216** | **0.180** |
+| Elo (baseline) | 0.215 | 0.217 | 0.201 |
+| Naive base-rate | 0.249 | 0.235 | 0.191 |
+
+RPS = the football-standard ordinal score (a win-vs-draw miss hurts less than win-vs-loss); lower is better. The Bayesian model beats both baselines in every tournament. *2026 in-progress (directional). **Any new feature must lower RPS here to ship.**
+
+## Results — what actually moved the score
+
+- **Expected goals beat actual goals:** on 2018/2022 StatsBomb xG, the xG-fit model wins on RPS (**0.2294** vs 0.2319) — chance *quality* is a steadier signal than noisy goals.
+- **Form helps — but only the right kind:** conditioning on recent *shots-on-target* is the single best variant (RPS **0.2231**); conditioning on recent *goals* makes it *worse* (0.2345).
+- **Calibration:** the reliability curve hugs the diagonal — probabilities are honest, not just confident.
+- **Live self-grading** (resolved 2026 matches): outcome hit-rate **65%**, RPS **0.165**, goal-total MAE 1.43 — refreshed daily in `FORECAST_LOG.md`.
+- **Discipline:** spatial-style & social-sentiment features barely moved RPS ⇒ kept, but clearly labelled exploratory.
+
 # Presentation
 
 ## Presentation & the daily chain

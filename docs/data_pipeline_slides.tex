@@ -295,6 +295,136 @@ sign(attack$-$defence); \texttt{star\_player} = top outfield by \texttt{overall}
 \end{itemize}
 \end{frame}
 
+\section{Modeling}
+
+\begin{frame}{Goals as the primitive}
+\textbf{Generative model} --- a hierarchical Bayesian Poisson (Baio--Blangiardo):
+\[
+\text{home\_goals} \sim \text{Poisson}(\lambda_h),\qquad
+\text{away\_goals} \sim \text{Poisson}(\lambda_a)
+\]
+\[
+\log\lambda_h = \mu + \text{home\_adv} + \text{att}_h - \text{def}_a,\qquad
+\log\lambda_a = \mu + \text{att}_a - \text{def}_h
+\]
+\footnotesize
+\begin{itemize}\footnotesize
+  \item Rate teams \emph{individually} (attack / defence), not matchups $\Rightarrow$
+        can price fixtures that have never been played (48-team bracket).
+  \item Keeps goal margins (a 4--0 says more than a 1--0) --- unlike a
+        Bradley--Terry / win-only model.
+  \item Bayesian $\Rightarrow$ every ability carries uncertainty that flows
+        through to the final probabilities.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Player prior, pooling \& identifiability}
+Effective attack = learned covariate on the squad prior + a pooled residual:
+\[
+\text{att\_eff}_t = \beta_{\text{prior}}\cdot \text{prior\_strength}_t + \text{att}_t
+\]
+\[
+\text{att}_t = \sigma_{\text{att}}\,\text{att\_raw}_t,\qquad
+\text{att\_raw} \sim \text{ZeroSumNormal}(1)
+\]
+\begin{itemize}\footnotesize
+  \item $\beta_{\text{prior}}$ is \emph{estimated} --- the model learns how much
+        to trust FIFA squad ratings; on the live fit $\beta_{\text{prior}}\approx 0.53$.
+  \item \textbf{Partial pooling} shrinks thin-record teams toward the mean ---
+        the principled fix for debutants in an expanded field.
+  \item \textbf{ZeroSumNormal} pins abilities to average zero; $\mu$ absorbs the
+        overall scoring level (identifiability).
+  \item \textbf{Recency-weighted likelihood:} exponential decay (half-life
+        $\sim$540 d) so current squads count more.
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Inference --- NUTS \& the funnel}
+Fit with PyMC / NUTS (4 chains) on 586 real results (2022$\to$cutoff, 48 teams).
+\begin{itemize}\footnotesize
+  \item \textbf{Reproducibility note:} the first (centered) parameterization
+        produced the classic \emph{funnel} --- $\sigma_{\text{att}}\!\to\!0$,
+        $\hat R\approx 1.6$, ESS in single digits; raising \texttt{target\_accept}
+        made it \emph{worse}.
+  \item \textbf{Fix:} the non-centered form above (sample standardized offsets,
+        scale by $\sigma$ separately) $\Rightarrow$ $\hat R\approx 1.0$, ESS up
+        $\sim$100$\times$.
+\end{itemize}
+\begin{lstlisting}
+att_raw ~ ZeroSumNormal(1);  att = sigma_att * att_raw   # non-centered
+# diagnostics gate: R-hat < 1.01, no divergences, ESS healthy
+\end{lstlisting}
+\centering\scriptsize The canonical hierarchical pathology --- and its canonical cure.
+\end{frame}
+
+\begin{frame}{From goals to winners}
+Two derived layers, both just sums / simulations over the scoreline distribution:
+\begin{enumerate}\footnotesize
+  \item \textbf{Per match} (\texttt{predict\_match}): for \emph{every} posterior
+        draw form $\lambda=\exp(\mu[+\text{home\_adv}]+\text{att\_eff}-\text{def})$,
+        build the Poisson scoreline matrix, average over draws
+        (\emph{posterior-predictive}). Read off:
+        \begin{itemize}\scriptsize
+          \item 1X2 = $P(\text{home}), P(\text{draw}), P(\text{away})$
+          \item most-likely score, over/under 2.5, both-teams-score
+        \end{itemize}
+  \item \textbf{Whole tournament} (Monte-Carlo): draw a full parameter set per
+        simulated tournament, run the real 12-group $\to$ knockout structure,
+        \textbf{holding played games fixed}. Aggregate $\Rightarrow$ each team's
+        $P(\text{advance})\ldots P(\text{champion})$.
+\end{enumerate}
+\centering\scriptsize Parameter uncertainty propagates into the headline odds.
+\end{frame}
+
+\begin{frame}{Cross-checks --- Elo \& LLM-as-a-Judge}
+\begin{itemize}
+  \item \textbf{Elo} (recency-weighted): $R' = R + K\,G\,(W-E)$, $K$ larger for
+        World Cups, $G$ a goal-diff multiplier. Sequential $\Rightarrow$ ``who is
+        hot now''. Also drives the fast timeline / scorecard simulator.
+  \item \textbf{LLM-as-a-Judge}: fuses both ratings + form + venue into a
+        calibrated 1X2 for a single fixture (Elo fallback with no API key).
+  \item \textbf{Disagreement = signal:} pooled Bayesian ranks Mexico 20th, Elo
+        7th --- the gap localizes where the data is least certain.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Results --- the scoreboard (RPS $\downarrow$)}
+Out-of-sample: fit on the 4 years before each tournament, scored on its matches.
+\centering
+\begin{tabular}{@{}lccc@{}}
+\toprule
+Model & WC 2018 & WC 2022 & WC 2026\textsuperscript{*} \\
+\midrule
+Bayesian        & \textbf{0.213} & \textbf{0.216} & \textbf{0.180} \\
+Elo (baseline)  & 0.215 & 0.217 & 0.201 \\
+Naive base-rate & 0.249 & 0.235 & 0.191 \\
+\bottomrule
+\end{tabular}
+\vspace{0.8em}
+\footnotesize RPS = the football-standard ordinal score (a win-vs-draw miss
+hurts less than win-vs-loss); lower is better. The Bayesian model beats both
+baselines in every tournament. \textsuperscript{*}2026 is in-progress
+(directional). \emph{Any new feature must lower RPS here to ship.}
+\end{frame}
+
+\begin{frame}{Results --- what actually moved the score}
+\begin{itemize}\footnotesize
+  \item \textbf{Expected goals beat actual goals:} on 2018/2022 StatsBomb xG,
+        the xG-fit model wins on RPS (\textbf{0.2294} vs 0.2319) --- chance
+        \emph{quality} is a steadier signal than noisy goals.
+  \item \textbf{Form helps --- but only the right kind:} conditioning on recent
+        \emph{shots-on-target} is the single best variant (RPS \textbf{0.2231});
+        conditioning on recent \emph{goals} makes it \emph{worse} (0.2345).
+  \item \textbf{Calibration:} the reliability curve hugs the diagonal ---
+        probabilities are honest, not just confident.
+  \item \textbf{Live self-grading} (resolved 2026 matches): outcome hit-rate
+        \textbf{65\%}, RPS \textbf{0.165}, goal-total MAE 1.43 --- refreshed
+        daily in \texttt{FORECAST\_LOG.md}.
+  \item \textbf{Discipline:} spatial-style \& social-sentiment features barely
+        moved RPS $\Rightarrow$ kept, but clearly labelled exploratory.
+\end{itemize}
+\end{frame}
+
 \section{Presentation}
 
 \begin{frame}[fragile]{Presentation \& the daily chain}
