@@ -50,6 +50,7 @@ played, and commits the refreshed reports.
 | [docs/analytics.md](docs/analytics.md) | Calibration chart, match sentiment & tactics |
 | [docs/METHODOLOGY.md](docs/METHODOLOGY.md) · [docs/LIVE_PIPELINE.md](docs/LIVE_PIPELINE.md) | Methodology + the live/agent automation guide |
 | [docs/DATA_PIPELINE.md](docs/DATA_PIPELINE.md) | **Developer reference:** collection → player extraction → features → per-player/team aggregation → presentation (signatures, schemas, formulas) |
+| [notebooks/goal_difference_gaussian.ipynb](notebooks/goal_difference_gaussian.ipynb) | **Teaching notebook:** a simple Bayesian *Gaussian* model of the signed goal difference (data → target → model → fit → predict) |
 
 ### Title odds over the tournament
 
