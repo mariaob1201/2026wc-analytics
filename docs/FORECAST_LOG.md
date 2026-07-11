@@ -1,13 +1,13 @@
 # 📒 Forecast Log — Predictions vs Ground Truth
 
-_A growing, append-on-result ledger: every goal forecast and how it turned out. Updated by the daily GitHub Action. Compiled 2026-07-10._
+_A growing, append-on-result ledger: every goal forecast and how it turned out. Updated by the daily GitHub Action. Compiled 2026-07-11._
 
 ## Running accuracy (resolved matches)
 
-- **Matches scored:** 97
+- **Matches scored:** 98
 - **Outcome hit-rate:** 65%
-- **Goal-total MAE:** 1.413 goals/match
-- **RPS:** 0.1644 · **log-loss:** 0.87 (lower better)
+- **Goal-total MAE:** 1.4 goals/match
+- **RPS:** 0.1651 · **log-loss:** 0.8703 (lower better)
 
 ## Resolved — forecast vs actual
 
@@ -110,12 +110,12 @@ _A growing, append-on-result ledger: every goal forecast and how it turned out. 
 | 2026-07-07 | Argentina v Egypt | 1.8-0.6 | 1-0 | **3-2** | ✅ |
 | 2026-07-07 | Switzerland v Colombia | 1.0-1.5 | 0-1 | **0-0** | — |
 | 2026-07-09 | France v Morocco | 1.4-0.8 | 1-0 | **2-0** | ✅ |
+| 2026-07-10 | Spain v Belgium | 1.5-1.3 | 1-1 | **2-1** | ✅ |
 
 ## Pending — forecasts awaiting kickoff
 
 | Date | Fixture | Forecast (xG) | Likely | P(H/D/A) |
 |---|---|---|---|---|
-| 2026-07-10 | Spain v Belgium | 1.7-1.6 | 1-1 | 41%/23%/36% |
 | 2026-07-11 | Norway v England | 1.1-1.9 | 1-1 | 23%/22%/55% |
 | 2026-07-11 | Argentina v Switzerland | 2.0-1.1 | 1-1 | 59%/21%/20% |
 

@@ -1,6 +1,6 @@
 # WC 2026 — Tracking Analytics, Sentiment & Tactics
 
-_Run after each matchday to track model calibration and read the next slate. Charts in `artifacts/`. Compiled 2026-07-10._
+_Run after each matchday to track model calibration and read the next slate. Charts in `artifacts/`. Compiled 2026-07-11._
 
 ## Tracking charts
 
@@ -12,21 +12,16 @@ _Run after each matchday to track model calibration and read the next slate. Cha
 - **Predicted vs actual goals** (`artifacts/goals_pred_vs_actual.png`) — scatter of expected vs real total goals per played match.
 - **Forecast win/draw/win** (`artifacts/forecast_probs.png`) — stacked 1X2 bars for upcoming fixtures.
 
-**Tracking metrics (97 matches):** outcome hit-rate 65% · total-goals MAE 1.41. Re-run to update as results come in.
+**Tracking metrics (98 matches):** outcome hit-rate 65% · total-goals MAE 1.40. Re-run to update as results come in.
 
 ## Match sentiment & momentum (next fixtures)
 
 | Fixture | Home form | Away form | Momentum edge |
 |---|---|---|---|
-| Spain v Belgium | red-hot (+0.15) | red-hot (+0.18) | **even** |
 | Norway v England | rising (+0.06) | rising (+0.10) | **even** |
-| Argentina v Switzerland | red-hot (+0.17) | red-hot (+0.13) | **Argentina** |
+| Argentina v Switzerland | red-hot (+0.18) | red-hot (+0.13) | **Argentina** |
 
 ## Tactical read (next fixtures)
-
-**Spain v Belgium** — best shapes 4-2-3-1 vs 3-4-3.
-  - Defence: home edge (86 vs 81) · Midfield: even (86 vs 86) · Attack: even (85 vs 86)
-  - midfield finely balanced; home built around its defence, away around its midfield.
 
 **Norway v England** — best shapes 3-5-2 vs 4-3-3.
   - Defence: away edge (75 vs 85) · Midfield: away edge (78 vs 85) · Attack: away edge (80 vs 88)

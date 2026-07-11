@@ -81,12 +81,12 @@ date,home,away,score,p_home,p_draw,p_away,pred,actual,hit
 2026-07-01,England,Congo DR,2-1,0.523,0.238,0.239,England,England,True
 2026-07-01,Belgium,Senegal,3-2,0.434,0.276,0.29,Belgium,Belgium,True
 2026-07-01,United States,Bosnia-Herzegovina,2-0,0.547,0.228,0.225,United States,United States,True
+2026-07-02,Spain,Austria,3-0,0.567,0.22,0.213,Spain,Spain,True
 2026-07-02,Portugal,Croatia,2-1,0.547,0.228,0.225,Portugal,Portugal,True
 2026-07-02,Switzerland,Algeria,2-0,0.404,0.29,0.306,Switzerland,Switzerland,True
-2026-07-02,Spain,Austria,3-0,0.567,0.22,0.213,Spain,Spain,True
-2026-07-03,Argentina,Cape Verde,3-2,0.684,0.175,0.141,Argentina,Argentina,True
 2026-07-03,Colombia,Ghana,1-0,0.673,0.179,0.148,Colombia,Colombia,True
 2026-07-03,Australia,Egypt,1-1,0.336,0.316,0.348,Egypt,Draw,False
+2026-07-03,Argentina,Cape Verde,3-2,0.684,0.175,0.141,Argentina,Argentina,True
 2026-07-04,Canada,Morocco,0-3,0.256,0.251,0.493,Morocco,Morocco,True
 2026-07-04,Paraguay,France,0-1,0.155,0.184,0.661,France,France,True
 2026-07-05,Brazil,Norway,1-2,0.55,0.227,0.223,Brazil,Norway,False
@@ -96,3 +96,4 @@ date,home,away,score,p_home,p_draw,p_away,pred,actual,hit
 2026-07-07,Argentina,Egypt,3-2,0.617,0.2,0.183,Argentina,Argentina,True
 2026-07-07,Switzerland,Colombia,0-0,0.313,0.295,0.392,Colombia,Draw,False
 2026-07-09,France,Morocco,2-0,0.496,0.249,0.255,France,France,True
+2026-07-10,Spain,Belgium,2-1,0.523,0.238,0.239,Spain,Spain,True
