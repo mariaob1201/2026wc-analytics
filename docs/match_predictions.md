@@ -1,13 +1,13 @@
 # WC 2026 — Match Predictions vs Reality, and Forecasts
 
-_Model trained on pre-tournament data only (results to 2026-06-10 + FIFA squad prior). Backtest compares those out-of-sample forecasts to the actual scorelines; forecasts cover the next slate. Compiled 2026-07-10._
+_Model trained on pre-tournament data only (results to 2026-06-10 + FIFA squad prior). Backtest compares those out-of-sample forecasts to the actual scorelines; forecasts cover the next slate. Compiled 2026-07-11._
 
 ## Accuracy so far (out-of-sample)
 
-- **Matches scored:** 97
+- **Matches scored:** 98
 - **Outcome hit-rate:** 65% (predicted W/D/L matched actual)
 - **Mean probability on the actual outcome:** 0.45 · **Brier score:** 0.512 (lower is better)
-- **Total-goals mean abs error:** 1.41 goals/match
+- **Total-goals mean abs error:** 1.40 goals/match
 
 > Read these as a small-sample sanity check (one matchday), not a verdict. Blowouts like Germany 7-1 and Canada 6-0 inflate the goals error — the model is calibrated to typical scorelines, not outliers.
 
@@ -112,6 +112,7 @@ _Model trained on pre-tournament data only (results to 2026-06-10 + FIFA squad p
 | 2026-07-07 | Argentina v Egypt | 1.8-0.6 | 1-0 | 65%/22%/13% | **3-2** | ✅ |
 | 2026-07-07 | Switzerland v Colombia | 1.0-1.5 | 0-1 | 25%/26%/48% | **0-0** | — |
 | 2026-07-09 | France v Morocco | 1.4-0.8 | 1-0 | 51%/27%/22% | **2-0** | ✅ |
+| 2026-07-10 | Spain v Belgium | 1.5-1.3 | 1-1 | 41%/25%/34% | **2-1** | ✅ |
 
 ## Forecast — next fixtures (with momentum nudge)
 
@@ -119,9 +120,8 @@ _`Mom` = recency-weighted form (+ scouted sentiment) applied as a small, capped 
 
 | Date | Fixture | Pred xG | Likely | P(H/D/A) | Over 2.5 | Mom H/A |
 |---|---|---|---|---|---|---|
-| 2026-07-10 | Spain v Belgium | 1.7-1.6 | 1-1 | 41%/23%/36% | 64% | +0.15/+0.18 |
-| 2026-07-11 | Norway v England | 1.1-1.9 | 1-1 | 23%/22%/55% | 57% | +0.06/+0.10 |
-| 2026-07-11 | Argentina v Switzerland | 2.0-1.1 | 1-1 | 59%/21%/20% | 60% | +0.17/+0.13 |
+| 2026-07-11 | Norway v England | 1.1-1.9 | 1-1 | 23%/22%/55% | 58% | +0.06/+0.10 |
+| 2026-07-11 | Argentina v Switzerland | 2.0-1.1 | 1-1 | 59%/21%/20% | 60% | +0.18/+0.13 |
 
 ## Squad & player context (forecast teams)
 
@@ -129,10 +129,8 @@ _From real player data: squad rating, average age (seniority), stylistic tilt, a
 
 | Team | Tier | Squad ovr | Avg age | Style | Talisman |
 |---|---|---|---|---|---|
-| Spain | Elite contender | 85.5 | 30.4 | well-balanced | Sergio Ramos |
 | Norway | Solid outfit | 76.8 | 26.1 | attack-leaning | E. Haaland |
 | Argentina | Elite contender | 84.4 | 29.0 | attack-leaning | L. Messi |
-| Belgium | Elite contender | 83.8 | 29.7 | attack-leaning | K. De Bruyne |
 | England | Elite contender | 85.1 | 26.7 | attack-leaning | H. Kane |
 | Switzerland | Strong side | 79.1 | 27.2 | well-balanced | R. Freuler |
 
