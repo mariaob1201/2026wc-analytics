@@ -47,6 +47,7 @@ played, and commits the refreshed reports.
 | [docs/match_predictions.md](docs/match_predictions.md) | Per-match predicted goals vs actual + next-slate forecasts |
 | [docs/CHAMPION_TRACKER.md](docs/CHAMPION_TRACKER.md) | Goals rolled up → title odds, conditioned on current results |
 | [docs/WINNERS.md](docs/WINNERS.md) | Next-day match picks + Elo champion scorecard + predicted-vs-true track record |
+| [docs/GOAL_DIFF_FORECAST.md](docs/GOAL_DIFF_FORECAST.md) | Daily Gaussian goal-difference forecast (simpler model; refit on latest results) |
 | [docs/analytics.md](docs/analytics.md) | Calibration chart, match sentiment & tactics |
 | [docs/METHODOLOGY.md](docs/METHODOLOGY.md) · [docs/LIVE_PIPELINE.md](docs/LIVE_PIPELINE.md) | Methodology + the live/agent automation guide |
 | [docs/DATA_PIPELINE.md](docs/DATA_PIPELINE.md) | **Developer reference:** collection → player extraction → features → per-player/team aggregation → presentation (signatures, schemas, formulas) |

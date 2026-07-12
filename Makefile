@@ -99,6 +99,10 @@ winners:
 timeline:
 	$(PY) scripts/29_champion_timeline.py
 
+# Gaussian goal-DIFFERENCE forecast (simpler model): refit daily, predict margins.
+goal-diff:
+	$(PY) scripts/30_gaussian_goal_diff.py
+
 # Backtest the xG model vs the goals model (run `make fetch-xg` first;
 # `make xg-backtest ARGS=--demo` runs a synthetic sanity check instead).
 xg-backtest:
@@ -107,7 +111,7 @@ xg-backtest:
 # The full daily refresh (used by the GitHub Action): real squads + live results
 # -> refit -> player/team tables -> winners + backtest/forecast -> trackers ->
 # title-odds timeline -> forecast-vs-truth log.
-daily: real-players live-squads live-features real-fit elo dataset winners track champion timeline prediction-log
+daily: real-players live-squads live-features real-fit elo dataset winners goal-diff track champion timeline prediction-log
 
 # Backtest + forecast, then tracking charts/sentiment/tactics. Re-run each matchday.
 track:

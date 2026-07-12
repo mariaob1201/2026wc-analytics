@@ -430,3 +430,20 @@ def test_champion_timeline_plot(tmp_path):
     out = tmp_path / "tl.png"
     plot_champion_timeline(pd.DataFrame(rows), out, top=3)
     assert out.exists() and out.stat().st_size > 0
+
+
+def test_gaussian_goal_diff_prior_alignment():
+    """Stage 30: prior loader aligns to team order, standardizes, 0-fills safely."""
+    import importlib.util
+    from pathlib import Path
+
+    spec = importlib.util.spec_from_file_location(
+        "gauss_gd", Path(__file__).parent.parent / "scripts" / "30_gaussian_goal_diff.py")
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+
+    from wc2026.data.teams import TEAMS
+    teams = [t.name for t in TEAMS]
+    prior = mod._load_prior(teams)
+    assert prior.shape == (len(teams),)
+    assert np.isfinite(prior).all()          # no NaNs even for missing teams
