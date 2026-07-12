@@ -1,15 +1,11 @@
 # 🔮 WC 2026 — Winners: next-day picks + champion scorecard
 
-_A simple **Elo** model, conditioned on the **98 matches played so far** and the real 2026 bracket. Updated 2026-07-11._
+_A simple **Elo** model, conditioned on the **98 matches played so far** and the real 2026 bracket. Updated 2026-07-12._
 
 ## Next match day — who wins (Elo goals model)
 
-_Elo gap → two Poisson scoring rates → 1X2 + likely score. Date: **2026-07-11**._
+_No upcoming fixtures in the feed._
 
-| Fixture | Elo | Pred goals | Likely | P(H/D/A) | **Pick** |
-|---|---|---|---|---|---|
-| Norway v England | 1579 v 1659 | 1.2-1.5 | 1-1 | 30%/25%/44% | **England** (44%) |
-| Argentina v Switzerland | 1752 v 1627 | 1.6-1.1 | 1-1 | 49%/25%/27% | **Argentina** (49%) |
 
 ## Champion scorecard — simulated from today's state
 
