@@ -1,11 +1,14 @@
 # 🔮 WC 2026 — Winners: next-day picks + champion scorecard
 
-_A simple **Elo** model, conditioned on the **98 matches played so far** and the real 2026 bracket. Updated 2026-07-13._
+_A simple **Elo** model, conditioned on the **100 matches played so far** and the real 2026 bracket. Updated 2026-07-14._
 
 ## Next match day — who wins (Elo goals model)
 
-_No upcoming fixtures in the feed._
+_Elo gap → two Poisson scoring rates → 1X2 + likely score. Date: **2026-07-15**._
 
+| Fixture | Elo | Pred goals | Likely | P(H/D/A) | **Pick** |
+|---|---|---|---|---|---|
+| England v Argentina | 1682 v 1782 | 1.2-1.6 | 1-1 | 29%/25%/46% | **Argentina** (46%) |
 
 ## Champion scorecard — simulated from today's state
 
@@ -13,31 +16,29 @@ _8,000 Elo tournaments. Played group games are held fixed; the rest of the group
 
 | # | Team | R16 | QF | SF | Final | **Champion** |
 |--:|---|---|---|---|---|---|
-| 1 | Spain | 92% | 49% | 30% | 21% | **16%** |
-| 2 | France | 92% | 49% | 29% | 21% | **16%** |
-| 3 | Argentina | 90% | 58% | 27% | 17% | **13%** |
-| 4 | Belgium | 71% | 40% | 23% | 14% | **6%** |
-| 5 | England | 77% | 43% | 25% | 9% | **6%** |
-| 6 | Colombia | 78% | 43% | 25% | 9% | **6%** |
-| 7 | Portugal | 81% | 36% | 14% | 8% | **5%** |
-| 8 | Brazil | 74% | 45% | 23% | 8% | **5%** |
-| 9 | Mexico | 66% | 37% | 20% | 12% | **4%** |
-| 10 | Morocco | 68% | 38% | 21% | 12% | **4%** |
-| 11 | Netherlands | 64% | 34% | 17% | 10% | **3%** |
-| 12 | Switzerland | 72% | 38% | 18% | 6% | **3%** |
-| 13 | Norway | 58% | 32% | 18% | 8% | **2%** |
-| 14 | Germany | 58% | 30% | 16% | 8% | **2%** |
-| 15 | Japan | 56% | 30% | 15% | 7% | **2%** |
-| 16 | Ecuador | 52% | 26% | 12% | 6% | **2%** |
+| 1 | Argentina | 91% | 62% | 31% | 21% | **17%** |
+| 2 | Spain | 92% | 49% | 28% | 20% | **15%** |
+| 3 | France | 92% | 49% | 28% | 19% | **15%** |
+| 4 | England | 80% | 47% | 28% | 10% | **7%** |
+| 5 | Morocco | 70% | 39% | 23% | 14% | **5%** |
+| 6 | Colombia | 77% | 41% | 23% | 8% | **5%** |
+| 7 | Brazil | 74% | 45% | 22% | 8% | **5%** |
+| 8 | Portugal | 81% | 33% | 12% | 7% | **4%** |
+| 9 | Mexico | 67% | 37% | 21% | 12% | **4%** |
+| 10 | Netherlands | 65% | 37% | 20% | 11% | **4%** |
+| 11 | Switzerland | 62% | 33% | 16% | 9% | **3%** |
+| 12 | Belgium | 71% | 37% | 17% | 5% | **3%** |
+| 13 | Germany | 57% | 31% | 17% | 8% | **2%** |
+| 14 | Norway | 55% | 29% | 15% | 7% | **2%** |
+| 15 | Japan | 57% | 29% | 15% | 7% | **2%** |
+| 16 | Ecuador | 52% | 26% | 13% | 6% | **2%** |
 
 ## Track record — predicted vs true winners (out-of-sample)
 
-_Each WC match was predicted from Elo as it stood **before** that game (then the rating updated). Running accuracy: **62%** on 98 matches. Full log: `data/processed/winners_track.csv`._
+_Each WC match was predicted from Elo as it stood **before** that game (then the rating updated). Running accuracy: **63%** on 100 matches. Full log: `data/processed/winners_track.csv`._
 
 | Date | Fixture | Score | Predicted | Actual | ✓ |
 |---|---|---|---|---|:--:|
-| 2026-07-03 | Australia v Egypt | 1-1 | Egypt | **Draw** | — |
-| 2026-07-03 | Argentina v Cape Verde | 3-2 | Argentina | **Argentina** | ✅ |
 | 2026-07-04 | Canada v Morocco | 0-3 | Morocco | **Morocco** | ✅ |
 | 2026-07-04 | Paraguay v France | 0-1 | France | **France** | ✅ |
 | 2026-07-05 | Brazil v Norway | 1-2 | Brazil | **Norway** | — |
@@ -48,8 +49,10 @@ _Each WC match was predicted from Elo as it stood **before** that game (then the
 | 2026-07-07 | Switzerland v Colombia | 0-0 | Colombia | **Draw** | — |
 | 2026-07-09 | France v Morocco | 2-0 | France | **France** | ✅ |
 | 2026-07-10 | Spain v Belgium | 2-1 | Spain | **Spain** | ✅ |
+| 2026-07-11 | Norway v England | 1-2 | England | **England** | ✅ |
+| 2026-07-11 | Argentina v Switzerland | 3-1 | Argentina | **Argentina** | ✅ |
 
-_Showing the latest 12 of 98. Elo hit-rate vs a coin-flip baseline is the honest scoreboard for these picks._
+_Showing the latest 12 of 100. Elo hit-rate vs a coin-flip baseline is the honest scoreboard for these picks._
 
 
 ## Method (simple by design)

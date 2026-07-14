@@ -1,6 +1,6 @@
 # WC 2026 — Tracking Analytics, Sentiment & Tactics
 
-_Run after each matchday to track model calibration and read the next slate. Charts in `artifacts/`. Compiled 2026-07-13._
+_Run after each matchday to track model calibration and read the next slate. Charts in `artifacts/`. Compiled 2026-07-14._
 
 ## Tracking charts
 
@@ -12,24 +12,24 @@ _Run after each matchday to track model calibration and read the next slate. Cha
 - **Predicted vs actual goals** (`artifacts/goals_pred_vs_actual.png`) — scatter of expected vs real total goals per played match.
 - **Forecast win/draw/win** (`artifacts/forecast_probs.png`) — stacked 1X2 bars for upcoming fixtures.
 
-**Tracking metrics (98 matches):** outcome hit-rate 65% · total-goals MAE 1.40. Re-run to update as results come in.
+**Tracking metrics (100 matches):** outcome hit-rate 66% · total-goals MAE 1.39. Re-run to update as results come in.
 
 ## Match sentiment & momentum (next fixtures)
 
 | Fixture | Home form | Away form | Momentum edge |
 |---|---|---|---|
-| Norway v England | rising (+0.06) | rising (+0.10) | **even** |
-| Argentina v Switzerland | red-hot (+0.18) | red-hot (+0.13) | **Argentina** |
+| France v Spain | red-hot (+0.18) | red-hot (+0.15) | **even** |
+| England v Argentina | rising (+0.10) | red-hot (+0.18) | **Argentina** |
 
 ## Tactical read (next fixtures)
 
-**Norway v England** — best shapes 3-5-2 vs 4-3-3.
-  - Defence: away edge (75 vs 85) · Midfield: away edge (78 vs 85) · Attack: away edge (80 vs 88)
-  - away controls midfield; home built around its attack, away around its attack.
+**France v Spain** — best shapes 3-4-3 vs 4-2-3-1.
+  - Defence: away edge (84 vs 86) · Midfield: even (87 vs 86) · Attack: home edge (88 vs 85)
+  - midfield finely balanced; home built around its attack, away around its defence.
 
-**Argentina v Switzerland** — best shapes 4-3-3 vs 3-5-2.
-  - Defence: home edge (82 vs 78) · Midfield: home edge (82 vs 79) · Attack: home edge (89 vs 78)
-  - home controls midfield; home built around its attack, away around its midfield.
+**England v Argentina** — best shapes 4-3-3 vs 4-3-3.
+  - Defence: home edge (85 vs 82) · Midfield: home edge (85 vs 82) · Attack: away edge (88 vs 89)
+  - home controls midfield; home built around its attack, away around its attack.
 
 ## Keep working on it
 
