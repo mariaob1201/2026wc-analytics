@@ -1,6 +1,6 @@
 # 🏆 World Cup 2026 — Champion Tracker
 
-_A living, state-aware forecast. Conditioned on the **101 matches played so far**: completed group games are held fixed; the rest of the tournament is simulated from a Bayesian goals model (squad-skill prior + current form + X/ESPN sentiment). Updated 2026-07-15._
+_A living, state-aware forecast. Conditioned on the **102 matches played so far**: completed group games are held fixed; the rest of the tournament is simulated from a Bayesian goals model (squad-skill prior + current form + X/ESPN sentiment). Updated 2026-07-16._
 
 ## How to read this
 
@@ -15,18 +15,18 @@ Both come from one model: goals are the primitive; the winner is a simulation ov
 
 | Team | Quarter | Semi | Final | **Champion** |
 |---|---|---|---|---|
-| France | 48% | 27% | 16% | **12%** |
-| Spain | 48% | 27% | 17% | **11%** |
+| Spain | 50% | 28% | 18% | **13%** |
+| France | 49% | 27% | 16% | **11%** |
 | Argentina | 47% | 25% | 14% | **10%** |
-| Belgium | 45% | 24% | 12% | **8%** |
+| Belgium | 45% | 23% | 12% | **8%** |
 | Portugal | 44% | 23% | 12% | **8%** |
-| Brazil | 43% | 23% | 11% | **6%** |
-| Colombia | 40% | 21% | 10% | **6%** |
-| Germany | 38% | 20% | 10% | **5%** |
-| Morocco | 35% | 18% | 9% | **4%** |
-| Japan | 34% | 18% | 8% | **4%** |
-| Switzerland | 32% | 17% | 9% | **4%** |
-| England | 33% | 18% | 9% | **3%** |
+| Brazil | 41% | 22% | 10% | **6%** |
+| Colombia | 41% | 21% | 10% | **6%** |
+| Germany | 38% | 20% | 9% | **4%** |
+| Morocco | 34% | 18% | 9% | **4%** |
+| Netherlands | 34% | 17% | 9% | **4%** |
+| Japan | 35% | 18% | 8% | **4%** |
+| Switzerland | 35% | 18% | 9% | **4%** |
 
 _Mexico's Round-of-32 opponent odds (per candidate): [R32_ODDS.md](R32_ODDS.md) — `make r32-odds`._
 
@@ -42,16 +42,17 @@ _How each contender's championship probability moved as matches were played. The
 
 | Date | Fixture | Pred goals (xG) | Likely | P(H/D/A) | Home form |
 |---|---|---|---|---|---|
-| 2026-07-15 | England v Argentina | 1.2-1.9 | 1-1 | 25%/22%/53% | rising |
+| 2026-07-18 | France v England | 1.8-1.0 | 1-0 | 56%/23%/21% | red-hot |
+| 2026-07-19 | Spain v Argentina | 1.6-1.5 | 1-1 | 42%/23%/35% | red-hot |
 
 ## Current group standings (played)
 
 | Team | P | Pts | GD |
 |---|---|---|---|
+| Argentina | 7 | 21 | +12 |
 | Spain | 7 | 19 | +12 |
 | France | 7 | 18 | +12 |
-| Argentina | 6 | 18 | +11 |
-| England | 6 | 16 | +7 |
+| England | 7 | 16 | +6 |
 | Mexico | 5 | 12 | +7 |
 | Norway | 6 | 12 | +2 |
 | Belgium | 6 | 11 | +7 |
