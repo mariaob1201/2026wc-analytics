@@ -101,5 +101,5 @@ match_date,home,away,pred_goals,pred_score,p_H,p_D,p_A,actual,result,hit,goal_ab
 2026-07-11,Argentina,Switzerland,1.7-1.0,1-0,0.548,0.238,0.215,3-1,H,True,1.31,resolved
 2026-07-14,France,Spain,1.4-1.1,1-1,0.421,0.266,0.313,0-2,A,False,0.51,resolved
 2026-07-15,England,Argentina,1.1-1.4,1-1,0.281,0.262,0.456,1-2,A,True,0.5,resolved
-2026-07-18,France,England,1.7-1.1,1-1,0.504,0.239,0.256,,,,,pending
+2026-07-18,France,England,1.7-1.1,1-1,0.504,0.24,0.256,,,,,pending
 2026-07-19,Spain,Argentina,1.4-1.6,1-1,0.327,0.238,0.434,,,,,pending

@@ -1,6 +1,6 @@
 # 🔮 WC 2026 — Winners: next-day picks + champion scorecard
 
-_A simple **Elo** model, conditioned on the **102 matches played so far** and the real 2026 bracket. Updated 2026-07-16._
+_A simple **Elo** model, conditioned on the **102 matches played so far** and the real 2026 bracket. Updated 2026-07-17._
 
 ## Next match day — who wins (Elo goals model)
 

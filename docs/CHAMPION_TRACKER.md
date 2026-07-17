@@ -1,6 +1,6 @@
 # 🏆 World Cup 2026 — Champion Tracker
 
-_A living, state-aware forecast. Conditioned on the **102 matches played so far**: completed group games are held fixed; the rest of the tournament is simulated from a Bayesian goals model (squad-skill prior + current form + X/ESPN sentiment). Updated 2026-07-16._
+_A living, state-aware forecast. Conditioned on the **102 matches played so far**: completed group games are held fixed; the rest of the tournament is simulated from a Bayesian goals model (squad-skill prior + current form + X/ESPN sentiment). Updated 2026-07-17._
 
 ## How to read this
 
@@ -15,18 +15,18 @@ Both come from one model: goals are the primitive; the winner is a simulation ov
 
 | Team | Quarter | Semi | Final | **Champion** |
 |---|---|---|---|---|
-| Spain | 50% | 28% | 18% | **13%** |
-| France | 49% | 27% | 16% | **11%** |
-| Argentina | 47% | 25% | 14% | **10%** |
-| Belgium | 45% | 23% | 12% | **8%** |
-| Portugal | 44% | 23% | 12% | **8%** |
-| Brazil | 41% | 22% | 10% | **6%** |
-| Colombia | 41% | 21% | 10% | **6%** |
-| Germany | 38% | 20% | 9% | **4%** |
-| Morocco | 34% | 18% | 9% | **4%** |
-| Netherlands | 34% | 17% | 9% | **4%** |
-| Japan | 35% | 18% | 8% | **4%** |
-| Switzerland | 35% | 18% | 9% | **4%** |
+| France | 49% | 27% | 16% | **12%** |
+| Spain | 47% | 26% | 16% | **11%** |
+| Argentina | 48% | 25% | 14% | **10%** |
+| Belgium | 45% | 23% | 12% | **7%** |
+| Portugal | 44% | 23% | 12% | **7%** |
+| Brazil | 42% | 22% | 11% | **6%** |
+| Colombia | 41% | 22% | 11% | **6%** |
+| Germany | 38% | 19% | 10% | **4%** |
+| Switzerland | 33% | 18% | 9% | **4%** |
+| Japan | 36% | 19% | 10% | **4%** |
+| Morocco | 37% | 19% | 9% | **4%** |
+| Netherlands | 34% | 18% | 9% | **4%** |
 
 _Mexico's Round-of-32 opponent odds (per candidate): [R32_ODDS.md](R32_ODDS.md) — `make r32-odds`._
 

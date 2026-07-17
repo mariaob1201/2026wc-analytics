@@ -1,6 +1,6 @@
 # WC 2026 — Match Predictions vs Reality, and Forecasts
 
-_Model trained on pre-tournament data only (results to 2026-06-10 + FIFA squad prior). Backtest compares those out-of-sample forecasts to the actual scorelines; forecasts cover the next slate. Compiled 2026-07-16._
+_Model trained on pre-tournament data only (results to 2026-06-10 + FIFA squad prior). Backtest compares those out-of-sample forecasts to the actual scorelines; forecasts cover the next slate. Compiled 2026-07-17._
 
 ## Accuracy so far (out-of-sample)
 

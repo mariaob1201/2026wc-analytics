@@ -1,6 +1,6 @@
 # 📒 Forecast Log — Predictions vs Ground Truth
 
-_A growing, append-on-result ledger: every goal forecast and how it turned out. Updated by the daily GitHub Action. Compiled 2026-07-16._
+_A growing, append-on-result ledger: every goal forecast and how it turned out. Updated by the daily GitHub Action. Compiled 2026-07-17._
 
 ## Running accuracy (resolved matches)
 
